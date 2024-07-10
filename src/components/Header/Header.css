@@ -1,0 +1,42 @@
+.header {
+  padding: 50px 70px 0;
+}
+
+.header__top {
+  display: flex;
+  align-items: center;
+}
+
+.header__menu {
+  margin-left: auto;
+  display: flex;
+  gap: 20px;
+}
+
+.header__link {
+  font-weight: 400;
+  font-size: 18px;
+  text-decoration: none;
+  color: #000;
+}
+
+.header__icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+}
+
+
+.header__categories {
+  display: flex;
+  padding-top: 32px;
+  gap: 32px;
+  justify-content: center;
+}
+
+.header__category {
+  font-weight: 400;
+  font-size: 20px;
+  text-decoration: none;
+  color: #000;
+}
