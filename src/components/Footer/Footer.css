@@ -1,0 +1,37 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  background-color: #FAF0E6;
+  padding: 50px 70px;
+}
+
+.footer__info {
+  margin-top: 24px;
+  display: flex;
+  gap: 120px;
+}
+
+.footer__title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.footer__text {
+  font-size: 16px;
+  max-width: 350px;
+}
+
+.footer__socials {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 120px;
+  column-gap: 12px;
+  row-gap: 8px;
+}
+
+.footer__social-icon {
+  width: 24px;
+  height: 24px;
+}

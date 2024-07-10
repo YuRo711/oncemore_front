@@ -3,11 +3,10 @@ import Search from "../Search/Search";
 import "./Header.css";
 import liked from "../../images/icon _heart.svg";
 import cart from "../../images/icon _shopping cart.svg";
-import { categories } from "../../utils/constants";
 
 export default function Header(props) {
   return (
-    <div className="header">
+    <header className="header">
       <div className="header__top">
         <img className="header__logo"
           src="#"
@@ -41,7 +40,7 @@ export default function Header(props) {
 
       <div className="header__categories">
           {
-            categories.map((category) => (
+            props.categories.map((category) => (
               <NavLink className="header__category"
                 to={`/items?filter=${category.filter}`}
               >
@@ -50,6 +49,6 @@ export default function Header(props) {
             ))
           }
       </div>
-    </div>
+    </header>
   );
 }
