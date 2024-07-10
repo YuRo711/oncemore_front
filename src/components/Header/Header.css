@@ -17,6 +17,12 @@
 
 .header__menu {
   display: flex;
+  margin-left: auto;
+  gap: 28px;
+}
+
+.header__links {
+  display: flex;
   gap: 20px;
 }
 
@@ -27,10 +33,16 @@
   color: #000;
 }
 
+.header__button {
+  background: none;
+  border: none;
+  font-weight: 400;
+  font-size: 18px;
+}
+
 .header__icon {
   width: 24px;
   height: 24px;
-  margin-left: 8px;
 }
 
 

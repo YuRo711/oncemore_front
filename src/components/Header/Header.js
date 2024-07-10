@@ -11,15 +11,30 @@ export default function Header(props) {
         <h1 className="header__logo">OnceMore</h1>
         <Search/>
         <nav className="header__menu">
-          <NavLink className="header__link" to="/login">
-            Вход
-          </NavLink>
-          <NavLink className="header__link" to="/orders">
-            Заказы
-          </NavLink>
-          <NavLink className="header__link" to="/points">
-            Баллы
-          </NavLink>
+          {props.isLoggedIn ? 
+          (
+            <div className="header__links">
+              <NavLink className="header__link" to="/orders">
+                Заказы
+              </NavLink>
+              <NavLink className="header__link" to="/points">
+                Баллы
+              </NavLink>
+            </div>
+          ) : (
+            <div className="header__links">
+              <button className="header__button"
+                onClick={() => props.handleModalOpen("login")}
+              >
+                Вход
+              </button>
+              <button className="header__button"
+                onClick={() => props.handleModalOpen("signup")}
+              >
+                Регистрация
+              </button>
+            </div>            
+          )}
           <NavLink className="header__link" to="/liked">
             <img className="header__icon"
               src={liked}

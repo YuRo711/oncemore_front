@@ -1,5 +1,6 @@
 .search {
   position: relative;
+  margin-left: 150px;
 }
 
 .search__input {
