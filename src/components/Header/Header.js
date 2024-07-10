@@ -8,10 +8,7 @@ export default function Header(props) {
   return (
     <header className="header">
       <div className="header__top">
-        <img className="header__logo"
-          src="#"
-          alt="Once More Cosmetics"
-        />
+        <h1 className="header__logo">OnceMore</h1>
         <Search/>
         <nav className="header__menu">
           <NavLink className="header__link" to="/login">

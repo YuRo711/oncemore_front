@@ -4,10 +4,7 @@ import "./Footer.css";
 export default function Footer(props) {
   return (
     <footer className="footer">
-      <img className="footer__logo"
-        src="#"
-        alt="Once More Cosmetics"
-      />
+      <h2 className="footer__logo">OnceMore</h2>
       <div className="footer__info">
         <div className="footer__legal">
           <h2 className="footer__title">

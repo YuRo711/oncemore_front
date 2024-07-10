@@ -8,6 +8,13 @@
   justify-content: space-between;
 }
 
+.header__logo {
+  font-family: 'Comfortaa', 'Segoe UI', Verdana, sans-serif;
+  text-transform: lowercase;
+  font-weight: 400;
+  font-size: 36px;
+}
+
 .header__menu {
   display: flex;
   gap: 20px;
