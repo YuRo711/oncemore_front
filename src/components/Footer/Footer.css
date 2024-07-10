@@ -42,3 +42,15 @@
   width: 24px;
   height: 24px;
 }
+
+
+@media screen and (max-width: 600px) {
+  .footer {
+    padding: 20px 30px;
+  }
+
+  .footer__info {
+    flex-direction: column;
+    gap: 30px;
+  }
+}

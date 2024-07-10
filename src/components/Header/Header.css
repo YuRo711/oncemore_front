@@ -59,3 +59,36 @@
   text-decoration: none;
   color: #000;
 }
+
+.header__menu-button {
+  background: none;
+  border: none;
+  height: 24px;
+  width: 24px;
+  background-image: url('../../images/menu\ black.svg');
+}
+
+
+@media screen and (min-width: 600px) and (max-width: 1300px) {
+  .header__top {
+    flex-flow: row wrap;
+  }
+
+  .header__menu {
+    gap: 20px;
+  }
+
+  .header__links {
+    gap: 14px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    padding: 30px 30px 0;
+  }
+
+  .header__top {
+    flex-flow: row wrap;
+  }
+}

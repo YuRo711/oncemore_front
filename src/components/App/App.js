@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router";
 import { useState } from "react";
 import LoginModal from "../Modals/LoginModal/LoginModal";
 import RegisterModal from "../Modals/RegisterModal/RegisterModal";
+import MobileMenu from "../MobileMenu/MobileMenu";
 
 export default function App(props) {
   //#region Methods
@@ -36,6 +37,9 @@ export default function App(props) {
     signup: false,
     login: false,
   });
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
+
 
   //#endregion
 
@@ -47,6 +51,8 @@ export default function App(props) {
         categories={categories}
         isLoggedIn={isLoggedIn}
         handleModalOpen={handleModalOpen}
+        isOnMobile={isOnMobile}
+        setMenuOpen={setMenuOpen}
       />
       <Routes>
         <Route path="/"
@@ -69,6 +75,11 @@ export default function App(props) {
         onClose={handleModalClose}
         isOpen={modalsActivity["login"]}
         openAnotherModal={() => openAnotherModal("login", "signup")}
+      />
+      <MobileMenu
+        isMenuOpen={isMenuOpen}
+        setMenuOpen={setMenuOpen}
+        openLoginModal={() => handleModalOpen("login")}
       />
     </div>
   );

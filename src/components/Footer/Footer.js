@@ -20,8 +20,11 @@ export default function Footer(props) {
           </h2>
           <div className="footer__socials">
             {
-              props.contacts.map((social) => (
-                <NavLink className="footer__social-link" to={social.link}>
+              props.contacts.map((social, i) => (
+                <NavLink className="footer__social-link" 
+                  to={social.link}
+                  key={`social-${i}`}
+                >
                   <img className="footer__social-icon"
                     src={social.icon}
                   />

@@ -7,6 +7,15 @@ import cart from "../../images/icon _shopping cart.svg";
 export default function Header(props) {
   return (
     <header className="header">
+      {props.isOnMobile ? (
+        <button
+          className={
+            "header__menu-button"
+          }
+          onClick={() => props.setMenuOpen(true)}
+        />
+      ) : 
+      (
       <div className="header__top">
         <h1 className="header__logo">OnceMore</h1>
         <Search/>
@@ -28,11 +37,6 @@ export default function Header(props) {
               >
                 Вход
               </button>
-              <button className="header__button"
-                onClick={() => props.handleModalOpen("signup")}
-              >
-                Регистрация
-              </button>
             </div>            
           )}
           <NavLink className="header__link" to="/liked">
@@ -49,8 +53,9 @@ export default function Header(props) {
           </NavLink>
         </nav>
       </div>
+      )}
 
-      <div className="header__categories">
+      {/* <div className="header__categories">
           {
             props.categories.map((category) => (
               <NavLink className="header__category"
@@ -60,7 +65,7 @@ export default function Header(props) {
               </NavLink>
             ))
           }
-      </div>
+      </div> */}
     </header>
   );
 }
