@@ -5,10 +5,10 @@
 .header__top {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .header__menu {
-  margin-left: auto;
   display: flex;
   gap: 20px;
 }
