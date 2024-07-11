@@ -7,6 +7,8 @@ import { useState } from "react";
 import LoginModal from "../Modals/LoginModal/LoginModal";
 import RegisterModal from "../Modals/RegisterModal/RegisterModal";
 import MobileMenu from "../MobileMenu/MobileMenu";
+import Banners from "../Banners/Banners";
+import Product from "../Product/Product";
 
 export default function App(props) {
   //#region Methods
@@ -55,11 +57,12 @@ export default function App(props) {
         setMenuOpen={setMenuOpen}
       />
       <Routes>
-        <Route path="/"
-          element={
-            <div></div>
-          }
-        />
+        <Route path="/" element={
+          <Banners />
+        }/>
+        <Route path="item" element={
+          <Product />
+        }/>
       </Routes>
       <Footer
         contacts={contacts}
