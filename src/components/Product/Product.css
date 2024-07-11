@@ -96,6 +96,35 @@
   font-size: 30px;
 }
 
+.product__text {
+  margin-top: 16px;
+}
+
+.product__quality {
+  color: #606060;
+}
+
+.product__colors {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.product__color {
+  border: solid 1px #D0D0D0;
+  transition: filter 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.product__color:hover {
+  filter: brightness(85%);
+}
+
+.product__color_selected {
+  border: solid 2px #000;
+}
+
+
 .product__buttons {
   margin-top: 40px;
   display: flex;

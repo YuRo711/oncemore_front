@@ -1,7 +1,8 @@
 import "./Product.css";
 import image1 from "../../images/canvas 2.png";
 import image2 from "../../images/canvas.png";
-import plus from "../../images/Plus.svg";
+import brown from "../../images/Screenshot from 2024-07-11 19-46-27.png";
+import blue from "../../images/Screenshot from 2024-07-11 19-46-31.png";
 import { useState } from "react";
 
 export default function Product(props) {
@@ -27,6 +28,12 @@ export default function Product(props) {
   function toggleDetails() {
     setDetailsOpen(!detailsOpen);
   }
+
+  function selectColor(i)
+  {
+    setColor(colors[i]);
+    setColorNum(i);
+  }
   
 
   const name = "Карандаш для глаз";
@@ -35,6 +42,10 @@ export default function Product(props) {
   const [currentImageNum, setCurrentImageNum] = useState(0);
   const [currentImage, setCurrentImage] = useState(images[currentImageNum]);
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const colors = ["коричневый", "синий"];
+  const colorImages = [brown, blue];
+  const [colorNum, setColorNum] = useState(0);
+  const [color, setColor] = useState(colors[0]);
 
 
   return (
@@ -72,7 +83,26 @@ export default function Product(props) {
             <h2 className="product__name">{name}</h2>
             <h3 className="product__price">{price}</h3>
           </div>
-          <div className="product__color-choice"></div>
+          <div className="product__color-choice">
+            <p className="product__text">
+              <span className="product__quality">Цвет: </span>
+              {color}
+            </p>
+            <div className="product__colors">
+              {
+                colorImages.map((img, i) => 
+                  <img 
+                    className={`product__color ${
+                      colorNum == i ? "product__color_selected" : ""
+                    }`}
+                    src={img}
+                    key={`color-${i}`}
+                    onClick={() => selectColor(i)}
+                  />
+                )
+              }
+            </div>
+          </div>
           <div className="product__buttons">
             <button className="product__cart-button">
               Добавить в корзину
