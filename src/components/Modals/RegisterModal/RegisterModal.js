@@ -56,7 +56,6 @@ function RegisterModal(props) {
           value={email}
           required
         />
-        <p className="modal__error" id="signup-email-error"></p>
       </label>
 
       <label className="modal__label">
@@ -73,7 +72,6 @@ function RegisterModal(props) {
           value={password}
           required
         />
-        <p className="modal__error" id="signup-password-error"></p>
       </label>
 
       <label className="modal__label">
@@ -90,7 +88,6 @@ function RegisterModal(props) {
           value={name}
           required
         />
-        <p className="modal__error" id="signup-username-error"></p>
       </label>
     </FormModal>
   );

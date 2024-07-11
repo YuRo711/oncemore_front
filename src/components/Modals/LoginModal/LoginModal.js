@@ -45,7 +45,7 @@ function LoginModal(props) {
         <p className="modal__label-text">E-mail</p>
         <input
           className="modal__input"
-          type="text"
+          type="email"
           id="login-email"
           placeholder="Введите e-mail"
           onChange={(e) => {
@@ -55,7 +55,6 @@ function LoginModal(props) {
           value={email}
           required
         />
-        <p className="modal__error" id="login-email-error"></p>
       </label>
 
       <label className="modal__label">
@@ -72,7 +71,6 @@ function LoginModal(props) {
           value={password}
           required
         />
-        <p className="modal__error" id="login-password-error"></p>
       </label>
     </FormModal>
   );

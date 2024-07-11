@@ -11,18 +11,12 @@ export class FormValidator {
     });
   }
 
-  _showInputError(inputElement, errorMessage) {
-    const errorElement = this._formElement.querySelector(
-      `#${inputElement.id}-error`,
-    );
-    errorElement.textContent = errorMessage;
+  _showInputError(inputElement) {
+    inputElement.classList.add("modal__input_error");
   }
 
   _hideInputError(inputElement) {
-    const errorElement = this._formElement.querySelector(
-      `#${inputElement.id}-error`,
-    );
-    errorElement.textContent = "";
+    inputElement.classList.remove("modal__input_error");
   }
 
   _validateInput(inputElement) {
