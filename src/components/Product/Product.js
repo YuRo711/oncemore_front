@@ -1,6 +1,7 @@
 import "./Product.css";
 import image1 from "../../images/canvas 2.png";
 import image2 from "../../images/canvas.png";
+import plus from "../../images/Plus.svg";
 import { useState } from "react";
 
 export default function Product(props) {
@@ -23,10 +24,18 @@ export default function Product(props) {
     setCurrentImage(images[i]);
   }
 
+  function toggleDetails() {
+    setDetailsOpen(!detailsOpen);
+  }
+  
+
   const name = "Карандаш для глаз";
+  const price = "300₽"
   const images = [image1, image2];
   const [currentImageNum, setCurrentImageNum] = useState(0);
   const [currentImage, setCurrentImage] = useState(images[currentImageNum]);
+  const [detailsOpen, setDetailsOpen] = useState(false);
+
 
   return (
     <main className="product">
@@ -42,7 +51,7 @@ export default function Product(props) {
             )
             }
           </div>
-          <div className="product__main">
+          <div className="product__current-image">
             <img className="product__main-image"
               src={currentImage}
               alt={name}
@@ -58,7 +67,29 @@ export default function Product(props) {
           </div>
       </div>
       <div className="product__info">
-        
+        <div className="product__main">
+          <div className="product__title">
+            <h2 className="product__name">{name}</h2>
+            <h3 className="product__price">{price}</h3>
+          </div>
+          <div className="product__color-choice"></div>
+          <button className="product__button">
+            Добавить в корзину
+          </button>
+        </div>
+        <div className="product__details">
+          <div className="product__details-header">
+            О товаре
+            <button className={`product__more-button 
+              product__more-button_${detailsOpen ? "minus" : "plus"}`}
+              onClick={toggleDetails}
+            />
+          </div>
+          <p className={`product__details-text
+              ${detailsOpen ? "product__details-text_visible" : ""}`}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          </p>
+        </div>
       </div>
     </main>
   );
