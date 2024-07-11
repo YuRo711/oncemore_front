@@ -73,9 +73,12 @@ export default function Product(props) {
             <h3 className="product__price">{price}</h3>
           </div>
           <div className="product__color-choice"></div>
-          <button className="product__button">
-            Добавить в корзину
-          </button>
+          <div className="product__buttons">
+            <button className="product__cart-button">
+              Добавить в корзину
+            </button>
+            <button className="product__like-button"/>
+          </div>
         </div>
         <div className="product__details">
           <div className="product__details-header">
