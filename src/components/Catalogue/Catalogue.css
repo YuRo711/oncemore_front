@@ -17,7 +17,7 @@
 
 .catalogue__filter-form {
   display: flex;
-  gap: 40px;
+  gap: 30px;
 }
 
 .catalogue__label {
@@ -30,6 +30,25 @@
 .catalogue__checkbox {
   height: 20px;
   width: 20px;
+}
+
+.catalogue__select {
+  background: none;
+  border: solid 1px gray;
+  border-radius: 5px;
+}
+
+.catalogue__num-input {
+  height: 20px;
+  width: 70px;
+  appearance: textfield;
+  border: solid 1px gray;
+  border-radius: 3px;
+  padding: 0 5px;
+}
+
+.catalogue__num-input:focus {
+  outline: none;
 }
 
 .catalogue__gallery {

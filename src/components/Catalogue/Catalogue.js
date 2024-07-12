@@ -8,6 +8,10 @@ export default function Catalogue(props) {
 
   }
 
+  const colors = getUniqueItems(props.items.map((data) => data.color));
+  const maxPrice = Math.max(...(props.items.map((data) => data.price)));
+  console.log(maxPrice);
+
   return (
     <main className="catalogue">
       <h2 className="catalogue__title">Глаза</h2>
@@ -41,15 +45,14 @@ export default function Catalogue(props) {
             <select className="catalogue__select"
               id="filter-color"
               onChange={updateFilters}
+              defaultValue=""
             >
-              <option value="" disabled selected>Цвет</option>        
+              <option disabled value="">Цвет</option>        
               {
-                getUniqueItems(
-                  props.items.map((data) => data.color)
-                )
+                colors
                   .map((color, i) => 
                     <option className="catalogue__option"
-                      id={`color-${i}`}
+                      key={`color-${i}`}
                       value={color}
                     >
                       {color}
@@ -58,19 +61,21 @@ export default function Catalogue(props) {
               }
             </select>
             <label className="catalogue__label">
-              Цена от...
+              Цена от 
               <input className="catalogue__num-input"
                 type="number"
                 id="filter-min-price"
                 min={0}
                 onChange={updateFilters}
+                placeholder="0"
               />
-              до...
+              до 
               <input className="catalogue__num-input"
                 type="number"
                 id="filter-max-price"
                 min={0}
                 onChange={updateFilters}
+                placeholder={maxPrice}
               />
             </label>
           </form>
