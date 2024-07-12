@@ -1,7 +1,7 @@
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./App.css";
-import { categories, contacts } from "../../utils/constants";
+import { categories, contacts, products } from "../../utils/constants";
 import { Route, Routes } from "react-router";
 import { useEffect, useState } from "react";
 import LoginModal from "../Modals/LoginModal/LoginModal";
@@ -9,6 +9,7 @@ import RegisterModal from "../Modals/RegisterModal/RegisterModal";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import Banners from "../Banners/Banners";
 import Product from "../Product/Product";
+import Catalogue from "../Catalogue/Catalogue";
 
 export default function App(props) {
   //#region Methods
@@ -57,11 +58,16 @@ export default function App(props) {
         setMenuOpen={setMenuOpen}
       />
       <Routes>
-        <Route path="/" element={
-          <Banners />
-        }/>
         <Route path="item" element={
           <Product />
+        }/>
+        <Route path="items" element={
+          <Catalogue
+            items={products}
+          />
+        }/>
+        <Route path="/" element={
+          <Banners />
         }/>
       </Routes>
       <Footer
