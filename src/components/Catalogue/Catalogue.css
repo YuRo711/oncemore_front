@@ -7,6 +7,9 @@
   font-size: 28px;
 }
 
-.catalogue__products {
-  
+.catalogue__gallery {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
 }

@@ -1,3 +1,60 @@
 .item {
-  
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  border: solid 1px #A0A0A0;
+  border-radius: 10px;
+  padding: 20px;
+  text-decoration: none;
+}
+
+.item__name {
+  font-weight: 500;
+  font-size: 18px;
+  margin-top: 14px;
+  color: #000;
+}
+
+.item__price {
+  font-weight: 500;
+  font-size: 20px;
+  margin-top: 8px;
+  color: #000;
+}
+
+.item__cart-button {
+  margin-top: 16px;
+  background-color: #ff91c8;
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  color: #2c1822;
+  width: 200px;
+  height: 40px;
+  border-radius: 35px;
+  box-shadow: 2px 3px 5px #27203650;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.item__cart-button:hover {
+  background-color: #ee88bb;
+}
+
+.item__cart-button:active {
+  background-color: #d87aa9;
+}
+
+.item__like-button {
+  height: 32px;
+  width: 32px;
+  background: none;
+  border: none;
+  background-image: url('../../images/icon\ _heart.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 16px;
+  right: 16px;
 }

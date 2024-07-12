@@ -1,10 +1,11 @@
+import { NavLink } from "react-router-dom";
 import "./ProductCard.css";
 
 export default function ProductCard(props) {
-  const { image, name, price, color } = props.data;
+  const { image, name, price, colorm, _id } = props.data;
 
   return (
-    <div className="item">
+    <NavLink className="item" to={`/item?id=${_id}`}>
       <img className="item__image"
         src={image}
         alt={name}
@@ -13,6 +14,6 @@ export default function ProductCard(props) {
       <h4 className="item__price">{price}₽</h4>
       <button className="item__cart-button">В корзину</button>
       <button className="item__like-button"/>
-    </div>
+    </NavLink>
   );
 }
