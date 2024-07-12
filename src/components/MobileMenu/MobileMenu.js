@@ -29,6 +29,16 @@ function MobileMenu(props) {
             >
               Главная
             </NavLink>
+            {
+              props.categories.map((category, i) => (
+                <NavLink className="menu__link"
+                  to={`/items?filter=${category.filter}`}
+                  key={`category-${i}`}
+                >
+                  {category.name}
+                </NavLink>
+              ))
+            }
           </nav>
           {isLoggedIn ? (
             <button
@@ -39,12 +49,7 @@ function MobileMenu(props) {
                 props.setMenuOpen(false);
               }}
             >
-              {props.username}
-              <img
-                className="menu__button-icon"
-                src={logoutWhite}
-                alt="logout icon"
-              />
+              Выход
             </button>
           ) : (
             <button

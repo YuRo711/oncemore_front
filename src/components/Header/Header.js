@@ -5,17 +5,20 @@ import liked from "../../images/icon _heart.svg";
 import cart from "../../images/icon _shopping cart.svg";
 
 export default function Header(props) {
-  return (
-    <header className="header">
-      {props.isOnMobile ? (
+  if (props.isOnMobile) {
+    return(
+      <header className="header">
         <button
           className={
             "header__menu-button"
           }
           onClick={() => props.setMenuOpen(true)}
         />
-      ) : 
-      (
+      </header>
+    );
+  }
+  return (
+    <header className="header">
       <div className="header__top">
         <h1 className="header__logo">OnceMore</h1>
         <Search/>
@@ -53,19 +56,18 @@ export default function Header(props) {
           </NavLink>
         </nav>
       </div>
-      )}
-
-      {/* <div className="header__categories">
+      <div className="header__categories">
           {
-            props.categories.map((category) => (
+            props.categories.map((category, i) => (
               <NavLink className="header__category"
                 to={`/items?filter=${category.filter}`}
+                key={`category-${i}`}
               >
                 {category.name}
               </NavLink>
             ))
           }
-      </div> */}
+      </div>
     </header>
   );
 }

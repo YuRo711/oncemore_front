@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import "./App.css";
 import { categories, contacts } from "../../utils/constants";
 import { Route, Routes } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoginModal from "../Modals/LoginModal/LoginModal";
 import RegisterModal from "../Modals/RegisterModal/RegisterModal";
 import MobileMenu from "../MobileMenu/MobileMenu";
@@ -83,6 +83,7 @@ export default function App(props) {
         isMenuOpen={isMenuOpen}
         setMenuOpen={setMenuOpen}
         openLoginModal={() => handleModalOpen("login")}
+        categories={categories}
       />
     </div>
   );
