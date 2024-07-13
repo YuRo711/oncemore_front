@@ -17,6 +17,7 @@
 
 .catalogue__filter-form {
   display: flex;
+  max-height: 24px;
   gap: 30px;
 }
 

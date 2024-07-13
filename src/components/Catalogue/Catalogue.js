@@ -52,7 +52,7 @@ export default function Catalogue(props) {
               />
             </label>
             <MultiSelect
-              colors={colors}
+              options={colors}
               onSelect={selectColors}
               title="Цвет"
             />
