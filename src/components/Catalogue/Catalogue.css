@@ -32,28 +32,6 @@
   width: 20px;
 }
 
-.catalogue__select {
-  background: none;
-  border: solid 1px gray;
-  border-radius: 5px;
-}
-
-.catalogue__select option:first-child::before {
-  content: "";
-}
-
-.catalogue__select option::before {
-  content: "\2610";
-  width: 1.3em;
-  text-align: center;
-  display: inline-block;
-  margin-right: 3px;
-}
-
-.catalogue__select option:checked::before {
-  content: "\2611";
-}
-
 .catalogue__num-input {
   height: 20px;
   width: 70px;

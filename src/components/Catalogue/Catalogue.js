@@ -1,16 +1,21 @@
 import "./Catalogue.css";
 import ProductCard from "../ProductCard/ProductCard";
+import MultiSelect from "../MultiSelect/MultiSelect";
 import { getUniqueItems } from "../../utils/uniqueItems";
 import { useState } from "react";
 
 export default function Catalogue(props) {
+  function selectColors() {
+
+  }
+
   const colors = getUniqueItems(props.items.map((data) => data.color));
   const maxItemPrice = Math.max(...(props.items.map((data) => data.price)));
   
   const [recommended, setRecommended] = useState(false);
   const [isNew, setIsNew] = useState(false);
   const [discount, setDiscount] = useState(false);
-  const [color, setColor] = useState(false);
+  const [selectedColors, setColors] = useState([]);
   const [minPrice, setMinPrice] = useState(false);
   const [maxPrice, setMaxPrice] = useState(false);
 
@@ -46,25 +51,11 @@ export default function Catalogue(props) {
                 onChange={(value) => setDiscount(value)}
               />
             </label>
-            <select className="catalogue__select"
-              id="filter-color"
-              onChange={(value) => setColor(value)}
-              defaultValue=""
-              multiple
-            >
-              <option disabled value="">Цвет</option>        
-              {
-                colors
-                  .map((color, i) => 
-                    <option className="catalogue__option"
-                      key={`color-${i}`}
-                      value={color}
-                    >
-                      {color}
-                    </option>
-                  )
-              }
-            </select>
+            <MultiSelect
+              colors={colors}
+              onSelect={selectColors}
+              title="Цвет"
+            />
             <label className="catalogue__label">
               Цена от 
               <input className="catalogue__num-input"

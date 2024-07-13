@@ -1,0 +1,17 @@
+.multiselect__button {
+  background: none;
+  border: solid 1px gray;
+  border-radius: 5px;
+  width: 120px;
+  height: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+  color: rgb(0, 0, 0, 0.7);
+}
+
+.multiselect__icon {
+  width: 16px;
+  height: 16px;
+}
