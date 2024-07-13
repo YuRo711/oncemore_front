@@ -1,16 +1,20 @@
 import "./Catalogue.css";
 import ProductCard from "../ProductCard/ProductCard";
 import { getUniqueItems } from "../../utils/uniqueItems";
+import { useState } from "react";
 
 export default function Catalogue(props) {
-  function updateFilters()
-  {
-
-  }
-
   const colors = getUniqueItems(props.items.map((data) => data.color));
-  const maxPrice = Math.max(...(props.items.map((data) => data.price)));
-  console.log(maxPrice);
+  const maxItemPrice = Math.max(...(props.items.map((data) => data.price)));
+  
+  const [recommended, setRecommended] = useState(false);
+  const [isNew, setIsNew] = useState(false);
+  const [discount, setDiscount] = useState(false);
+  const [color, setColor] = useState(false);
+  const [minPrice, setMinPrice] = useState(false);
+  const [maxPrice, setMaxPrice] = useState(false);
+
+  const filteredItems = props.items;
 
   return (
     <main className="catalogue">
@@ -23,7 +27,7 @@ export default function Catalogue(props) {
               <input className="catalogue__checkbox"
                 type="checkbox"
                 id="filter-recommended"
-                onChange={updateFilters}
+                onChange={(value) => setRecommended(value)}
               />
             </label>
             <label className="catalogue__label">
@@ -31,7 +35,7 @@ export default function Catalogue(props) {
               <input className="catalogue__checkbox"
                 type="checkbox"
                 id="filter-new"
-                onChange={updateFilters}
+                onChange={(value) => setIsNew(value)}
               />
             </label>
             <label className="catalogue__label">
@@ -39,13 +43,14 @@ export default function Catalogue(props) {
               <input className="catalogue__checkbox"
                 type="checkbox"
                 id="filter-discount"
-                onChange={updateFilters}
+                onChange={(value) => setDiscount(value)}
               />
             </label>
             <select className="catalogue__select"
               id="filter-color"
-              onChange={updateFilters}
+              onChange={(value) => setColor(value)}
               defaultValue=""
+              multiple
             >
               <option disabled value="">Цвет</option>        
               {
@@ -66,7 +71,7 @@ export default function Catalogue(props) {
                 type="number"
                 id="filter-min-price"
                 min={0}
-                onChange={updateFilters}
+                onChange={(value) => setMinPrice(value)}
                 placeholder="0"
               />
               до 
@@ -74,8 +79,8 @@ export default function Catalogue(props) {
                 type="number"
                 id="filter-max-price"
                 min={0}
-                onChange={updateFilters}
-                placeholder={maxPrice}
+                onChange={(value) => setMaxPrice(value)}
+                placeholder={maxItemPrice}
               />
             </label>
           </form>
