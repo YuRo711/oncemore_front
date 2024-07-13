@@ -2,11 +2,24 @@ import "./Catalogue.css";
 import ProductCard from "../ProductCard/ProductCard";
 import MultiSelect from "../MultiSelect/MultiSelect";
 import { getUniqueItems } from "../../utils/uniqueItems";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Catalogue(props) {
-  function selectColors() {
+  function selectColors(changedColor) {
+    if (selectedColors.includes(changedColor)) {
+      setColors(selectedColors.filter((el) => el !== changedColor));
+    } else {
+      setColors([...selectedColors, changedColor]);
+    }
+  }
 
+  function filterItems()
+  {
+    setFilteredItems(
+      props.items.filter((item) => (
+        (selectedColors.length === 0 || selectedColors.includes(item.color))
+      ))
+    );
   }
 
   const colors = getUniqueItems(props.items.map((data) => data.color));
@@ -19,7 +32,10 @@ export default function Catalogue(props) {
   const [minPrice, setMinPrice] = useState(false);
   const [maxPrice, setMaxPrice] = useState(false);
 
-  const filteredItems = props.items;
+  const [filteredItems, setFilteredItems] = useState(props.items);
+  useEffect(() => filterItems(),
+    [selectedColors]
+  );
 
   return (
     <main className="catalogue">
@@ -78,7 +94,7 @@ export default function Catalogue(props) {
         </div>
         <div className="catalogue__gallery">
           {
-            props.items.map((data, i) => 
+            filteredItems.map((data, i) => 
               <ProductCard
                 data={data}
                 key={`product-${i}`}

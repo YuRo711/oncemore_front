@@ -55,37 +55,37 @@ const contacts = [
 
 const products = [
   {
-    image: item1,
+    image: item2,
     name: "Карандаш для глаз",
     price: 300,
     color: "коричневый",
   },
   {
-    image: item2,
+    image: item1,
     name: "Карандаш для глаз",
     price: 300,
     color: "синий",
   },
   {
-    image: item1,
+    image: item2,
     name: "Карандаш для глаз",
     price: 300,
     color: "коричневый",
   },
   {
-    image: item2,
+    image: item1,
     name: "Карандаш для глаз",
     price: 300,
     color: "синий",
   },
   {
-    image: item1,
+    image: item2,
     name: "Карандаш для глаз",
     price: 300,
     color: "коричневый",
   },
   {
-    image: item2,
+    image: item1,
     name: "Карандаш для глаз",
     price: 300,
     color: "синий",

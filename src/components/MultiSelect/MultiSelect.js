@@ -29,7 +29,8 @@ export default function MultiSelect(props) {
               <label className="multiselect__label">
                 <input className="multiselect__checkbox"
                   type="checkbox"
-                  onChange={props.onSelect}
+                  value={option}
+                  onChange={() => props.onSelect(option)}
                 />
                 {option}
               </label>
