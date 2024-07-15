@@ -1,13 +1,13 @@
 import "./Product.css";
 import image1 from "../../images/canvas 2.png";
 import image2 from "../../images/canvas.png";
-import brown from "../../images/Screenshot from 2024-07-11 19-46-27.png";
-import blue from "../../images/Screenshot from 2024-07-11 19-46-31.png";
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 import Video from "../Video/Video";
 
 export default function Product(props) {
+  //#region Methods
+
   function nextImage() {
     const newNum = (currentImageNum + 1) % images.length;
     setCurrentImageNum(newNum);
@@ -34,21 +34,29 @@ export default function Product(props) {
   function selectColor(i)
   {
   }
+
+  //#endregion
   
+  //#region Variables
+
   const searchParams = useSearchParams();
   const id = searchParams[0].get("id");
-  const data = props.items[id];
+  const data = props.items
+    .filter((item) => item.id == id)[0];
   const { name, price, color } = data;
 
   const images = [image1, image2];
   const [currentImageNum, setCurrentImageNum] = useState(0);
   const [currentImage, setCurrentImage] = useState(images[currentImageNum]);
   const [detailsOpen, setDetailsOpen] = useState(false);
-  const colorImages = [brown, blue];
 
   const videos = props.videos.filter((vid) => vid.productId == id);
-  console.log(videos);
+  const sameItems = props.items.filter((item) => item.name == name);
+  const colorImages = sameItems.map((item) => item.colorImage);
 
+  //#endregion
+
+  //#region Rendering
 
   return (
     <main className="product">
@@ -94,14 +102,16 @@ export default function Product(props) {
               <div className="product__colors">
                 {
                   colorImages.map((img, i) => 
-                    <img 
-                      className={`product__color ${
-                        color == i ? "product__color_selected" : ""
-                      }`}
-                      src={img}
-                      key={`color-${i}`}
-                      onClick={() => selectColor(i)}
-                    />
+                    <NavLink to={`/item?id=${sameItems[i].id}`}>
+                      <img 
+                        className={`product__color ${
+                          sameItems[i].id == id ? "product__color_selected" : ""
+                        }`}
+                        src={img}
+                        key={`color-${i}`}
+                        onClick={() => selectColor(i)}
+                      />
+                    </NavLink>
                   )
                 }
               </div>
@@ -142,4 +152,6 @@ export default function Product(props) {
       </div>
     </main>
   );
+
+  //#endregion
 }
