@@ -1,22 +1,58 @@
 .player {
   display: flex;
-  padding: 120px 0;
+  padding: 90px 0 0;
 }
 
 .player__main {
-  width: 50%;
   background-color: #000;
   display: flex;
   position: relative;
+  padding: 0 150px;
+  box-sizing: border-box;
 }
 
 .player__video {
   height: calc(100vh - 60px);
-  margin: 0 auto;
 }
 
 .player__video-info {
   position: absolute;
   top: 20px;
   right: 20px;
+}
+
+.player__user {
+  display: flex;
+}
+
+.player__user-button {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  height: 24px;
+  width: 24px;
+  background-color: #FFF;
+  border: none;
+  border-radius: 12px;
+  background-image: url('../../images/Plus.svg');
+  background-size: cover;
+}
+
+.player__author {
+  position: absolute;
+  color: #FFF;
+  right: 150px;
+  top: 0;
+}
+
+.player__tags {
+  position: absolute;
+  color: #FFF;
+  right: 150px;
+  top: 24px;
+  display: flex;
+  gap: 6px;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

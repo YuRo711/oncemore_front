@@ -1,4 +1,8 @@
 .avatar {
+  position: relative;
+}
+
+.avatar__container {
   background-color: #f1bbd6;
   height: 50px;
   width: 50px;

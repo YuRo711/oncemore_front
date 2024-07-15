@@ -10,11 +10,15 @@ export default function VideoPlayer(props) {
   const id = searchParams[0].get("id");
   const data = props.videos
     .filter((video) => video.id == id)[0];
-  const { link, productId, productName, price, author, views } = data;
+  const { link, productId, price, author, views, tags } = data;
+
   const [userData, setUserData] = useState(null);
+  const [productData, setProductData] = useState(null);
   useEffect(() => {
     props.getUser((author))
       .then((user) => setUserData(user));
+    props.getProduct((productId))
+      .then((product) => setProductData(product));
   }, [])
 
   //#endregion
@@ -28,11 +32,29 @@ export default function VideoPlayer(props) {
           src={link}
           autoPlay
         />
-        <div className="player__video-info">
-          <UserAvatar
-            userData={userData}
-          />
-        </div>
+          <div className="player__video-info">
+          {
+            userData ?
+            <div className="player__user">
+              <UserAvatar
+                userData={userData}
+              >
+                <button className="player__user-button"/>
+              </UserAvatar>
+              <div className="player__author">
+                @{userData.name}
+              </div>
+              <div className="player__tags">
+                {
+                  tags.map((tag) => 
+                    <p className="player__tag">#{tag}</p>
+                )
+                }
+              </div>
+            </div>
+            : ""
+          }
+          </div> 
       </div>
     </main>
   );

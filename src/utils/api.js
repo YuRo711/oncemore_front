@@ -1,4 +1,5 @@
 import defaultVid from "../temp/video.mp4";
+import {products} from "./constants";
 
 class videoApi {
   async getVideos() {
@@ -11,6 +12,7 @@ class videoApi {
         author: 0,
         views: 12505,
         id: 0,
+        tags: [],
       },
       {
         link: defaultVid,
@@ -20,6 +22,7 @@ class videoApi {
         author: 0,
         views: 400,
         id: 1,
+        tags: ["cat", "notreal"],
       },
     ]
   }
@@ -40,6 +43,11 @@ class videoApi {
         users.filter((user) => user.id == id)
         [0]
     );
+  }
+
+  async getProduct(id) {
+    return products
+      .filter((product) => product.id == id);
   }
 }
 

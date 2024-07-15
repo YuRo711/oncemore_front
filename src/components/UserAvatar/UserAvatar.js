@@ -12,15 +12,18 @@ export default function UserAvatar(props) {
 
   return (
     <div className="avatar">
-      {
-        avatar ?
-          <img className="avatar__image"
-            src={avatar}
-            alt={name}
-          />
-          :
-          getFirstLetter(name)
-      }
+      <div className="avatar__container">
+        {
+          avatar ?
+            <img className="avatar__image"
+              src={avatar}
+              alt={name}
+            />
+            :
+            getFirstLetter(name)
+        }
+      </div>
+      {props.children}
     </div>
   );
 }

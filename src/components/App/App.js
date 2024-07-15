@@ -10,7 +10,7 @@ import MobileMenu from "../MobileMenu/MobileMenu";
 import Banners from "../Banners/Banners";
 import Product from "../Product/Product";
 import Catalogue from "../Catalogue/Catalogue";
-import videoApi from "../../utils/videoApi";
+import videoApi from "../../utils/api";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
 export default function App(props) {
@@ -38,6 +38,10 @@ export default function App(props) {
 
   function getUser(id) {
     return videoApi.getUser(id);
+  }
+
+  function getProduct(id) {
+    return videoApi.getProduct(id);
   }
 
   //#endregion
@@ -96,6 +100,7 @@ export default function App(props) {
             videos={videos}
             items={products}
             getUser={getUser}
+            getProduct={getProduct}
           />
         }/>
         <Route path="/" element={
