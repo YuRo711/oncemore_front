@@ -19,6 +19,8 @@ export default function Header(props) {
     );
   }
 
+  const currentPath = window.location.pathname;
+
   return (
     <header className="header">
       <div className="header__top">
@@ -63,18 +65,21 @@ export default function Header(props) {
           </NavLink>
         </nav>
       </div>
-      <div className="header__categories">
-          {
-            props.categories.map((category, i) => (
-              <NavLink className="header__category"
-                to={`/items?filter=${category.filter}`}
-                key={`category-${i}`}
-              >
-                {category.name}
-              </NavLink>
-            ))
-          }
-      </div>
+      {
+        currentPath == "/review" ? "" :
+        <div className="header__categories">
+        {
+          props.categories.map((category, i) => (
+            <NavLink className="header__category"
+              to={`/items?filter=${category.filter}`}
+              key={`category-${i}`}
+            >
+              {category.name}
+            </NavLink>
+          ))
+        }
+        </div>
+      }
     </header>
   );
 }

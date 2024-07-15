@@ -9,7 +9,8 @@ class videoApi {
         productName: "Название товара",
         price: 250,
         author: "Автор",
-        views: 12500,
+        views: 12505,
+        id: 0,
       },
       {
         link: defaultVid,
@@ -18,6 +19,7 @@ class videoApi {
         price: 250,
         author: "Автор 2",
         views: 400,
+        id: 1,
       },
     ]
   }

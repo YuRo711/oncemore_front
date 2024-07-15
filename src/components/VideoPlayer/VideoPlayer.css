@@ -1,0 +1,16 @@
+.player {
+  display: flex;
+  padding: 60px 0;
+}
+
+.player__main {
+  width: 50%;
+  background-color: #000;
+  display: flex;
+}
+
+.player__video {
+  height: calc(100vh - 60px);
+  margin: 0 auto;
+}
+

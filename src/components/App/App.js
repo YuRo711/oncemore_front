@@ -11,6 +11,7 @@ import Banners from "../Banners/Banners";
 import Product from "../Product/Product";
 import Catalogue from "../Catalogue/Catalogue";
 import videoApi from "../../utils/videoApi";
+import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
 export default function App(props) {
   //#region Methods
@@ -58,6 +59,11 @@ export default function App(props) {
   //#endregion
 
   //#region Rendering
+  if (videos.length == 0 || products.length == 0) {
+    return <div className="page">
+      Loading...
+    </div>
+  }
 
   return (
     <div className="page">
@@ -79,6 +85,12 @@ export default function App(props) {
           <Catalogue
             items={products}
             videos={videos}
+          />
+        }/>
+        <Route path="review" element={
+          <VideoPlayer
+            videos={videos}
+            items={products}
           />
         }/>
         <Route path="/" element={
