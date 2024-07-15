@@ -22,6 +22,7 @@ export default function VideoPlayer(props) {
       .then((user) => setUserData(user));
     props.getProduct((productId))
       .then((product) => setProductData(product));
+    console.log(productData);
   }, [])
 
   //#endregion
@@ -35,7 +36,23 @@ export default function VideoPlayer(props) {
           src={link}
           autoPlay
         />
-          <div className="player__video-info">
+        {
+          productData ? 
+            <div className="player__product">
+              <img className="player__product-image"
+                src={productData.images[0]}
+              />
+              <div className="player__product-info">
+                <h4 className="player__price">{productData.price}₽</h4>
+                <h3 className="player__title">{productData.name}</h3>
+              </div>
+              <button className="player__cart-button" 
+                type="button"
+              />
+            </div>
+          : ""
+        }
+        <div className="player__video-info">
           {
             userData ?
             <div className="player__user">
@@ -63,7 +80,7 @@ export default function VideoPlayer(props) {
             />
             {parsedViews}
           </div>
-          </div>
+        </div>
       </div>
     </main>
   );

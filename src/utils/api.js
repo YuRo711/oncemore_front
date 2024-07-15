@@ -47,7 +47,7 @@ class videoApi {
 
   async getProduct(id) {
     return products
-      .filter((product) => product.id == id);
+      .filter((product) => product.id == id)[0];
   }
 }
 
