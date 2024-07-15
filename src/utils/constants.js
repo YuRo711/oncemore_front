@@ -57,12 +57,12 @@ const contacts = [
 
 const products = [
   {
-    image: item2,
     name: "Карандаш для глаз",
     price: 300,
     color: "коричневый",
     colorImage: brown,
     id: 0,
+    images: [item1, item2],
   },
   {
     image: item1,
@@ -71,6 +71,7 @@ const products = [
     color: "синий",
     colorImage: blue,
     id: 1,
+    images: [item1],
   },
   {
     image: item2,
@@ -79,6 +80,7 @@ const products = [
     color: "коричневый",
     colorImage: brown,
     id: 2,
+    images: [item1, item2],
   },
   {
     image: item1,
@@ -87,6 +89,7 @@ const products = [
     color: "синий",
     colorImage: blue,
     id: 3,
+    images: [item1, item2],
   },
   {
     image: item2,
@@ -95,6 +98,7 @@ const products = [
     color: "коричневый",
     colorImage: brown,
     id: 4,
+    images: [item1, item2],
   },
   {
     image: item1,
@@ -103,6 +107,7 @@ const products = [
     color: "синий",
     colorImage: blue,
     id: 5,
+    images: [item1, item2],
   },
 ];
 

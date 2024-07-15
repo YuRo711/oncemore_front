@@ -2,12 +2,12 @@ import { NavLink } from "react-router-dom";
 import "./ProductCard.css";
 
 export default function ProductCard(props) {
-  const { image, name, price, colorm, _id } = props.data;
+  const { images, name, price, color, _id } = props.data;
 
   return (
     <NavLink className="item" to={`/item?id=${_id}`}>
       <img className="item__image"
-        src={image}
+        src={images[0]}
         alt={name}
       />
       <h3 className="item__name">{name}</h3>

@@ -62,6 +62,12 @@
   scale: 1;
 }
 
+.product__image-button:disabled {
+  opacity: 50%;
+  scale: 1;
+  cursor: auto;
+}
+
 .product__image-button_left {
   background-image: url('../../images/arrow-circle-left.svg');
   left: 20px;

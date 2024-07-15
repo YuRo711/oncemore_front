@@ -1,6 +1,4 @@
 import "./Product.css";
-import image1 from "../../images/canvas 2.png";
-import image2 from "../../images/canvas.png";
 import { useState } from "react";
 import { NavLink, useSearchParams } from "react-router-dom";
 import Video from "../Video/Video";
@@ -43,12 +41,12 @@ export default function Product(props) {
   const id = searchParams[0].get("id");
   const data = props.items
     .filter((item) => item.id == id)[0];
-  const { name, price, color } = data;
+  const { name, price, color, images } = data;
 
-  const images = [image1, image2];
   const [currentImageNum, setCurrentImageNum] = useState(0);
   const [currentImage, setCurrentImage] = useState(images[currentImageNum]);
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const areButtonsDisabled = images.length < 2;
 
   const videos = props.videos.filter((vid) => vid.productId == id);
   const sameItems = props.items.filter((item) => item.name == name);
@@ -81,10 +79,12 @@ export default function Product(props) {
               <button className=
                 "product__image-button product__image-button_left"
                 onClick={prevImage}
+                disabled={areButtonsDisabled}
               />
               <button className=
                 "product__image-button product__image-button_right"
                 onClick={nextImage}
+                disabled={areButtonsDisabled}
               />
             </div>
         </div>
