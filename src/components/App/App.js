@@ -70,7 +70,10 @@ export default function App(props) {
       />
       <Routes>
         <Route path="item" element={
-          <Product />
+          <Product
+            videos={videos}
+            items={products}
+          />
         }/>
         <Route path="items" element={
           <Catalogue

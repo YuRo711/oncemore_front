@@ -5,6 +5,7 @@ class videoApi {
     return [
       {
         link: defaultVid,
+        productId: 1,
         productName: "Название товара",
         price: 250,
         author: "Автор",
@@ -12,6 +13,7 @@ class videoApi {
       },
       {
         link: defaultVid,
+        productId: 0,
         productName: "Название товара 2",
         price: 250,
         author: "Автор 2",
