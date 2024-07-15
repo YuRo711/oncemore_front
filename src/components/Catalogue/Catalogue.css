@@ -4,15 +4,21 @@
 
 .catalogue__title {
   font-weight: 500;
-  font-size: 28px;
-  margin-left: 50px;
+  font-size: 32px;
 }
 
 .catalogue__products {
-  margin-top: 40px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.catalogue__subtitle {
+  margin-bottom: 30px;
+  font-size: 26px;
+  font-weight: 500;
+  margin-right: auto;
 }
 
 .catalogue__filter-form {
@@ -51,4 +57,9 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
+}
+
+
+.catalogue__reviews {
+  margin-top: 50px;
 }

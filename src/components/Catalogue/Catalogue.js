@@ -40,7 +40,8 @@ export default function Catalogue(props) {
   return (
     <main className="catalogue">
       <h2 className="catalogue__title">Глаза</h2>
-      <div className="catalogue__products">
+      <section className="catalogue__products">
+        <h3 className="catalogue__subtitle">Товары</h3>
         <div className="catalogue__filters">
           <form className="catalogue__filter-form">
             <label className="catalogue__label">
@@ -102,7 +103,10 @@ export default function Catalogue(props) {
             )
           }
         </div>
-      </div>
+      </section>
+      <section className="catalogue__reviews">
+        <h3 className="catalogue__subtitle">#тренды</h3>
+      </section>
     </main>
   );
 }
