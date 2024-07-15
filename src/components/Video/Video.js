@@ -1,19 +1,9 @@
 import { NavLink } from "react-router-dom";
 import play from "../../images/play.svg";
 import "./Video.css";
+import {parseViews} from "../../utils/parsers";
 
 export default function Video(props) {
-  function parseViews(views)
-  {
-    if (views > 1000000) {
-      return `${Math.round(views / 100000) / 10}}m`;
-    }
-    if (views > 1000) {
-      return `${Math.round(views / 100) / 10}k`;
-    }
-    return views;
-  }
-
   const { link, productName, price, views, id } = props.data;
   const parsedViews = parseViews(views);
 

@@ -2,6 +2,8 @@ import { useSearchParams } from "react-router-dom";
 import "./VideoPlayer.css";
 import UserAvatar from "../UserAvatar/UserAvatar";
 import { useEffect, useState } from "react";
+import {parseViews} from "../../utils/parsers";
+import playIcon from "../../images/play.svg";
 
 export default function VideoPlayer(props) {
   //#region Variables
@@ -11,6 +13,7 @@ export default function VideoPlayer(props) {
   const data = props.videos
     .filter((video) => video.id == id)[0];
   const { link, productId, price, author, views, tags } = data;
+  const parsedViews = parseViews(views);
 
   const [userData, setUserData] = useState(null);
   const [productData, setProductData] = useState(null);
@@ -54,7 +57,13 @@ export default function VideoPlayer(props) {
             </div>
             : ""
           }
-          </div> 
+          <div className="player__views">
+            <img className="player__views-icon"
+              src={playIcon}
+            />
+            {parsedViews}
+          </div>
+          </div>
       </div>
     </main>
   );
