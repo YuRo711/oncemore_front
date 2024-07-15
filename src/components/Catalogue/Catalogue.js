@@ -3,6 +3,7 @@ import ProductCard from "../ProductCard/ProductCard";
 import MultiSelect from "../MultiSelect/MultiSelect";
 import { getUniqueItems } from "../../utils/uniqueItems";
 import { useEffect, useState } from "react";
+import Video from "../Video/Video";
 
 export default function Catalogue(props) {
   function selectColors(changedColor) {
@@ -106,6 +107,15 @@ export default function Catalogue(props) {
       </section>
       <section className="catalogue__reviews">
         <h3 className="catalogue__subtitle">#тренды</h3>
+        <div className="catalague__videos">
+          {
+            props.videos.map((video) => 
+              <Video
+                data={video}
+              />
+            )
+          }
+        </div>
       </section>
     </main>
   );

@@ -63,3 +63,8 @@
 .catalogue__reviews {
   margin-top: 50px;
 }
+
+.catalague__videos {
+  display: flex;
+  gap: 20px;
+}

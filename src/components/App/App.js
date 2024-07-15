@@ -10,6 +10,7 @@ import MobileMenu from "../MobileMenu/MobileMenu";
 import Banners from "../Banners/Banners";
 import Product from "../Product/Product";
 import Catalogue from "../Catalogue/Catalogue";
+import videoApi from "../../utils/videoApi";
 
 export default function App(props) {
   //#region Methods
@@ -30,6 +31,10 @@ export default function App(props) {
     });
   }
 
+  function getVideos() {
+    return videoApi.getVideos();
+  }
+
   //#endregion
 
 
@@ -42,6 +47,12 @@ export default function App(props) {
   });
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    getVideos()
+      .then((res) => setVideos(res));
+  }, [])
 
 
   //#endregion
@@ -64,6 +75,7 @@ export default function App(props) {
         <Route path="items" element={
           <Catalogue
             items={products}
+            videos={videos}
           />
         }/>
         <Route path="/" element={
