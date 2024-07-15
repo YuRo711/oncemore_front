@@ -3,6 +3,7 @@ import Search from "../Search/Search";
 import "./Header.css";
 import liked from "../../images/icon _heart.svg";
 import cart from "../../images/icon _shopping cart.svg";
+import DropdownMenu from "../DropdownMenu/DropdownMenu";
 
 export default function Header(props) {
   if (props.isOnMobile) {
@@ -17,10 +18,16 @@ export default function Header(props) {
       </header>
     );
   }
+
   return (
     <header className="header">
       <div className="header__top">
         <h1 className="header__logo">OnceMore</h1>
+        <div className="header__dropdown">
+          <DropdownMenu
+            links={props.categories}
+          />
+        </div>
         <Search/>
         <nav className="header__menu">
           {props.isLoggedIn ? 

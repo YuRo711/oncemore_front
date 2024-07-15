@@ -1,11 +1,14 @@
-.header {
-  padding: 50px 70px 0;
-}
-
 .header__top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 30px 70px 20px;
+  border-bottom: solid 1px #c28ea7;
+  position: fixed;
+  z-index: 1;
+  background-color: #FFF;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .header__logo {
@@ -48,7 +51,7 @@
 
 .header__categories {
   display: flex;
-  padding-top: 32px;
+  padding-top: 122px;
   gap: 32px;
   justify-content: center;
 }
