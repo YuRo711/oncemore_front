@@ -36,6 +36,10 @@ export default function App(props) {
     return videoApi.getVideos();
   }
 
+  function getUser(id) {
+    return videoApi.getUser(id);
+  }
+
   //#endregion
 
 
@@ -91,6 +95,7 @@ export default function App(props) {
           <VideoPlayer
             videos={videos}
             items={products}
+            getUser={getUser}
           />
         }/>
         <Route path="/" element={

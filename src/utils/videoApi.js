@@ -8,7 +8,7 @@ class videoApi {
         productId: 1,
         productName: "Название товара",
         price: 250,
-        author: "Автор",
+        author: 0,
         views: 12505,
         id: 0,
       },
@@ -17,11 +17,29 @@ class videoApi {
         productId: 0,
         productName: "Название товара 2",
         price: 250,
-        author: "Автор 2",
+        author: 0,
         views: 400,
         id: 1,
       },
     ]
+  }
+
+  async getUsers() {
+    return [
+      {
+        id: 0,
+        name: "testuser",
+        avatar: null,
+      },
+    ]
+  }
+
+  async getUser(id) {
+    return this.getUsers()
+      .then((users) => 
+        users.filter((user) => user.id == id)
+        [0]
+    );
   }
 }
 

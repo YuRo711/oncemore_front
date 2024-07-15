@@ -1,12 +1,13 @@
 .player {
   display: flex;
-  padding: 60px 0;
+  padding: 120px 0;
 }
 
 .player__main {
   width: 50%;
   background-color: #000;
   display: flex;
+  position: relative;
 }
 
 .player__video {
@@ -14,3 +15,8 @@
   margin: 0 auto;
 }
 
+.player__video-info {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
