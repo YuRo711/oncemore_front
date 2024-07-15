@@ -1,7 +1,7 @@
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./App.css";
-import { categories, contacts } from "../../utils/constants";
+import { categories, contacts, products } from "../../utils/constants";
 import { Route, Routes } from "react-router";
 import { useEffect, useState } from "react";
 import LoginModal from "../Modals/LoginModal/LoginModal";
@@ -9,6 +9,9 @@ import RegisterModal from "../Modals/RegisterModal/RegisterModal";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import Banners from "../Banners/Banners";
 import Product from "../Product/Product";
+import Catalogue from "../Catalogue/Catalogue";
+import videoApi from "../../utils/videoApi";
+import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
 export default function App(props) {
   //#region Methods
@@ -29,6 +32,10 @@ export default function App(props) {
     });
   }
 
+  function getVideos() {
+    return videoApi.getVideos();
+  }
+
   //#endregion
 
 
@@ -41,11 +48,22 @@ export default function App(props) {
   });
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    getVideos()
+      .then((res) => setVideos(res));
+  }, [])
 
 
   //#endregion
 
   //#region Rendering
+  if (videos.length == 0 || products.length == 0) {
+    return <div className="page">
+      Loading...
+    </div>
+  }
 
   return (
     <div className="page">
@@ -57,11 +75,26 @@ export default function App(props) {
         setMenuOpen={setMenuOpen}
       />
       <Routes>
+        <Route path="item" element={
+          <Product
+            videos={videos}
+            items={products}
+          />
+        }/>
+        <Route path="items" element={
+          <Catalogue
+            items={products}
+            videos={videos}
+          />
+        }/>
+        <Route path="review" element={
+          <VideoPlayer
+            videos={videos}
+            items={products}
+          />
+        }/>
         <Route path="/" element={
           <Banners />
-        }/>
-        <Route path="item" element={
-          <Product />
         }/>
       </Routes>
       <Footer
