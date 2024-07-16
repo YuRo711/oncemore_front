@@ -34,6 +34,7 @@
   font-size: 18px;
   text-decoration: none;
   color: #000;
+  position: relative;
 }
 
 .header__button {
@@ -46,6 +47,22 @@
 .header__icon {
   width: 24px;
   height: 24px;
+}
+
+.header__cart-num {
+  background-color: #ff91c8;
+  color: #2c1822;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  position: absolute;
+  top: -14px;
+  right: -14px;
 }
 
 

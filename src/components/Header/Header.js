@@ -4,13 +4,15 @@ import "./Header.css";
 import liked from "../../images/icon _heart.svg";
 import cart from "../../images/icon _shopping cart.svg";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CartContext } from "../../contexts/CartContext";
 
 export default function Header(props) {
 
   const [currentPath, setCurrentPath] = useState("/");
   useEffect(() => setCurrentPath(window.location.pathname),
     [window.location]);
+  const cartItemsNum = useContext(CartContext).cart.length;
 
   
   if (props.isOnMobile) {
@@ -69,6 +71,10 @@ export default function Header(props) {
               src={cart}
               alt="cart"
             />
+            {
+              cartItemsNum == 0 ? "" :
+              <div className="header__cart-num">{cartItemsNum}</div>
+            }
           </NavLink>
         </nav>
       </div>
