@@ -3,13 +3,18 @@
   display: flex;
   flex-direction: column;
   width: 250px;
-  height: 400px;
+  height: 20px;
   border: solid 1px #c28ea7;
   border-radius: 8px;
   overflow: hidden;
   text-decoration: none;
   color: #000;
   cursor: pointer;
+}
+
+.video_small {
+  width: 180px;
+  height: 280px;
 }
 
 .video:hover {
@@ -21,6 +26,9 @@
   height: 75%;
   overflow: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .video__vid {
@@ -60,6 +68,10 @@
   padding: 30px 20px 20px;
   display: flex;
   flex-direction: column;
+}
+
+.video_small .video__info {
+  padding: 15px;
 }
 
 .video__title {

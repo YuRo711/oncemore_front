@@ -31,7 +31,8 @@ class videoApi {
     return [
       {
         id: 0,
-        name: "testuser",
+        name: "Иван Иванов",
+        handle: "testuser",
         avatar: null,
       },
     ]

@@ -8,7 +8,9 @@ export default function Video(props) {
   const parsedViews = parseViews(views);
 
   return (
-    <NavLink className="video" to={`/review?id=${id}`}>
+    <NavLink className={`video ${props.isSmall ? "video_small" : ""}`}
+      to={`/review?id=${id}`}
+    >
       <div className="video__container">
         <video className="video__vid"
           src={link}

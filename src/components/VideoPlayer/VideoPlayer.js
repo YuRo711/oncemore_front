@@ -4,6 +4,7 @@ import UserAvatar from "../UserAvatar/UserAvatar";
 import { useEffect, useState } from "react";
 import {parseViews} from "../../utils/parsers";
 import playIcon from "../../images/play.svg";
+import Video from "../Video/Video";
 
 export default function VideoPlayer(props) {
   //#region Variables
@@ -14,6 +15,7 @@ export default function VideoPlayer(props) {
     .filter((video) => video.id == id)[0];
   const { link, productId, price, author, views, tags } = data;
   const parsedViews = parseViews(views);
+  const videos = props.videos.filter((vid) => vid.productId == productId);
 
   const [userData, setUserData] = useState(null);
   const [productData, setProductData] = useState(null);
@@ -62,7 +64,7 @@ export default function VideoPlayer(props) {
                 <button className="player__user-button"/>
               </UserAvatar>
               <div className="player__author">
-                @{userData.name}
+                @{userData.handle}
               </div>
               <div className="player__tags">
                 {
@@ -82,6 +84,30 @@ export default function VideoPlayer(props) {
           </div>
         </div>
       </div>
+          {
+            !userData || !productData ? "" :
+            <div className="player__products">
+              <h2 className="player__review-title">
+                Обзор продукта {productData.name} от пользователя {userData.name}
+              </h2>
+                <div className="player__category">
+                  <h3 className="player__subtitle">
+                    Другие обзоры
+                    <div className="player__videos">
+                      {
+                        videos.map((video, i) => 
+                          <Video
+                            isSmall={true}
+                            data={video}
+                            key={`video-${i}`}
+                          />
+                        )
+                      }
+                    </div>
+                  </h3>
+              </div>
+            </div>
+          }
     </main>
   );
 
