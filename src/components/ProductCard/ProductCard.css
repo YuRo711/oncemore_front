@@ -11,6 +11,10 @@
   box-sizing: border-box;
 }
 
+.item:hover {
+  box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.2);
+}
+
 .item_small {
   width: 200px;
   height: 280px;
