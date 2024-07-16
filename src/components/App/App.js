@@ -16,6 +16,7 @@ import VideoPlayer from "../VideoPlayer/VideoPlayer";
 import testVid from "../../temp/video.mp4";
 import { CartContext } from "../../contexts/CartContext";
 import Cart from "../Cart/Cart";
+import Gallery from "../Gallery/Gallery";
 
 export default function App(props) {
   //#region Methods
@@ -110,6 +111,10 @@ export default function App(props) {
               addItem={addItem}
             />
           }/>
+          <Route path="items/gallery" element={
+            <Gallery
+            />
+          }/>
           <Route path="items" element={
             <Catalogue
               items={products}
@@ -125,7 +130,7 @@ export default function App(props) {
               getProduct={getProduct}
             />
           }/>
-          <Route path="/cart" element={
+          <Route path="cart" element={
             <Cart
               clearCart={clearCart}
             />

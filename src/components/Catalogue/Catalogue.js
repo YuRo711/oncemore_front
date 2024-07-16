@@ -5,6 +5,7 @@ import { getUniqueItems } from "../../utils/uniqueItems";
 import { useEffect, useRef, useState } from "react";
 import Video from "../Video/Video";
 import AliceCarousel from "react-alice-carousel";
+import { NavLink, useSearchParams } from "react-router-dom";
 
 export default function Catalogue(props) {
   //#region Methods
@@ -78,6 +79,9 @@ export default function Catalogue(props) {
   const itemCarousel = useRef();
   const videoCarousel = useRef();
 
+  const searchParams = useSearchParams();
+  const filter = searchParams[0].get("filter");
+
   //#endregion
 
   return (
@@ -135,7 +139,14 @@ export default function Catalogue(props) {
             </label>
           </form>
         </div>
-        <h3 className="catalogue__subtitle">#лучшее</h3>
+        <div className="catalogue__category">
+          <h3 className="catalogue__subtitle">#лучшее</h3>
+          <NavLink className="catalogue__more"
+            to={`/items/gallery?filter=${filter}`}
+          >
+            Посмотреть всё
+          </NavLink>
+        </div>
         <div className="catalogue__gallery catalogue__gallery_scroll">
           <AliceCarousel
             items={items}
@@ -171,8 +182,13 @@ export default function Catalogue(props) {
         </div>
       </section>
       <section className="catalogue__reviews">
-        <h3 className="catalogue__subtitle">#тренды</h3>
-        <div className="catalague__videos">
+        <div className="catalogue__category">
+          <h3 className="catalogue__subtitle">#тренды</h3>
+          <NavLink className="catalogue__more">
+            Посмотреть всё
+          </NavLink>
+        </div>
+        <div className="catalogue__videos">
           <AliceCarousel
             items={videos}
             paddingLeft={0}

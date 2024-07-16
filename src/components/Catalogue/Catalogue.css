@@ -14,11 +14,22 @@
   align-items: center;
 }
 
-.catalogue__subtitle {
+.catalogue__category {
   margin-bottom: 30px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.catalogue__subtitle {
   font-size: 26px;
   font-weight: 500;
   margin-right: auto;
+}
+
+.catalogue__more {
+  color: #888888;
 }
 
 .catalogue__filter-form {
@@ -75,7 +86,7 @@
   margin-top: 50px;
 }
 
-.catalague__videos {
+.catalogue__videos {
   display: flex;
   gap: 20px;
   max-width: 100%;
