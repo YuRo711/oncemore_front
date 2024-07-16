@@ -47,7 +47,13 @@ export default function App(props) {
     return videoApi.getProduct(id);
   }
 
-  function addItem(id) {
+  function addItem(e, id) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    const item = products.find((pr) => pr.id == id);
+    console.log(item);
+    setCart([...cart, item]);
   }
 
   //#endregion
@@ -82,7 +88,7 @@ export default function App(props) {
 
   return (
     <div className="page">
-      <CartContext.Provider value={{ cart, setCart }}>
+      <CartContext.Provider value={{ cart, addItem }}>
         <Header
           categories={categories}
           isLoggedIn={isLoggedIn}
@@ -102,6 +108,7 @@ export default function App(props) {
             <Catalogue
               items={products}
               videos={videos}
+              addItem={addItem}
             />
           }/>
           <Route path="review" element={

@@ -66,6 +66,7 @@ export default function Catalogue(props) {
     <ProductCard
       data={data}
       key={`product-${i}`}
+      addItem={props.addItem}
     />
   );
   const videos= props.videos.map((video, i) => 
