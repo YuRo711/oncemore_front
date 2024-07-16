@@ -68,6 +68,7 @@ export default function Catalogue(props) {
       data={data}
       key={`product-${i}`}
       addItem={props.addItem}
+      likeItem={props.likeItem}
     />
   );
   const videos= props.videos.map((video, i) => 

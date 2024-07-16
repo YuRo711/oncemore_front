@@ -124,7 +124,9 @@ export default function Product(props) {
               >
                 Добавить в корзину
               </button>
-              <button className="product__like-button"/>
+              <button className="product__like-button"
+                onClick={props.likeButton}
+              />
             </div>
           </div>
           <div className="product__details">

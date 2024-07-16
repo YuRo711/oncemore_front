@@ -54,6 +54,7 @@ export default function Cart(props) {
               data={item}
               key={`cart-item-${i}`}
               isCart={true}
+              likeItem={props.likeItem}
             />
           )
         }

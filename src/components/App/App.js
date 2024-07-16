@@ -60,9 +60,20 @@ export default function App(props) {
     setCart([...cart, item]);
   }
 
-
   function clearCart() {
     setCart([]);
+  }
+
+  function likeItem(e, id) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    if (!isLoggedIn || !user) {
+      handleModalOpen("login");
+      return;
+    }
+
+    products[id].likes.append(user.id);
   }
 
   //#endregion
@@ -115,12 +126,14 @@ export default function App(props) {
               videos={videos}
               items={products}
               addItem={addItem}
+              likeItem={likeItem}
             />
           }/>
           <Route path="items/gallery" element={
             <Gallery
               items={products}
               videos={videos}
+              likeItem={likeItem}
             />
           }/>
           <Route path="items" element={
@@ -128,6 +141,7 @@ export default function App(props) {
               items={products}
               videos={videos}
               addItem={addItem}
+              likeItem={likeItem}
             />
           }/>
           <Route path="review" element={
@@ -148,6 +162,7 @@ export default function App(props) {
           <Route path="cart" element={
             <Cart
               clearCart={clearCart}
+              likeItem={likeItem}
             />
           }/>
           <Route path="/" element={

@@ -22,7 +22,9 @@ export default function ProductCard(props) {
       >
         В корзину
       </button>
-      <button className="item__like-button"/>
+      <button className="item__like-button"
+        onClick={(e) => props.likeItem(e, id)}
+      />
     </NavLink>
   );
 }
