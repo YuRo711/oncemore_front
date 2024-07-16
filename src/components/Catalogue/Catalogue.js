@@ -109,9 +109,10 @@ export default function Catalogue(props) {
         <h3 className="catalogue__subtitle">#тренды</h3>
         <div className="catalague__videos">
           {
-            props.videos.map((video) => 
+            props.videos.map((video, i) => 
               <Video
                 data={video}
+                key={`video-${i}`}
               />
             )
           }
