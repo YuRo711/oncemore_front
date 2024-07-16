@@ -84,7 +84,6 @@ export default function Catalogue(props) {
     <main className="catalogue">
       <h2 className="catalogue__title">Глаза</h2>
       <section className="catalogue__products">
-        <h3 className="catalogue__subtitle">Товары</h3>
         <div className="catalogue__filters">
           <form className="catalogue__filter-form">
             <label className="catalogue__label">
@@ -136,6 +135,7 @@ export default function Catalogue(props) {
             </label>
           </form>
         </div>
+        <h3 className="catalogue__subtitle">#лучшее</h3>
         <div className="catalogue__gallery catalogue__gallery_scroll">
           <AliceCarousel
             items={items}
