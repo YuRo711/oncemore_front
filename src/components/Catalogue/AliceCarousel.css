@@ -11,10 +11,15 @@
   list-style: none;
   padding: 0;
   position: relative;
-  max-width: calc(100vw - 140px);
+  width: calc(100vw - 140px);
   overflow: hidden;
 }
 
 .alice-carousel__dots {
   display: none
+}
+
+.alice-carousel__stage-item {
+  margin: 0;
+  max-width: 250px;
 }

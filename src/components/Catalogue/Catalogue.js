@@ -26,19 +26,20 @@ export default function Catalogue(props) {
     );
   }
 
-  function slideNext()
+  function slideNext(carousel)
   {
+    console.log(carousel.current.state);
     const index = carousel.current.state.activeIndex;
     const itemsOnSlide = 5;
-    if (index >= filteredItems.length / itemsOnSlide) return;
+    if (index + 1 >= 
+      carousel.current.state.transformationSet.length / itemsOnSlide) 
+      return;
 
-    console.log(index);
     carousel.current.slideNext();
   }
 
-  function slidePrev()
+  function slidePrev(carousel)
   {
-    console.log(carousel.current.state.activeIndex);
     carousel.current.slidePrev();
   }
 
@@ -67,7 +68,14 @@ export default function Catalogue(props) {
       key={`product-${i}`}
     />
   );
-  const carousel = useRef();
+  const videos= props.videos.map((video, i) => 
+    <Video
+      data={video}
+      key={`video-${i}`}
+    />
+  );
+  const itemCarousel = useRef();
+  const videoCarousel = useRef();
 
   //#endregion
 
@@ -147,31 +155,54 @@ export default function Catalogue(props) {
               }
             }}
             disableButtonsControls={true}
-            ref={carousel}
+            ref={itemCarousel}
           />
           <button 
             className="catalogue__carousel-btn catalogue__carousel-btn_prev"
             type="button"
-            onClick={slidePrev}
+            onClick={() => slidePrev(itemCarousel)}
           />
           <button 
             className="catalogue__carousel-btn catalogue__carousel-btn_next"
             type="button"
-            onClick={slideNext}
+            onClick={() => slideNext(itemCarousel)}
           />
         </div>
       </section>
       <section className="catalogue__reviews">
         <h3 className="catalogue__subtitle">#тренды</h3>
         <div className="catalague__videos">
-          {
-            props.videos.map((video, i) => 
-              <Video
-                data={video}
-                key={`video-${i}`}
-              />
-            )
-          }
+          <AliceCarousel
+            items={videos}
+            paddingLeft={0}
+            paddingRight={0}
+            mouseTrackingresponsive={{
+              0: {
+                items: 2
+              },
+              600: {
+                items: 3
+              },
+              900: {
+                items: 4
+              },
+              1200: {
+                items: 5
+              }
+            }}
+            disableButtonsControls={true}
+            ref={videoCarousel}
+          />
+          <button 
+            className="catalogue__carousel-btn catalogue__carousel-btn_prev"
+            type="button"
+            onClick={() => slidePrev(videoCarousel)}
+          />
+          <button 
+            className="catalogue__carousel-btn catalogue__carousel-btn_next"
+            type="button"
+            onClick={() => slideNext(videoCarousel)}
+          /> 
         </div>
       </section>
     </main>

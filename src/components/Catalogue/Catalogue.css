@@ -78,6 +78,8 @@
 .catalague__videos {
   display: flex;
   gap: 20px;
+  max-width: 100%;
+  position: relative;
 }
 
 .catalogue__carousel-btn {
