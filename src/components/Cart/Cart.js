@@ -14,6 +14,16 @@ export default function Cart(props) {
   }
 
   const items = useContext(CartContext).cart;
+  const itemTotal = items
+    .map((item) => item.price)
+    .reduce(
+      (accumulator, currentValue) => accumulator + currentValue, 
+      0
+  );
+  const delivery = 100;
+  const tax = 0;
+  const discount = -51;
+  const total = itemTotal + delivery + tax + discount;
 
   return <main className="cart">
     <div className="cart__header">
@@ -46,6 +56,37 @@ export default function Cart(props) {
             />
           )
         }
+      </div>
+      <div className="cart__summary">
+        <div className="cart__costs">
+          <div className="cart__cost">
+            Стоимость товаров
+            <span className="cart__price">{itemTotal}₽</span>
+          </div>
+          <div className="cart__cost">
+            Доставка
+            <span className="cart__price">{delivery}₽</span>
+          </div>
+          <div className="cart__cost">
+            Налог
+            <span className="cart__price">{tax}₽</span>
+          </div>
+          <div className="cart__cost cart__cost_discount">
+            Скидка
+            <span className="cart__price cart__price_discount">
+              {discount}₽
+            </span>
+          </div>
+        </div>
+        <div className="cart__total">
+          Итого
+          <span className="cart__total-cost">{total}₽</span>
+        </div>
+        <button className="cart__checkout-button"
+          type="button"
+        >
+          К оплате
+        </button>
       </div>
     </div>
   </main>
