@@ -18,9 +18,22 @@
   flex-shrink: 0;
 }
 
-.item_small .item__image {
+.item__image-container {
+  height: 200px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.item_small .item__image-container {
   width: 130px;
   height: 130px;
+}
+
+.item__image {
+  width: 100%;
 }
 
 .item__name {
