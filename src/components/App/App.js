@@ -15,8 +15,10 @@ import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
 import testVid from "../../temp/video.mp4";
 import { CartContext } from "../../contexts/CartContext";
+import { UserContext } from "../../contexts/UserContext";
 import Cart from "../Cart/Cart";
 import Gallery from "../Gallery/Gallery";
+import Liked from "../Liked/Liked";
 
 export default function App(props) {
   //#region Methods
@@ -77,10 +79,12 @@ export default function App(props) {
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
   const [videos, setVideos] = useState([]);
   const [cart, setCart] = useState([]);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     getVideos()
       .then((res) => setVideos(res));
+    setUser(getUser(0));
   }, [])
 
 
@@ -96,6 +100,7 @@ export default function App(props) {
   return (
     <div className="page">
       <CartContext.Provider value={{ cart, addItem }}>
+      <UserContext.Provider value={{ user }}>      
         <Header
           categories={categories}
           isLoggedIn={isLoggedIn}
@@ -132,6 +137,10 @@ export default function App(props) {
               getProduct={getProduct}
             />
           }/>
+          <Route path="liked" element={
+            <Liked
+            />
+          }/>
           <Route path="cart" element={
             <Cart
               clearCart={clearCart}
@@ -164,6 +173,7 @@ export default function App(props) {
           openLoginModal={() => handleModalOpen("login")}
           categories={categories}
         />
+      </UserContext.Provider>
       </CartContext.Provider>
     </div>
   );
