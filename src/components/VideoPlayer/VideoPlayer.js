@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import {parseViews} from "../../utils/parsers";
 import playIcon from "../../images/play.svg";
 import Video from "../Video/Video";
+import ProductCard from "../ProductCard/ProductCard";
 
 export default function VideoPlayer(props) {
   //#region Variables
@@ -16,6 +17,7 @@ export default function VideoPlayer(props) {
   const { link, productId, price, author, views, tags } = data;
   const parsedViews = parseViews(views);
   const videos = props.videos.filter((vid) => vid.productId == productId);
+  const userVideos = props. videos.filter((vid) => vid.author == author)
 
   const [userData, setUserData] = useState(null);
   const [productData, setProductData] = useState(null);
@@ -93,7 +95,7 @@ export default function VideoPlayer(props) {
                 <div className="player__category">
                   <h3 className="player__subtitle">
                     Другие обзоры
-                    <div className="player__videos">
+                    <div className="player__gallery">
                       {
                         videos.map((video, i) => 
                           <Video
@@ -105,6 +107,38 @@ export default function VideoPlayer(props) {
                       }
                     </div>
                   </h3>
+              </div>
+              <div className="player__category">
+                <h3 className="player__subtitle">
+                  Похожие товары
+                  <div className="player__gallery">
+                    {
+                      props.items.map((data, i) => 
+                        <ProductCard
+                          isSmall={true}
+                          data={data}
+                          key={`product-${i}`}
+                        />
+                      )
+                    }
+                  </div>
+                </h3>
+              </div>
+              <div className="player__category">
+                <h3 className="player__subtitle">
+                  Обзоры пользователя {userData.name}
+                  <div className="player__gallery">
+                    {
+                      userVideos.map((video, i) => 
+                        <Video
+                          isSmall={true}
+                          data={video}
+                          key={`video-${i}`}
+                        />
+                      )
+                    }
+                  </div>
+                </h3>
               </div>
             </div>
           }
