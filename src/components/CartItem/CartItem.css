@@ -1,0 +1,22 @@
+.cart-item {
+  position: relative;
+  display: flex;
+  width: 100%;
+  padding: 20px;
+  text-decoration: none;
+  color: #000;
+  box-sizing: border-box;
+}
+
+.cart-item__image {
+  height: 120px;
+}
+
+.cart-item__info {
+  max-width: 700px;
+  margin-left: 50px;
+}
+
+.cart-item__title {
+  font-weight: 500;
+}
