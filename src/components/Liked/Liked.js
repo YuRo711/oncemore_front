@@ -5,7 +5,7 @@ import { UserContext } from "../../contexts/UserContext";
 export default function Liked(props) {
   const user = useContext(UserContext).user;
 
-  if (!props.isLoggedIn) {
+  if (!props.isLoggedIn || !user) {
     return (
       <main className="liked">
         <h2 className="liked__register">
@@ -22,7 +22,7 @@ export default function Liked(props) {
 
   return (
     <main className="liked">
-
+      
     </main>
   );
 }

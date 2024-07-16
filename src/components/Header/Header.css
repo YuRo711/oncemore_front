@@ -66,9 +66,13 @@
 }
 
 
+.header__categories-container {
+  padding-top: 90px;
+}
+
 .header__categories {
   display: flex;
-  padding-top: 122px;
+  padding-top: 32px;
   gap: 32px;
   justify-content: center;
 }

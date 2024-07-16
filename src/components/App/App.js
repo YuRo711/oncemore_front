@@ -70,7 +70,7 @@ export default function App(props) {
 
   //#region Variables Setup
 
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(true);
   const [modalsActivity, setModalsActivity] = useState({
     signup: false,
     login: false,
