@@ -113,6 +113,8 @@ export default function App(props) {
           }/>
           <Route path="items/gallery" element={
             <Gallery
+              items={products}
+              videos={videos}
             />
           }/>
           <Route path="items" element={

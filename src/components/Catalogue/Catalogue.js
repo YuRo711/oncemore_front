@@ -184,7 +184,9 @@ export default function Catalogue(props) {
       <section className="catalogue__reviews">
         <div className="catalogue__category">
           <h3 className="catalogue__subtitle">#тренды</h3>
-          <NavLink className="catalogue__more">
+          <NavLink className="catalogue__more"
+            to={`/items/gallery?filter=${filter}&type=videos`}
+          >
             Посмотреть всё
           </NavLink>
         </div>
