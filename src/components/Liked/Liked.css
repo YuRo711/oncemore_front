@@ -1,0 +1,17 @@
+.liked {
+  padding: 70px;
+}
+
+.liked__register {
+  font-weight: 300;
+  font-size: 24px;
+}
+
+.liked__signup-button {
+  border: none;
+  background: none;
+  font-weight: 300;
+  font-size: 24px;
+  padding: 0;
+  color: hsl(331, 92%, 62%);
+}

@@ -84,7 +84,8 @@ export default function App(props) {
   useEffect(() => {
     getVideos()
       .then((res) => setVideos(res));
-    setUser(getUser(0));
+    getUser(0)
+      .then((res) => setUser(res));
   }, [])
 
 
@@ -139,6 +140,8 @@ export default function App(props) {
           }/>
           <Route path="liked" element={
             <Liked
+              isLoggedIn={isLoggedIn}
+              openSignUp={() => handleModalOpen("signup")}
             />
           }/>
           <Route path="cart" element={

@@ -30,7 +30,7 @@
 }
 
 .header__link {
-  font-weight: 400;
+  font-weight: 300;
   font-size: 18px;
   text-decoration: none;
   color: #000;
@@ -40,7 +40,7 @@
 .header__button {
   background: none;
   border: none;
-  font-weight: 400;
+  font-weight: 00;
   font-size: 18px;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .header__category {
-  font-weight: 400;
+  font-weight: 300;
   font-size: 20px;
   text-decoration: none;
   color: #000;
