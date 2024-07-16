@@ -13,6 +13,8 @@ import Catalogue from "../Catalogue/Catalogue";
 import videoApi from "../../utils/api";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
+import testVid from "../../temp/video.mp4";
+
 export default function App(props) {
   //#region Methods
 
@@ -42,6 +44,9 @@ export default function App(props) {
 
   function getProduct(id) {
     return videoApi.getProduct(id);
+  }
+
+  function addItem(id) {
   }
 
   //#endregion
@@ -87,6 +92,7 @@ export default function App(props) {
           <Product
             videos={videos}
             items={products}
+            addItem={addItem}
           />
         }/>
         <Route path="items" element={

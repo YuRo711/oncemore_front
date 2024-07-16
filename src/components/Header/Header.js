@@ -29,7 +29,9 @@ export default function Header(props) {
   return (
     <header className="header">
       <div className="header__top">
-        <h1 className="header__logo">OnceMore</h1>
+        <NavLink className="header__link" to="/">
+          <h1 className="header__logo">OnceMore</h1>
+        </NavLink>
         <div className="header__dropdown">
           <DropdownMenu
             links={props.categories}
