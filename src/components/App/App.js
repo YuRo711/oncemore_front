@@ -1,7 +1,7 @@
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./App.css";
-import { categories, contacts, products } from "../../utils/constants";
+import { categories, contacts, products, banners } from "../../utils/constants";
 import { Route, Routes } from "react-router";
 import { useEffect, useState } from "react";
 import LoginModal from "../Modals/LoginModal/LoginModal";
@@ -10,8 +10,11 @@ import MobileMenu from "../MobileMenu/MobileMenu";
 import Banners from "../Banners/Banners";
 import Product from "../Product/Product";
 import Catalogue from "../Catalogue/Catalogue";
-import videoApi from "../../utils/videoApi";
+import videoApi from "../../utils/api";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
+
+import testVid from "../../temp/video.mp4";
+import { CartContext } from "../../contexts/CartContext";
 
 export default function App(props) {
   //#region Methods
@@ -36,6 +39,17 @@ export default function App(props) {
     return videoApi.getVideos();
   }
 
+  function getUser(id) {
+    return videoApi.getUser(id);
+  }
+
+  function getProduct(id) {
+    return videoApi.getProduct(id);
+  }
+
+  function addItem(id) {
+  }
+
   //#endregion
 
 
@@ -49,6 +63,7 @@ export default function App(props) {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
   const [videos, setVideos] = useState([]);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     getVideos()
@@ -67,57 +82,64 @@ export default function App(props) {
 
   return (
     <div className="page">
-      <Header
-        categories={categories}
-        isLoggedIn={isLoggedIn}
-        handleModalOpen={handleModalOpen}
-        isOnMobile={isOnMobile}
-        setMenuOpen={setMenuOpen}
-      />
-      <Routes>
-        <Route path="item" element={
-          <Product
-            videos={videos}
-            items={products}
-          />
-        }/>
-        <Route path="items" element={
-          <Catalogue
-            items={products}
-            videos={videos}
-          />
-        }/>
-        <Route path="review" element={
-          <VideoPlayer
-            videos={videos}
-            items={products}
-          />
-        }/>
-        <Route path="/" element={
-          <Banners />
-        }/>
-      </Routes>
-      <Footer
-        contacts={contacts}
-      />
-      <RegisterModal
-        name="signup"
-        onClose={handleModalClose}
-        isOpen={modalsActivity["signup"]}
-        openAnotherModal={() => openAnotherModal("signup", "login")}
-      />
-      <LoginModal
-        name="login"
-        onClose={handleModalClose}
-        isOpen={modalsActivity["login"]}
-        openAnotherModal={() => openAnotherModal("login", "signup")}
-      />
-      <MobileMenu
-        isMenuOpen={isMenuOpen}
-        setMenuOpen={setMenuOpen}
-        openLoginModal={() => handleModalOpen("login")}
-        categories={categories}
-      />
+      <CartContext.Provider value={{ cart, setCart }}>
+        <Header
+          categories={categories}
+          isLoggedIn={isLoggedIn}
+          handleModalOpen={handleModalOpen}
+          isOnMobile={isOnMobile}
+          setMenuOpen={setMenuOpen}
+        />
+        <Routes>
+          <Route path="item" element={
+            <Product
+              videos={videos}
+              items={products}
+              addItem={addItem}
+            />
+          }/>
+          <Route path="items" element={
+            <Catalogue
+              items={products}
+              videos={videos}
+            />
+          }/>
+          <Route path="review" element={
+            <VideoPlayer
+              videos={videos}
+              items={products}
+              getUser={getUser}
+              getProduct={getProduct}
+            />
+          }/>
+          <Route path="/" element={
+            <Banners
+              banners={banners}
+            />
+          }/>
+        </Routes>
+        <Footer
+          contacts={contacts}
+        />
+        <RegisterModal
+          name="signup"
+          onClose={handleModalClose}
+          isOpen={modalsActivity["signup"]}
+          openAnotherModal={() => openAnotherModal("signup", "login")}
+        />
+        <LoginModal
+          name="login"
+          onClose={handleModalClose}
+          isOpen={modalsActivity["login"]}
+          openAnotherModal={() => openAnotherModal("login", "signup")}
+        />
+        <MobileMenu
+          isMenuOpen={isMenuOpen}
+          setMenuOpen={setMenuOpen}
+          openLoginModal={() => handleModalOpen("login")}
+          categories={categories}
+        />
+      </CartContext.Provider>
     </div>
   );
 

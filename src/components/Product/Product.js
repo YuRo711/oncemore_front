@@ -102,13 +102,14 @@ export default function Product(props) {
               <div className="product__colors">
                 {
                   colorImages.map((img, i) => 
-                    <NavLink to={`/item?id=${sameItems[i].id}`}>
+                    <NavLink to={`/item?id=${sameItems[i].id}`}
+                      key={`color-${i}`}
+                    >
                       <img 
                         className={`product__color ${
                           sameItems[i].id == id ? "product__color_selected" : ""
                         }`}
                         src={img}
-                        key={`color-${i}`}
                         onClick={() => selectColor(i)}
                       />
                     </NavLink>
@@ -117,7 +118,10 @@ export default function Product(props) {
               </div>
             </div>
             <div className="product__buttons">
-              <button className="product__cart-button">
+              <button className="product__cart-button"
+                type="button"
+                onClick={() => props.addItem(id)}
+              >
                 Добавить в корзину
               </button>
               <button className="product__like-button"/>
@@ -142,9 +146,10 @@ export default function Product(props) {
         <h3 className="product__subtitle">Обзоры этого товара</h3>
         <div className="product__videos">
           {
-            videos.map((video) => 
+            videos.map((video, i) => 
               <Video
                 data={video}
+                key={`video-${i}`}
               />
             )
           }

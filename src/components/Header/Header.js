@@ -4,8 +4,15 @@ import "./Header.css";
 import liked from "../../images/icon _heart.svg";
 import cart from "../../images/icon _shopping cart.svg";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
+import { useEffect, useState } from "react";
 
 export default function Header(props) {
+
+  const [currentPath, setCurrentPath] = useState("/");
+  useEffect(() => setCurrentPath(window.location.pathname),
+    [window.location]);
+
+  
   if (props.isOnMobile) {
     return(
       <header className="header">
@@ -19,12 +26,12 @@ export default function Header(props) {
     );
   }
 
-  const currentPath = window.location.pathname;
-
   return (
     <header className="header">
       <div className="header__top">
-        <h1 className="header__logo">OnceMore</h1>
+        <NavLink className="header__link" to="/">
+          <h1 className="header__logo">OnceMore</h1>
+        </NavLink>
         <div className="header__dropdown">
           <DropdownMenu
             links={props.categories}

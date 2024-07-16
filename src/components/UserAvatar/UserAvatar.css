@@ -1,0 +1,16 @@
+.avatar {
+  position: relative;
+}
+
+.avatar__container {
+  background-color: #ff91c8;
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  text-transform: uppercase;
+}

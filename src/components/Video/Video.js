@@ -1,24 +1,16 @@
 import { NavLink } from "react-router-dom";
 import play from "../../images/play.svg";
 import "./Video.css";
+import {parseViews} from "../../utils/parsers";
 
 export default function Video(props) {
-  function parseViews(views)
-  {
-    if (views > 1000000) {
-      return `${Math.round(views / 100000) / 10}}m`;
-    }
-    if (views > 1000) {
-      return `${Math.round(views / 100) / 10}k`;
-    }
-    return views;
-  }
-
   const { link, productName, price, views, id } = props.data;
   const parsedViews = parseViews(views);
 
   return (
-    <NavLink className="video" to={`/review?id=${id}`}>
+    <NavLink className={`video ${props.isSmall ? "video_small" : ""}`}
+      to={`/review?id=${id}`}
+    >
       <div className="video__container">
         <video className="video__vid"
           src={link}

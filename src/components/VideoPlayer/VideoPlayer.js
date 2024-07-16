@@ -1,5 +1,11 @@
 import { useSearchParams } from "react-router-dom";
 import "./VideoPlayer.css";
+import UserAvatar from "../UserAvatar/UserAvatar";
+import { useEffect, useState } from "react";
+import {parseViews} from "../../utils/parsers";
+import playIcon from "../../images/play.svg";
+import Video from "../Video/Video";
+import ProductCard from "../ProductCard/ProductCard";
 
 export default function VideoPlayer(props) {
   //#region Variables
@@ -8,9 +14,24 @@ export default function VideoPlayer(props) {
   const id = searchParams[0].get("id");
   const data = props.videos
     .filter((video) => video.id == id)[0];
-  const { link, productId, productName, price, views } = data;
+  const { link, productId, price, author, views, tags } = data;
+  const parsedViews = parseViews(views);
+  const videos = props.videos.filter((vid) => vid.productId == productId);
+  const userVideos = props. videos.filter((vid) => vid.author == author)
+
+  const [userData, setUserData] = useState(null);
+  const [productData, setProductData] = useState(null);
+  useEffect(() => {
+    props.getUser((author))
+      .then((user) => setUserData(user));
+    props.getProduct((productId))
+      .then((product) => setProductData(product));
+    console.log(productData);
+  }, [])
 
   //#endregion
+
+  //#region Rendering
 
   return (
     <main className="player">
@@ -18,9 +39,111 @@ export default function VideoPlayer(props) {
         <video className="player__video"
           src={link}
           autoPlay
-          controls
         />
+        {
+          productData ? 
+            <div className="player__product">
+              <img className="player__product-image"
+                src={productData.images[0]}
+              />
+              <div className="player__product-info">
+                <h4 className="player__price">{productData.price}₽</h4>
+                <h3 className="player__title">{productData.name}</h3>
+              </div>
+              <button className="player__cart-button" 
+                type="button"
+              />
+            </div>
+          : ""
+        }
+        <div className="player__video-info">
+          {
+            userData ?
+            <div className="player__user">
+              <UserAvatar
+                userData={userData}
+              >
+                <button className="player__user-button"/>
+              </UserAvatar>
+              <div className="player__author">
+                @{userData.handle}
+              </div>
+              <div className="player__tags">
+                {
+                  tags.map((tag) => 
+                    <p className="player__tag">#{tag}</p>
+                )
+                }
+              </div>
+            </div>
+            : ""
+          }
+          <div className="player__views">
+            <img className="player__views-icon"
+              src={playIcon}
+            />
+            {parsedViews}
+          </div>
+        </div>
       </div>
+          {
+            !userData || !productData ? "" :
+            <div className="player__products">
+              <h2 className="player__review-title">
+                Обзор продукта {productData.name} от пользователя {userData.name}
+              </h2>
+                <div className="player__category">
+                  <h3 className="player__subtitle">
+                    Другие обзоры
+                    <div className="player__gallery">
+                      {
+                        videos.map((video, i) => 
+                          <Video
+                            isSmall={true}
+                            data={video}
+                            key={`video-${i}`}
+                          />
+                        )
+                      }
+                    </div>
+                  </h3>
+              </div>
+              <div className="player__category">
+                <h3 className="player__subtitle">
+                  Похожие товары
+                  <div className="player__gallery">
+                    {
+                      props.items.map((data, i) => 
+                        <ProductCard
+                          isSmall={true}
+                          data={data}
+                          key={`product-${i}`}
+                        />
+                      )
+                    }
+                  </div>
+                </h3>
+              </div>
+              <div className="player__category">
+                <h3 className="player__subtitle">
+                  Обзоры пользователя {userData.name}
+                  <div className="player__gallery">
+                    {
+                      userVideos.map((video, i) => 
+                        <Video
+                          isSmall={true}
+                          data={video}
+                          key={`video-${i}`}
+                        />
+                      )
+                    }
+                  </div>
+                </h3>
+              </div>
+            </div>
+          }
     </main>
   );
+
+  //#endregion
 }
