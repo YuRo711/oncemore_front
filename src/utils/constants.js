@@ -63,7 +63,8 @@ const products = [
     color: "коричневый",
     colorImage: brown,
     id: 0,
-    images: [item1, item2],
+    images: [item2],
+    likes: [0]
   },
   {
     image: item1,
@@ -73,6 +74,7 @@ const products = [
     colorImage: blue,
     id: 1,
     images: [item1],
+    likes: []
   },
   {
     image: item2,
@@ -81,7 +83,8 @@ const products = [
     color: "коричневый",
     colorImage: brown,
     id: 2,
-    images: [item1, item2],
+    images: [item2],
+    likes: []
   },
   {
     image: item1,
@@ -91,6 +94,7 @@ const products = [
     colorImage: blue,
     id: 3,
     images: [item1, item2],
+    likes: []
   },
   {
     image: item2,
@@ -99,7 +103,8 @@ const products = [
     color: "коричневый",
     colorImage: brown,
     id: 4,
-    images: [item1, item2],
+    images: [item2],
+    likes: []
   },
   {
     image: item1,
@@ -109,6 +114,7 @@ const products = [
     colorImage: blue,
     id: 5,
     images: [item1, item2],
+    likes: []
   },
 ];
 

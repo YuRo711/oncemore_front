@@ -142,6 +142,7 @@ export default function App(props) {
             <Liked
               isLoggedIn={isLoggedIn}
               openSignUp={() => handleModalOpen("signup")}
+              items={products}
             />
           }/>
           <Route path="cart" element={

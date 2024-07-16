@@ -53,6 +53,7 @@ export default function Cart(props) {
             <HorizontalItem
               data={item}
               key={`cart-item-${i}`}
+              isCart={true}
             />
           )
         }
