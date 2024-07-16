@@ -73,7 +73,8 @@ export default function App(props) {
       return;
     }
 
-    products[id].likes.append(user.id);
+    const item = products.find((item) => item.id == id);
+    item.likes.push(user.id);
   }
 
   //#endregion
