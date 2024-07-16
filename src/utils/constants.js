@@ -7,6 +7,7 @@ import item1 from "../images/canvas.png";
 import item2 from "../images/canvas 2.png";
 import brown from "../images/Screenshot from 2024-07-11 19-46-27.png";
 import blue from "../images/Screenshot from 2024-07-11 19-46-31.png";
+import banner2 from "../temp/banner 2.png"
 
 
 const categories = [
@@ -124,7 +125,17 @@ var banners = [
       "Шоппинг – это разговор, а покупка – новая история.",
       "Это будет здорово.",
     ]
-  }
+  },
+  {
+    title: "Получайте баллы за покупки и отзывы о товаре",
+    subtitle: "Чем реальнее и честнее будут Ваши отзывы, тем больше Покупатели будут доверять тому, что видят.",
+    paragraphs: [
+      "1.  Создавайте видео-отзывы о плюсах и минусах товара.",
+      "2. Оценивайте отзывы других людей.",
+      "3. Приглашайте своих друзей.",
+    ],
+    image: banner2
+  },
 ]
 
 export {
