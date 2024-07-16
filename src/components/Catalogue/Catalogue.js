@@ -2,10 +2,13 @@ import "./Catalogue.css";
 import ProductCard from "../ProductCard/ProductCard";
 import MultiSelect from "../MultiSelect/MultiSelect";
 import { getUniqueItems } from "../../utils/uniqueItems";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Video from "../Video/Video";
+import AliceCarousel from "react-alice-carousel";
 
 export default function Catalogue(props) {
+  //#region Methods
+
   function selectColors(changedColor) {
     if (selectedColors.includes(changedColor)) {
       setColors(selectedColors.filter((el) => el !== changedColor));
@@ -23,6 +26,26 @@ export default function Catalogue(props) {
     );
   }
 
+  function slideNext()
+  {
+    const index = carousel.current.state.activeIndex;
+    const itemsOnSlide = 5;
+    if (index >= filteredItems.length / itemsOnSlide) return;
+
+    console.log(index);
+    carousel.current.slideNext();
+  }
+
+  function slidePrev()
+  {
+    console.log(carousel.current.state.activeIndex);
+    carousel.current.slidePrev();
+  }
+
+  //#endregion
+
+  //#region  Variables
+
   const colors = getUniqueItems(props.items.map((data) => data.color));
   const maxItemPrice = Math.max(...(props.items.map((data) => data.price)));
   
@@ -37,6 +60,16 @@ export default function Catalogue(props) {
   useEffect(() => filterItems(),
     [selectedColors]
   );
+
+  const items = filteredItems.map((data, i) => 
+    <ProductCard
+      data={data}
+      key={`product-${i}`}
+    />
+  );
+  const carousel = useRef();
+
+  //#endregion
 
   return (
     <main className="catalogue">
@@ -94,15 +127,38 @@ export default function Catalogue(props) {
             </label>
           </form>
         </div>
-        <div className="catalogue__gallery">
-          {
-            filteredItems.map((data, i) => 
-              <ProductCard
-                data={data}
-                key={`product-${i}`}
-              />
-            )
-          }
+        <div className="catalogue__gallery catalogue__gallery_scroll">
+          <AliceCarousel
+            items={items}
+            paddingLeft={0}
+            paddingRight={0}
+            mouseTrackingresponsive={{
+              0: {
+                items: 2
+              },
+              600: {
+                items: 3
+              },
+              900: {
+                items: 4
+              },
+              1200: {
+                items: 5
+              }
+            }}
+            disableButtonsControls={true}
+            ref={carousel}
+          />
+          <button 
+            className="catalogue__carousel-btn catalogue__carousel-btn_prev"
+            type="button"
+            onClick={slidePrev}
+          />
+          <button 
+            className="catalogue__carousel-btn catalogue__carousel-btn_next"
+            type="button"
+            onClick={slideNext}
+          />
         </div>
       </section>
       <section className="catalogue__reviews">

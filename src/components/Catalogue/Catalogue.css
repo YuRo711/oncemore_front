@@ -54,9 +54,20 @@
 
 .catalogue__gallery {
   margin-top: 50px;
+  position: relative;
+  width: 100%;
+}
+
+.catalogue__gallery_scroll {
+  margin-top: 50px;
+  display: flex;
+  max-width: 100%;
+}
+
+.catalogue__gallery_grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
+  gap: 20px;  
 }
 
 
@@ -68,3 +79,27 @@
   display: flex;
   gap: 20px;
 }
+
+.catalogue__carousel-btn {
+  height: 50px;
+  width: 50px;
+  background-color: #FFF;
+  background-size: cover;
+  border: none;
+  border-radius: 25px;
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+}
+
+.catalogue__carousel-btn_prev {
+  background-image: url('../../images/arrow-circle-left.svg');
+  left: -20px;
+}
+
+.catalogue__carousel-btn_next {
+  background-image: url('../../images/arrow-circle-right.svg');
+  right: -20px;
+}
+
+@import url('./AliceCarousel.css');
