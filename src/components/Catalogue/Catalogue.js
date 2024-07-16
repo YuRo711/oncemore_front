@@ -142,7 +142,7 @@ export default function Catalogue(props) {
         <div className="catalogue__category">
           <h3 className="catalogue__subtitle">#лучшее</h3>
           <NavLink className="catalogue__more"
-            to={`/items/gallery?filter=${filter}`}
+            to={`/items/gallery?filter=${filter}&type=items`}
           >
             Посмотреть всё
           </NavLink>
