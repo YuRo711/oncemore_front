@@ -2,7 +2,7 @@ import { useContext } from "react";
 import "./Cart.css";
 import { CartContext } from "../../contexts/CartContext";
 import backIcon from "../../images/caret-left.svg";
-import CartItem from "../CartItem/CartItem";
+import HorizontalItem from "../HorizontalItem/HorizontalItem";
 
 export default function Cart(props) {
   function conjugateItem(n) {
@@ -50,7 +50,7 @@ export default function Cart(props) {
         </div>
         {
           items.map((item, i) => 
-            <CartItem
+            <HorizontalItem
               data={item}
               key={`cart-item-${i}`}
             />

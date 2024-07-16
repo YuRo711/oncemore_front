@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
-import "./CartItem.css";
+import "./HorizontalItem.css";
 
-export default function CartItem(props) {
+export default function HorizontalItem(props) {
   const { images, name, price, color, id } = props.data;
+  const { isCart } = props.data;
 
   return (
     <NavLink className="cart-item" to={`/item?id=${id}`}>
