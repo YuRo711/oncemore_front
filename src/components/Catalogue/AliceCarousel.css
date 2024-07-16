@@ -12,7 +12,6 @@
   padding: 0;
   position: relative;
   width: calc(100vw - 140px);
-  overflow: hidden;
 }
 
 .alice-carousel__dots {

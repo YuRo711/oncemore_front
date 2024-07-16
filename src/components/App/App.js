@@ -15,6 +15,7 @@ import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
 import testVid from "../../temp/video.mp4";
 import { CartContext } from "../../contexts/CartContext";
+import Cart from "../Cart/Cart";
 
 export default function App(props) {
   //#region Methods
@@ -47,7 +48,18 @@ export default function App(props) {
     return videoApi.getProduct(id);
   }
 
-  function addItem(id) {
+  function addItem(e, id) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    const item = products.find((pr) => pr.id == id);
+    console.log(item);
+    setCart([...cart, item]);
+  }
+
+
+  function clearCart() {
+    setCart([]);
   }
 
   //#endregion
@@ -82,7 +94,7 @@ export default function App(props) {
 
   return (
     <div className="page">
-      <CartContext.Provider value={{ cart, setCart }}>
+      <CartContext.Provider value={{ cart, addItem }}>
         <Header
           categories={categories}
           isLoggedIn={isLoggedIn}
@@ -102,6 +114,7 @@ export default function App(props) {
             <Catalogue
               items={products}
               videos={videos}
+              addItem={addItem}
             />
           }/>
           <Route path="review" element={
@@ -110,6 +123,11 @@ export default function App(props) {
               items={products}
               getUser={getUser}
               getProduct={getProduct}
+            />
+          }/>
+          <Route path="/cart" element={
+            <Cart
+              clearCart={clearCart}
             />
           }/>
           <Route path="/" element={
