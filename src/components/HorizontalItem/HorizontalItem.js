@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
-import "./CartItem.css";
+import "./HorizontalItem.css";
 
-export default function CartItem(props) {
+export default function HorizontalItem(props) {
   const { images, name, price, color, id } = props.data;
+  const { isCart } = props;
 
   return (
     <NavLink className="cart-item" to={`/item?id=${id}`}>
@@ -26,19 +27,22 @@ export default function CartItem(props) {
         <button className="cart-item__text-button"
           type="button"
         >
-          Сохранить
+          {isCart ? "Сохранить" : "В корзину"}
         </button>
-        <div className="cart-item__number">
-          <button 
-            className="cart-item__num-button cart-item__num-button_minus"
-            type="button"
-          />
-          1
-          <button 
-            className="cart-item__num-button cart-item__num-button_plus"
-            type="button"
-          />
-        </div>
+        {isCart ? 
+          <div className="cart-item__number">
+            <button 
+              className="cart-item__num-button cart-item__num-button_minus"
+              type="button"
+            />
+            1
+            <button 
+              className="cart-item__num-button cart-item__num-button_plus"
+              type="button"
+            />
+          </div>
+          : ""
+        }
       </div>
     </NavLink>
   );

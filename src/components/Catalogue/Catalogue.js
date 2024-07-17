@@ -68,6 +68,9 @@ export default function Catalogue(props) {
       data={data}
       key={`product-${i}`}
       addItem={props.addItem}
+      likeItem={props.likeItem}
+      openLoginModal={props.openLoginModal}
+      isLoggedIn={props.isLoggedIn}
     />
   );
   const videos= props.videos.map((video, i) => 

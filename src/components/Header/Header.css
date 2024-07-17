@@ -30,7 +30,7 @@
 }
 
 .header__link {
-  font-weight: 400;
+  font-weight: 300;
   font-size: 18px;
   text-decoration: none;
   color: #000;
@@ -40,7 +40,7 @@
 .header__button {
   background: none;
   border: none;
-  font-weight: 400;
+  font-weight: 00;
   font-size: 18px;
 }
 
@@ -66,15 +66,19 @@
 }
 
 
+.header__categories-container {
+  padding-top: 90px;
+}
+
 .header__categories {
   display: flex;
-  padding-top: 122px;
+  padding-top: 32px;
   gap: 32px;
   justify-content: center;
 }
 
 .header__category {
-  font-weight: 400;
+  font-weight: 300;
   font-size: 20px;
   text-decoration: none;
   color: #000;

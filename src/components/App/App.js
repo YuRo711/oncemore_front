@@ -15,8 +15,10 @@ import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
 import testVid from "../../temp/video.mp4";
 import { CartContext } from "../../contexts/CartContext";
+import { UserContext } from "../../contexts/UserContext";
 import Cart from "../Cart/Cart";
 import Gallery from "../Gallery/Gallery";
+import Liked from "../Liked/Liked";
 
 export default function App(props) {
   //#region Methods
@@ -58,9 +60,24 @@ export default function App(props) {
     setCart([...cart, item]);
   }
 
-
   function clearCart() {
     setCart([]);
+  }
+
+  function likeItem(e, id) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    if (!isLoggedIn || !user) {
+      handleModalOpen("login");
+      return;
+    }
+
+    const item = products.find((item) => item.id == id);
+    if (item.likes.includes(user.id))
+      item.likes.pop(user.id);
+    else
+      item.likes.push(user.id);
   }
 
   //#endregion
@@ -68,7 +85,7 @@ export default function App(props) {
 
   //#region Variables Setup
 
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(true);
   const [modalsActivity, setModalsActivity] = useState({
     signup: false,
     login: false,
@@ -77,10 +94,13 @@ export default function App(props) {
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
   const [videos, setVideos] = useState([]);
   const [cart, setCart] = useState([]);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     getVideos()
       .then((res) => setVideos(res));
+    getUser(0)
+      .then((res) => setUser(res));
   }, [])
 
 
@@ -96,6 +116,7 @@ export default function App(props) {
   return (
     <div className="page">
       <CartContext.Provider value={{ cart, addItem }}>
+      <UserContext.Provider value={{ user }}>      
         <Header
           categories={categories}
           isLoggedIn={isLoggedIn}
@@ -109,12 +130,18 @@ export default function App(props) {
               videos={videos}
               items={products}
               addItem={addItem}
+              likeItem={likeItem}
+              openLoginModal={() => handleModalOpen("login")}
+              isLoggedIn={isLoggedIn}
             />
           }/>
           <Route path="items/gallery" element={
             <Gallery
               items={products}
               videos={videos}
+              likeItem={likeItem}
+              openLoginModal={() => handleModalOpen("login")}
+              isLoggedIn={isLoggedIn}
             />
           }/>
           <Route path="items" element={
@@ -122,6 +149,9 @@ export default function App(props) {
               items={products}
               videos={videos}
               addItem={addItem}
+              likeItem={likeItem}
+              openLoginModal={() => handleModalOpen("login")}
+              isLoggedIn={isLoggedIn}
             />
           }/>
           <Route path="review" element={
@@ -132,9 +162,17 @@ export default function App(props) {
               getProduct={getProduct}
             />
           }/>
+          <Route path="liked" element={
+            <Liked
+              isLoggedIn={isLoggedIn}
+              openSignUp={() => handleModalOpen("signup")}
+              items={products}
+            />
+          }/>
           <Route path="cart" element={
             <Cart
               clearCart={clearCart}
+              likeItem={likeItem}
             />
           }/>
           <Route path="/" element={
@@ -164,6 +202,7 @@ export default function App(props) {
           openLoginModal={() => handleModalOpen("login")}
           categories={categories}
         />
+      </UserContext.Provider>
       </CartContext.Provider>
     </div>
   );

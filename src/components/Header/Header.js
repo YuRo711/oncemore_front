@@ -78,8 +78,11 @@ export default function Header(props) {
           </NavLink>
         </nav>
       </div>
+      <div className="header__categories-container">
       {
-        currentPath == "/review" ? "" :
+        currentPath !== "/" && currentPath !== "/items" 
+          && currentPath !== "/gallery"
+        ? "" :
         <div className="header__categories">
         {
           props.categories.map((category, i) => (
@@ -93,6 +96,7 @@ export default function Header(props) {
         }
         </div>
       }
+      </div>
     </header>
   );
 }
