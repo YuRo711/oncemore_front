@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import "./Liked.css";
-import { UserContext } from "../../contexts/UserContext";
-import HorizontalItem from "../HorizontalItem/HorizontalItem";
+import { UserContext } from "../../../contexts/UserContext";
+import HorizontalItem from "../../HorizontalItem/HorizontalItem";
 
 export default function Liked(props) {
   const user = useContext(UserContext).user;

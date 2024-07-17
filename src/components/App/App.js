@@ -7,18 +7,18 @@ import { useEffect, useState } from "react";
 import LoginModal from "../Modals/LoginModal/LoginModal";
 import RegisterModal from "../Modals/RegisterModal/RegisterModal";
 import MobileMenu from "../MobileMenu/MobileMenu";
-import Banners from "../Banners/Banners";
-import Product from "../Product/Product";
-import Catalogue from "../Catalogue/Catalogue";
+import Banners from "../Pages/Banners/Banners";
+import Product from "../Pages/Product/Product";
+import Catalogue from "../Pages/Catalogue/Catalogue";
 import videoApi from "../../utils/api";
-import VideoPlayer from "../VideoPlayer/VideoPlayer";
+import VideoPlayer from "../Pages/VideoPlayer/VideoPlayer";
 
 import testVid from "../../temp/video.mp4";
 import { CartContext } from "../../contexts/CartContext";
 import { UserContext } from "../../contexts/UserContext";
-import Cart from "../Cart/Cart";
-import Gallery from "../Gallery/Gallery";
-import Liked from "../Liked/Liked";
+import Cart from "../Pages/Cart/Cart";
+import Gallery from "../Pages/Gallery/Gallery";
+import Liked from "../Pages/Liked/Liked";
 
 export default function App(props) {
   //#region Methods

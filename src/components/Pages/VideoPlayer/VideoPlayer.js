@@ -1,12 +1,12 @@
 import { useSearchParams } from "react-router-dom";
 import "./VideoPlayer.css";
-import UserAvatar from "../UserAvatar/UserAvatar";
+import UserAvatar from "../../UserAvatar/UserAvatar";
 import { useEffect, useState } from "react";
-import {parseViews} from "../../utils/parsers";
-import playIcon from "../../images/play.svg";
-import Video from "../Video/Video";
-import ProductCard from "../ProductCard/ProductCard";
-import Review from "../Review/Review";
+import {parseViews} from "../../../utils/parsers";
+import playIcon from "../../../images/play.svg";
+import Video from "../../Video/Video";
+import ProductCard from "../../ProductCard/ProductCard";
+import Review from "../../Review/Review";
 
 export default function VideoPlayer(props) {
   function goBack() {

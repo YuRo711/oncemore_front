@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import "./Cart.css";
-import { CartContext } from "../../contexts/CartContext";
-import backIcon from "../../images/caret-left.svg";
-import HorizontalItem from "../HorizontalItem/HorizontalItem";
+import { CartContext } from "../../../contexts/CartContext";
+import backIcon from "../../../images/caret-left.svg";
+import HorizontalItem from "../../HorizontalItem/HorizontalItem";
 
 export default function Cart(props) {
   function conjugateItem(n) {

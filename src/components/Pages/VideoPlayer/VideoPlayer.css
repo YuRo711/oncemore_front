@@ -58,7 +58,7 @@
   border-radius: 35px;
   font-weight: 500;
   margin-left: auto;
-  background-image: url("../../images/icon\ _shopping\ cart.svg");
+  background-image: url("../../../images/icon\ _shopping\ cart.svg");
   background-size: cover;
   background-origin: content-box;
   padding: 18px;
@@ -138,12 +138,12 @@
   position: absolute;
   left: 20px;
   top: 20px;
-  background-image: url('../../images/close.svg');
+  background-image: url('../../../images/close.svg');
 }
 
 .player__video-button_share {
   margin: auto 0 50px;
-  background-image: url('../../images/share.svg');
+  background-image: url('../../../images/share.svg');
 }
 
 .player__arrows {
@@ -154,11 +154,11 @@
 }
 
 .player__video-button_up {
-  background-image: url('../../images/arrow-up.svg');
+  background-image: url('../../../images/arrow-up.svg');
 }
 
 .player__video-button_down {
-  background-image: url('../../images/arrow-down.svg');
+  background-image: url('../../../images/arrow-down.svg');
 }
 
 

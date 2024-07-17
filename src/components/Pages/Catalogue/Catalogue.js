@@ -1,9 +1,9 @@
 import "./Catalogue.css";
-import ProductCard from "../ProductCard/ProductCard";
-import MultiSelect from "../MultiSelect/MultiSelect";
-import { getUniqueItems } from "../../utils/uniqueItems";
+import ProductCard from "../../ProductCard/ProductCard";
+import MultiSelect from "../../MultiSelect/MultiSelect";
+import { getUniqueItems } from "../../../utils/uniqueItems";
 import { useEffect, useRef, useState } from "react";
-import Video from "../Video/Video";
+import Video from "../../Video/Video";
 import AliceCarousel from "react-alice-carousel";
 import { NavLink, useSearchParams } from "react-router-dom";
 

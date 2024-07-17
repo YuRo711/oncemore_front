@@ -1,8 +1,8 @@
 import "./Product.css";
 import { useContext, useState } from "react";
 import { NavLink, useSearchParams } from "react-router-dom";
-import Video from "../Video/Video";
-import { UserContext } from "../../contexts/UserContext";
+import Video from "../../Video/Video";
+import { UserContext } from "../../../contexts/UserContext";
 
 export default function Product(props) {
   //#region Methods
@@ -162,7 +162,7 @@ export default function Product(props) {
               <Video
                 data={video}
                 key={`video-${i}`}
-                getProduct={() => data}
+                getProduct={async function () {await data}}
               />
             )
           }

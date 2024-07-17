@@ -69,12 +69,12 @@
 }
 
 .product__image-button_left {
-  background-image: url('../../images/arrow-circle-left.svg');
+  background-image: url('../../../images/arrow-circle-left.svg');
   left: 20px;
 }
 
 .product__image-button_right {
-  background-image: url('../../images/arrow-circle-right.svg');
+  background-image: url('../../../images/arrow-circle-right.svg');
   right: 20px;
 }
 
@@ -167,14 +167,14 @@
   width: 44px;
   background: none;
   border: none;
-  background-image: url('../../images/like.svg');
+  background-image: url('../../../images/like.svg');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .product__like-button_active {
-  background-image: url('../../images/like\ active.svg');
+  background-image: url('../../../images/like\ active.svg');
 }
 
 .product__details {
@@ -203,11 +203,11 @@
 }
 
 .product__more-button_plus {
-  background-image: url('../../images/Plus.svg');
+  background-image: url('../../../images/Plus.svg');
 }
 
 .product__more-button_minus {
-  background-image: url('../../images/Minus.svg');
+  background-image: url('../../../images/Minus.svg');
 }
 
 .product__details-text {

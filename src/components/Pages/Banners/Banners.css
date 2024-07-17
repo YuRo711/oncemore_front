@@ -4,7 +4,7 @@
 }
 
 .banners__main {
-  background-image: url('../../temp/banner\ 2.jpg');
+  background-image: url('../../../temp/banner\ 2.jpg');
   width: 100vw;
   box-sizing: border-box;
   padding: 50px;

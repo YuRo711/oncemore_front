@@ -1,7 +1,7 @@
 import { NavLink, useSearchParams } from "react-router-dom";
 import "./Gallery.css";
-import ProductCard from "../ProductCard/ProductCard";
-import Video from "../Video/Video";
+import ProductCard from "../../ProductCard/ProductCard";
+import Video from "../../Video/Video";
 
 export default function Gallery(props) {
   const searchParams = useSearchParams();

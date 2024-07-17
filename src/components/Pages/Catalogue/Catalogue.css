@@ -106,12 +106,12 @@
 }
 
 .catalogue__carousel-btn_prev {
-  background-image: url('../../images/arrow-circle-left.svg');
+  background-image: url('../../../images/arrow-circle-left.svg');
   left: 0;
 }
 
 .catalogue__carousel-btn_next {
-  background-image: url('../../images/arrow-circle-right.svg');
+  background-image: url('../../../images/arrow-circle-right.svg');
   right: 0;
 }
 
