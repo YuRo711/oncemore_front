@@ -1,8 +1,16 @@
 import { NavLink } from "react-router-dom";
 import "./ProductCard.css";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function ProductCard(props) {
-  const { images, name, price, color, id } = props.data;
+  function toggleLike(e) {
+    props.likeItem(e, id);
+    setIsLiked(!isLiked);
+  }
+  const { images, name, price, color, id, likes } = props.data;
+  const userId = useContext(UserContext).user.id;
+  const [isLiked, setIsLiked] = useState(likes.includes(userId));
 
   return (
     <NavLink className={`item ${props.isSmall ? "item_small" : ""}`}
@@ -22,8 +30,9 @@ export default function ProductCard(props) {
       >
         В корзину
       </button>
-      <button className="item__like-button"
-        onClick={(e) => props.likeItem(e, id)}
+      <button className={`item__like-button 
+          ${isLiked ? "item__like-button_active" : ""}`}
+        onClick={(e) => toggleLike(e)}
       />
     </NavLink>
   );

@@ -74,7 +74,10 @@ export default function App(props) {
     }
 
     const item = products.find((item) => item.id == id);
-    item.likes.push(user.id);
+    if (item.likes.includes(user.id))
+      item.likes.pop(user.id);
+    else
+      item.likes.push(user.id);
   }
 
   //#endregion
