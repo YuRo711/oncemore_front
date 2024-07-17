@@ -29,8 +29,10 @@ export default function Banners(props) {
         </div>
       </div>
       {
-        subBanners.map((banner) => 
-          <div className="banners__banner">
+        subBanners.map((banner, i) => 
+          <div className="banners__banner" 
+            key={`banner-${i}`}
+          >
             <h2 className="banners__title">
               {banner.title}
             </h2>
@@ -52,7 +54,7 @@ export default function Banners(props) {
                 {
                   banner.paragraphs.map((text, i) => 
                     <p className="banners__paragraph"
-                      key={`text-main-${i}`}
+                      key={`text-banner-${i}`}
                     >
                       {text}
                     </p>
