@@ -1,0 +1,14 @@
+.review {
+  border: solid 1px #c28ea7;
+  border-radius: 8px;
+  background-color: #F8F8F8;
+  position: relative;
+  display: flex;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.review__main {
+  display: flex;
+  flex-direction: column;
+}

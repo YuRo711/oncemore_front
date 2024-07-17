@@ -143,6 +143,7 @@ export default function App(props) {
               likeItem={likeItem}
               openLoginModal={() => handleModalOpen("login")}
               isLoggedIn={isLoggedIn}
+              getProduct={getProduct}
             />
           }/>
           <Route path="items" element={
@@ -153,6 +154,7 @@ export default function App(props) {
               likeItem={likeItem}
               openLoginModal={() => handleModalOpen("login")}
               isLoggedIn={isLoggedIn}
+              getProduct={getProduct}
             />
           }/>
           <Route path="review" element={

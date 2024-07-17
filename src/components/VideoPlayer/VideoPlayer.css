@@ -1,6 +1,7 @@
 .player {
   display: flex;
-  padding: 90px 0 0;
+  margin-top: -44px;
+  padding: 0 0 0;
 }
 
 .player__main {

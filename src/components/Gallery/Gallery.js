@@ -45,6 +45,7 @@ export default function Gallery(props) {
             <Video
               data={video}
               key={`video-${i}`}
+              getProduct={props.getProduct}
             />
           )
         }

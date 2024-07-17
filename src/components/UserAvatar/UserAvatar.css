@@ -4,6 +4,8 @@
 
 .avatar__container {
   background-color: #ff91c8;
+  color: #FFF;
+  font-weight: 400;
   height: 50px;
   width: 50px;
   border-radius: 25px;

@@ -162,6 +162,7 @@ export default function Product(props) {
               <Video
                 data={video}
                 key={`video-${i}`}
+                getProduct={() => data}
               />
             )
           }

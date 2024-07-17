@@ -63,7 +63,7 @@ export default function Header(props) {
           {props.isLoggedIn ? 
           (
             <div className="header__links">
-              <NavLink className="header__link" to="/me">
+              <div className="header__link">
                 <button className="header__user"
                   type="button"
                   onMouseEnter={() => setUserOpen(true)}
@@ -83,7 +83,7 @@ export default function Header(props) {
                     />
                   </div>
                 </button>
-              </NavLink>
+              </div>
               <NavLink className="header__link" to="/points">
                 <p className="header__link-title">Баллы</p>
                 <p className="header__subtitle">{points}₽</p>

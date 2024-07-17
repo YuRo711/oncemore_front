@@ -7,8 +7,6 @@ class videoApi {
       {
         link: defaultVid,
         productId: 1,
-        productName: "Название товара",
-        price: 250,
         author: 0,
         views: 12505,
         id: 0,
@@ -17,8 +15,6 @@ class videoApi {
       {
         link: defaultVid,
         productId: 0,
-        productName: "Название товара 2",
-        price: 250,
         author: 0,
         views: 400,
         id: 1,

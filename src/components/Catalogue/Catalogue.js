@@ -77,6 +77,7 @@ export default function Catalogue(props) {
     <Video
       data={video}
       key={`video-${i}`}
+      getProduct={props.getProduct}
     />
   );
   const itemCarousel = useRef();
