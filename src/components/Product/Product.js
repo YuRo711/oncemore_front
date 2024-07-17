@@ -31,6 +31,11 @@ export default function Product(props) {
   }
 
   function toggleLike(e) {
+    if (!props.isLoggedIn) {
+      props.openLoginModal();
+      return;
+    }
+    
     props.likeItem(e, id);
     setIsLiked(!isLiked);
   }

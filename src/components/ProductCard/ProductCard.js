@@ -5,10 +5,15 @@ import { UserContext } from "../../contexts/UserContext";
 
 export default function ProductCard(props) {
   function toggleLike(e) {
+    if (!props.isLoggedIn) {
+      props.openLoginModal();
+      return;
+    }
+
     props.likeItem(e, id);
     setIsLiked(!isLiked);
   }
-  
+
   const { images, name, price, color, id, likes } = props.data;
   const userId = useContext(UserContext).user.id;
   const [isLiked, setIsLiked] = useState(likes.includes(userId));

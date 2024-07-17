@@ -36,6 +36,8 @@ export default function Gallery(props) {
               key={`product-${i}`}
               addItem={props.addItem}
               likeItem={props.likeItem}
+              openLoginModal={props.openLoginModal}
+              isLoggedIn={props.isLoggedIn}
             />
           ) 
           :

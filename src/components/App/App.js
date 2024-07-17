@@ -131,6 +131,8 @@ export default function App(props) {
               items={products}
               addItem={addItem}
               likeItem={likeItem}
+              openLoginModal={() => handleModalOpen("login")}
+              isLoggedIn={isLoggedIn}
             />
           }/>
           <Route path="items/gallery" element={
@@ -138,6 +140,8 @@ export default function App(props) {
               items={products}
               videos={videos}
               likeItem={likeItem}
+              openLoginModal={() => handleModalOpen("login")}
+              isLoggedIn={isLoggedIn}
             />
           }/>
           <Route path="items" element={
@@ -146,6 +150,8 @@ export default function App(props) {
               videos={videos}
               addItem={addItem}
               likeItem={likeItem}
+              openLoginModal={() => handleModalOpen("login")}
+              isLoggedIn={isLoggedIn}
             />
           }/>
           <Route path="review" element={
