@@ -87,7 +87,7 @@ export default function Cart(props) {
         <button className="cart__checkout-button"
           type="button"
         >
-          К оплате
+          Оформить заказ
         </button>
       </div>
     </div>
