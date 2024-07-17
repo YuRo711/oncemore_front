@@ -48,12 +48,20 @@ export default function Header(props) {
           {props.isLoggedIn ? 
           (
             <div className="header__links">
-              <NavLink className="header__link" to="/orders">
-                Заказы
+              <NavLink className="header__link" to="/me">
+                <div className="header__user">
+                  <UserAvatar
+                    userData={userData}
+                  />
+                  <div className="header__user-info">
+                    <p className="header__link-title">{userData.name}</p>
+                    <p className="header__subtitle">Аккаунт</p>
+                  </div>
+                </div>
               </NavLink>
               <NavLink className="header__link" to="/points">
                 <p className="header__link-title">Баллы</p>
-                <p className="header__points">{points}₽</p>
+                <p className="header__subtitle">{points}₽</p>
               </NavLink>
             </div>
           ) : (
@@ -80,11 +88,6 @@ export default function Header(props) {
               cartItemsNum == 0 ? "" :
               <div className="header__cart-num">{cartItemsNum}</div>
             }
-          </NavLink>
-          <NavLink className="header__link" to="/me">
-            <UserAvatar
-              userData={userData}
-            />
           </NavLink>
         </nav>
       </div>
