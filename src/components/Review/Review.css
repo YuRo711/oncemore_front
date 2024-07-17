@@ -12,3 +12,30 @@
   display: flex;
   flex-direction: column;
 }
+
+.review__author {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.review__username {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.review__views {
+  font-size: 13px;
+  font-weight: 400;
+  margin-top: 3px;
+}
+
+.review__text {
+  font-weight: 300;
+  margin: 20px 0 10px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

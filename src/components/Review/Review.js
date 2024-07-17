@@ -3,7 +3,8 @@ import UserAvatar from "../UserAvatar/UserAvatar";
 import ("./Review.css");
 
 export default function Review(props) {
-  const { isVideo, author } = props;
+  const { isVideo, videoData, author } = props;
+  const { reviewText, views } = videoData;
 
   return (
     <div className="review">
@@ -14,7 +15,18 @@ export default function Review(props) {
           >
             <button className="player__user-button"/>
           </UserAvatar>
+          <div className="review__author__info">
+            <h2 className="review__username">
+              {author.name}
+            </h2>
+            <p className="review__views">
+              {views} просмотров
+            </p>
+          </div>
         </div>
+        <p className="review__text">
+          {reviewText}
+        </p>
       </div>
     </div>
   );

@@ -128,10 +128,11 @@ export default function VideoPlayer(props) {
           <div className="player__review">
             <h3 className="player__subtitle">
               Что {userData.name} говорит о {productData.name}
-              <Review 
-                author={userData}
-              />
             </h3>
+            <Review 
+              author={userData}
+              videoData={data}
+            />
           </div>
         }
         <div className="player__category">
