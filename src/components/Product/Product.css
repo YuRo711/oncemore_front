@@ -163,14 +163,18 @@
 }
 
 .product__like-button {
-  height: 36px;
-  width: 36px;
+  height: 44px;
+  width: 44px;
   background: none;
   border: none;
-  background-image: url('../../images/icon\ _heart.svg');
+  background-image: url('../../images/like.svg');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.product__like-button_active {
+  background-image: url('../../images/like\ active.svg');
 }
 
 .product__details {

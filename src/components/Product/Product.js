@@ -1,7 +1,8 @@
 import "./Product.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink, useSearchParams } from "react-router-dom";
 import Video from "../Video/Video";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function Product(props) {
   //#region Methods
@@ -29,8 +30,9 @@ export default function Product(props) {
     setDetailsOpen(!detailsOpen);
   }
 
-  function selectColor(i)
-  {
+  function toggleLike(e) {
+    props.likeItem(e, id);
+    setIsLiked(!isLiked);
   }
 
   //#endregion
@@ -41,7 +43,7 @@ export default function Product(props) {
   const id = searchParams[0].get("id");
   const data = props.items
     .filter((item) => item.id == id)[0];
-  const { name, price, color, images } = data;
+  const { name, price, color, images, likes } = data;
 
   const [currentImageNum, setCurrentImageNum] = useState(0);
   const [currentImage, setCurrentImage] = useState(images[currentImageNum]);
@@ -51,6 +53,9 @@ export default function Product(props) {
   const videos = props.videos.filter((vid) => vid.productId == id);
   const sameItems = props.items.filter((item) => item.name == name);
   const colorImages = sameItems.map((item) => item.colorImage);
+
+  const userId = useContext(UserContext).user.id;
+  const [isLiked, setIsLiked] = useState(likes.includes(userId));
 
   //#endregion
 
@@ -110,7 +115,6 @@ export default function Product(props) {
                           sameItems[i].id == id ? "product__color_selected" : ""
                         }`}
                         src={img}
-                        onClick={() => selectColor(i)}
                       />
                     </NavLink>
                   )
@@ -124,8 +128,9 @@ export default function Product(props) {
               >
                 Добавить в корзину
               </button>
-              <button className="product__like-button"
-                onClick={props.likeButton}
+              <button className={`product__like-button 
+                ${isLiked ? "product__like-button_active" : ""}`}
+                onClick={toggleLike}
               />
             </div>
           </div>

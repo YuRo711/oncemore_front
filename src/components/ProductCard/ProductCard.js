@@ -8,6 +8,7 @@ export default function ProductCard(props) {
     props.likeItem(e, id);
     setIsLiked(!isLiked);
   }
+  
   const { images, name, price, color, id, likes } = props.data;
   const userId = useContext(UserContext).user.id;
   const [isLiked, setIsLiked] = useState(likes.includes(userId));
