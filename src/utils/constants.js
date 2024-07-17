@@ -12,10 +12,6 @@ import banner2 from "../temp/banner 2.png"
 
 const categories = [
   {
-    name: "Для Вас",
-    filter: "foryou"
-  },
-  {
     name: "Новинки",
     filter: "new"
   },

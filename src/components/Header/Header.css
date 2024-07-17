@@ -1,12 +1,17 @@
+.header {
+  width: 100%;
+  background-color: #FFF;
+  position: fixed;
+  z-index: 1;
+  border-bottom: solid 1px #c28ea7;
+}
+
 .header__top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 30px 70px 20px;
   border-bottom: solid 1px #c28ea7;
-  position: fixed;
-  z-index: 1;
-  background-color: #FFF;
   width: 100%;
   box-sizing: border-box;
 }
@@ -36,13 +41,15 @@
   max-height: 40px;
   background: none;
   border: none;
-  width: 150px;
+  width: fit-content;
+  margin: 0 10px;
 }
 
 .header__user-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .header__link {
@@ -96,13 +103,9 @@
 }
 
 
-.header__categories-container {
-  padding-top: 90px;
-}
-
 .header__categories {
   display: flex;
-  padding-top: 32px;
+  padding: 24px 0;
   gap: 32px;
   justify-content: center;
 }

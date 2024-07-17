@@ -124,6 +124,7 @@ export default function App(props) {
           isOnMobile={isOnMobile}
           setMenuOpen={setMenuOpen}
         />
+        <div className="page__main">
         <Routes>
           <Route path="item" element={
             <Product
@@ -181,6 +182,7 @@ export default function App(props) {
             />
           }/>
         </Routes>
+        </div>
         <Footer
           contacts={contacts}
         />

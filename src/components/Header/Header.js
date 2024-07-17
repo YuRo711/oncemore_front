@@ -116,10 +116,8 @@ export default function Header(props) {
           </NavLink>
         </nav>
       </div>
-      <div className="header__categories-container">
       {
-        currentPath !== "/" && currentPath !== "/items" 
-          && currentPath !== "/gallery"
+        currentPath === "/review"
         ? "" :
         <div className="header__categories">
         {
@@ -134,7 +132,6 @@ export default function Header(props) {
         }
         </div>
       }
-      </div>
     </header>
   );
 }
