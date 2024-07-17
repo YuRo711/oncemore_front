@@ -8,15 +8,18 @@ import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import { UserContext } from "../../contexts/UserContext";
 import UserAvatar from "../UserAvatar/UserAvatar";
+import icon from "../../images/grid-2.svg"
 
 export default function Header(props) {
-
   const [currentPath, setCurrentPath] = useState("/");
   useEffect(() => setCurrentPath(window.location.pathname),
     [window.location]);
   const cartItemsNum = useContext(CartContext).cart.length;
   const userData = useContext(UserContext).user;
   const points = userData.points;
+
+  const [categoriesOpen, setCategoriesOpen] = useState(false);
+  const [userOpen, setUserOpen] = useState(false);
 
   
   if (props.isOnMobile) {
@@ -39,9 +42,21 @@ export default function Header(props) {
           <h1 className="header__logo">OnceMore</h1>
         </NavLink>
         <div className="header__dropdown">
-          <DropdownMenu
-            links={props.categories}
-          />
+          <button className={`dropdown__button ${
+              categoriesOpen ? "dropdown__button_open" : ""
+            }`}
+            type="button"
+            onClick={() => setCategoriesOpen(!categoriesOpen)}
+          >
+            <img className="dropdown__icon"
+              src={icon}
+            />
+            Категории
+            <DropdownMenu
+              links={props.categories}
+              isOpen={categoriesOpen}
+            />
+          </button>
         </div>
         <Search/>
         <nav className="header__menu">
@@ -49,7 +64,11 @@ export default function Header(props) {
           (
             <div className="header__links">
               <NavLink className="header__link" to="/me">
-                <div className="header__user">
+                <button className="header__user"
+                  type="button"
+                  onMouseEnter={() => setUserOpen(true)}
+                  onMouseLeave={() => setUserOpen(false)}
+                >
                   <UserAvatar
                     userData={userData}
                   />
@@ -57,7 +76,13 @@ export default function Header(props) {
                     <p className="header__link-title">{userData.name}</p>
                     <p className="header__subtitle">Аккаунт</p>
                   </div>
-                </div>
+                  <div className="header__dropdown">
+                    <DropdownMenu
+                      links={props.categories}
+                      isOpen={userOpen}
+                    />
+                  </div>
+                </button>
               </NavLink>
               <NavLink className="header__link" to="/points">
                 <p className="header__link-title">Баллы</p>
