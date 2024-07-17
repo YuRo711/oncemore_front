@@ -9,6 +9,10 @@ import ProductCard from "../ProductCard/ProductCard";
 import Review from "../Review/Review";
 
 export default function VideoPlayer(props) {
+  function goBack() {
+
+  }
+
   //#region Variables
 
   const searchParams = useSearchParams();
@@ -62,7 +66,7 @@ export default function VideoPlayer(props) {
             <UserAvatar
               userData={userData}
             >
-              <button className="player__user-button"/>
+              <button className="avatar__user-button"/>
             </UserAvatar>
             <div className="player__author">
               @{userData.handle}
@@ -75,16 +79,29 @@ export default function VideoPlayer(props) {
               }
             </div>
           </div>
-          {
-            reviewText ? "" :
-            <div className="player__views">
-              <img className="player__views-icon"
-                src={playIcon}
-              />
-              {parsedViews}
-            </div>
-          }
+          <div className="player__views">
+            <img className="player__views-icon"
+              src={playIcon}
+            />
+            {parsedViews}
+          </div>
+          <div className="player__arrows">
+            <button 
+              className="player__video-button player__video-button_up"
+            />
+            <button 
+              className="player__video-button player__video-button_down"
+            />
+          </div>
+          <button 
+            className="player__video-button player__video-button_share"
+            onClick={props.openShareModal}
+          />
         </div>
+        <button 
+          className="player__video-button player__video-button_close"
+          onClick={goBack}
+        />
       </div>
       <div className="player__products">
         <h2 className="player__review-title">

@@ -13,7 +13,7 @@ export default function Review(props) {
           <UserAvatar
             userData={author}
           >
-            <button className="player__user-button"/>
+            <button className="avatar__user-button"/>
           </UserAvatar>
           <div className="review__author__info">
             <h2 className="review__username">

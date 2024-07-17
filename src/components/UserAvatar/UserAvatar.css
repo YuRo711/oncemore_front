@@ -16,3 +16,16 @@
   font-size: 30px;
   text-transform: uppercase;
 }
+
+.avatar__user-button {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  height: 24px;
+  width: 24px;
+  background-color: #FFF;
+  border: none;
+  border-radius: 12px;
+  background-image: url('../../images/Plus.svg');
+  background-size: cover;
+}
