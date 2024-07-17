@@ -6,6 +6,7 @@ import cart from "../../images/icon _shopping cart.svg";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../contexts/CartContext";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function Header(props) {
 
@@ -13,6 +14,7 @@ export default function Header(props) {
   useEffect(() => setCurrentPath(window.location.pathname),
     [window.location]);
   const cartItemsNum = useContext(CartContext).cart.length;
+  const { points } = useContext(UserContext).user;
 
   
   if (props.isOnMobile) {
@@ -48,7 +50,8 @@ export default function Header(props) {
                 Заказы
               </NavLink>
               <NavLink className="header__link" to="/points">
-                Баллы
+                <p className="header__link-title">Баллы</p>
+                <p className="header__points">{points}₽</p>
               </NavLink>
             </div>
           ) : (

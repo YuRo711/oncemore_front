@@ -34,6 +34,7 @@ class videoApi {
         name: "Иван Иванов",
         handle: "testuser",
         avatar: null,
+        points: 18.01
       },
     ]
   }

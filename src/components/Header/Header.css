@@ -26,7 +26,7 @@
 
 .header__links {
   display: flex;
-  gap: 20px;
+  gap: 24px;
 }
 
 .header__link {
@@ -35,6 +35,20 @@
   text-decoration: none;
   color: #000;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__link-title {
+  font-size: 14px;
+}
+
+.header__points {
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 4px;
 }
 
 .header__button {
