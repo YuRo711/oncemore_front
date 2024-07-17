@@ -7,6 +7,7 @@ import DropdownMenu from "../DropdownMenu/DropdownMenu";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import { UserContext } from "../../contexts/UserContext";
+import UserAvatar from "../UserAvatar/UserAvatar";
 
 export default function Header(props) {
 
@@ -14,7 +15,8 @@ export default function Header(props) {
   useEffect(() => setCurrentPath(window.location.pathname),
     [window.location]);
   const cartItemsNum = useContext(CartContext).cart.length;
-  const { points } = useContext(UserContext).user;
+  const userData = useContext(UserContext).user;
+  const points = userData.points;
 
   
   if (props.isOnMobile) {
@@ -78,6 +80,11 @@ export default function Header(props) {
               cartItemsNum == 0 ? "" :
               <div className="header__cart-num">{cartItemsNum}</div>
             }
+          </NavLink>
+          <NavLink className="header__link" to="/me">
+            <UserAvatar
+              userData={userData}
+            />
           </NavLink>
         </nav>
       </div>
