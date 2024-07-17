@@ -36,6 +36,7 @@
   max-height: 40px;
   background: none;
   border: none;
+  width: 150px;
 }
 
 .header__user-info {

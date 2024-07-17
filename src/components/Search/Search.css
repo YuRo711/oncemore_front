@@ -1,11 +1,13 @@
 .search {
   position: relative;
-  margin-left: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 100%;
 }
 
 .search__input {
   height: 40px;
-  width: 450px;
+  width: 100%;
   box-sizing: border-box;
   padding: 0 34px;
   border-radius: 8px;
@@ -34,7 +36,7 @@
   height: 40px;
   width: 100px;
   position: absolute;
-  right: -50px;
+  right: 0;
   transition: background-color 0.2s ease-in-out;
 }
 
