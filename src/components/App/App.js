@@ -19,7 +19,7 @@ import { UserContext } from "../../contexts/UserContext";
 import Cart from "../Pages/Cart/Cart";
 import Gallery from "../Pages/Gallery/Gallery";
 import Liked from "../Pages/Liked/Liked";
-import Profile from "../Profile/Profile";
+import Profile from "../Pages/Profile/Profile";
 
 export default function App(props) {
   //#region Methods
@@ -182,10 +182,13 @@ export default function App(props) {
           }/>
           <Route path="user" element={
             <Profile
+              getUser={getUser}
+              videos={videos}
+              getProduct={getProduct}
             />
           }/>
           <Route path="me" element={
-            <Navigate to={`/user/${user.id}`}/>
+            <Navigate to={`/user?id=${user.id}`}/>
           }/>
           <Route path="/" element={
             <Banners

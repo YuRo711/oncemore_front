@@ -43,6 +43,7 @@
   border: none;
   width: fit-content;
   margin: 0 10px;
+  font-weight: 300;
 }
 
 .header__user-info {
