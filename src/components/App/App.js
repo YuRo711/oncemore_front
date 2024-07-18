@@ -2,7 +2,7 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./App.css";
 import { categories, contacts, products, banners, userLinks } from "../../utils/constants";
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import { useEffect, useState } from "react";
 import LoginModal from "../Modals/LoginModal/LoginModal";
 import RegisterModal from "../Modals/RegisterModal/RegisterModal";
@@ -19,6 +19,7 @@ import { UserContext } from "../../contexts/UserContext";
 import Cart from "../Pages/Cart/Cart";
 import Gallery from "../Pages/Gallery/Gallery";
 import Liked from "../Pages/Liked/Liked";
+import Profile from "../Profile/Profile";
 
 export default function App(props) {
   //#region Methods
@@ -178,6 +179,13 @@ export default function App(props) {
               clearCart={clearCart}
               likeItem={likeItem}
             />
+          }/>
+          <Route path="user" element={
+            <Profile
+            />
+          }/>
+          <Route path="me" element={
+            <Navigate to={`/user/${user.id}`}/>
           }/>
           <Route path="/" element={
             <Banners
