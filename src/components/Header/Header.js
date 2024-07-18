@@ -64,8 +64,7 @@ export default function Header(props) {
               <div className="header__link">
                 <button className="header__user"
                   type="button"
-                  onMouseEnter={() => setUserOpen(true)}
-                  onMouseLeave={() => setUserOpen(false)}
+                  onClick={() => setUserOpen(!userOpen)}
                 >
                   <UserAvatar
                     userData={userData}
