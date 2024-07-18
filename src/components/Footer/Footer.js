@@ -1,7 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "./Footer.css";
 
 export default function Footer(props) {
+  const currentPath = useLocation().pathname;
+
+  if (currentPath === "/review") return;
+
   return (
     <footer className="footer">
       <h2 className="footer__logo">OnceMore</h2>
