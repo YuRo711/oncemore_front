@@ -167,6 +167,16 @@ export default function Product(props) {
             )
           }
         </div>
+
+        {
+          props.isLoggedIn ? 
+          <button className="profile__review-button"
+            onClick={props.openVideoModal}
+          >
+            Новый обзор
+          </button>
+          : ""
+        }
       </div>
     </main>
   );

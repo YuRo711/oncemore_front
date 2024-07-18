@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import "./App.css";
 import { categories, contacts, products, banners, userLinks } from "../../utils/constants";
 import { Navigate, Route, Routes } from "react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import LoginModal from "../Modals/LoginModal/LoginModal";
 import RegisterModal from "../Modals/RegisterModal/RegisterModal";
 import MobileMenu from "../MobileMenu/MobileMenu";
@@ -82,6 +82,11 @@ export default function App(props) {
       item.likes.push(user.id);
   }
 
+  function productVideoModal(productData) {
+    setCurrentProduct(productData);
+    handleModalOpen("video");
+  }
+
   //#endregion
 
 
@@ -98,6 +103,7 @@ export default function App(props) {
   const [videos, setVideos] = useState([]);
   const [cart, setCart] = useState([]);
   const [user, setUser] = useState({});
+  const [currentProduct, setCurrentProduct] = useState("");
 
   useEffect(() => {
     getVideos()
@@ -138,6 +144,7 @@ export default function App(props) {
               likeItem={likeItem}
               openLoginModal={() => handleModalOpen("login")}
               isLoggedIn={isLoggedIn}
+              openVideoModal={(data) => productVideoModal(data)}
             />
           }/>
           <Route path="items/gallery" element={
@@ -219,6 +226,7 @@ export default function App(props) {
           name="video"
           onClose={handleModalClose}
           isOpen={modalsActivity["video"]}
+          product={currentProduct}
         />
         <MobileMenu
           isMenuOpen={isMenuOpen}
