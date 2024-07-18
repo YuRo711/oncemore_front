@@ -175,6 +175,12 @@
   margin-bottom: 50px;
 }
 
+.player__category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .player__review-title {
   font-weight: 500;
   font-size: 32px;

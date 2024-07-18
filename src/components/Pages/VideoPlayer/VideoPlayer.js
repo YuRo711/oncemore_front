@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 import "./VideoPlayer.css";
 import UserAvatar from "../../UserAvatar/UserAvatar";
 import { useEffect, useState } from "react";
@@ -108,8 +108,17 @@ export default function VideoPlayer(props) {
           Обзор продукта {productData.name} от пользователя {userData.name}
         </h2>
           <div className="player__category">
+            <div className="player__category-header">
+              <h3 className="player__subtitle">
+                Другие обзоры
+              </h3>
+              <NavLink className="catalogue__more"
+                to={`/items/gallery?filter=${""}&type=videos`}
+              >
+                Посмотреть всё
+              </NavLink>
+            </div>
             <h3 className="player__subtitle">
-              Другие обзоры
               <div className="player__gallery">
                 {
                   videos.map((video, i) => 
@@ -125,8 +134,16 @@ export default function VideoPlayer(props) {
             </h3>
         </div>
         <div className="player__category">
-          <h3 className="player__subtitle">
-            Похожие товары
+          <div className="player__category-header">
+            <h3 className="player__subtitle">
+              Похожие товары
+            </h3>
+            <NavLink className="catalogue__more"
+              to={`/items/gallery?filter=${""}&type=items`}
+            >
+              Посмотреть всё
+            </NavLink>
+          </div>
             <div className="player__gallery">
               {
                 props.items.map((data, i) => 
@@ -138,7 +155,6 @@ export default function VideoPlayer(props) {
                 )
               }
             </div>
-          </h3>
         </div>
         {
           !reviewText ? "" :
@@ -153,8 +169,16 @@ export default function VideoPlayer(props) {
           </div>
         }
         <div className="player__category">
-          <h3 className="player__subtitle">
-            Обзоры пользователя {userData.name}
+          <div className="player__category-header">
+            <h3 className="player__subtitle">
+              Обзоры пользователя {userData.name}
+            </h3>
+            <NavLink className="catalogue__more"
+              to={`/items/gallery?filter=${""}&type=videos`}
+            >
+              Посмотреть всё
+            </NavLink>
+          </div>
             <div className="player__gallery">
               {
                 userVideos.map((video, i) => 
@@ -167,7 +191,6 @@ export default function VideoPlayer(props) {
                 )
               }
             </div>
-          </h3>
         </div>
       </div>
     </main>
