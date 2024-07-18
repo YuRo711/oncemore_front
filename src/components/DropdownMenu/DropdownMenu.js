@@ -12,7 +12,7 @@ export default function DropdownMenu(props) {
         props.links.map((link, i) => 
           <NavLink className="dropdown__link"
             key={`dropdown-category-$${i}`}
-            to={`/items?filter=${link.filter}`}
+            to={link.link}
           >
             {link.name}
           </NavLink>

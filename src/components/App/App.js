@@ -1,7 +1,7 @@
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./App.css";
-import { categories, contacts, products, banners } from "../../utils/constants";
+import { categories, contacts, products, banners, userLinks } from "../../utils/constants";
 import { Route, Routes } from "react-router";
 import { useEffect, useState } from "react";
 import LoginModal from "../Modals/LoginModal/LoginModal";
@@ -119,6 +119,7 @@ export default function App(props) {
       <UserContext.Provider value={{ user }}>      
         <Header
           categories={categories}
+          userLinks={userLinks}
           isLoggedIn={isLoggedIn}
           handleModalOpen={handleModalOpen}
           isOnMobile={isOnMobile}

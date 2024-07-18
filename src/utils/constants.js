@@ -13,19 +13,34 @@ import banner2 from "../temp/banner 2.png"
 const categories = [
   {
     name: "Новинки",
-    filter: "new"
+    link: "/items?filter=new"
   },
   {
     name: "Глаза",
-    filter: "eyes"
+    link: "/items?filter=eyes"
   },
   {
     name: "Губы",
-    filter: "lips"
+    link: "/items?filter=lips"
   },
   {
     name: "Брови",
-    filter: "eyebrows"
+    link: "/items?filter=eyebrows"
+  },
+];
+
+const userLinks = [
+  {
+    name: "Профиль",
+    link: "/me",
+  },
+  {
+    name: "Заказы",
+    link: "/me/orders",
+  },
+  {
+    name: "Обзоры",
+    link: "/reviews",
   },
 ];
 
@@ -114,7 +129,7 @@ const products = [
   },
 ];
 
-var banners = [
+const banners = [
   {
     title: "OnceMore",
     subtitle: "Это будет здорово",
@@ -145,4 +160,5 @@ export {
   contacts,
   products,
   banners,
+  userLinks,
 };

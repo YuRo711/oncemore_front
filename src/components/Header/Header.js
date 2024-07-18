@@ -75,7 +75,7 @@ export default function Header(props) {
                   </div>
                   <div className="header__dropdown">
                     <DropdownMenu
-                      links={props.categories}
+                      links={props.userLinks}
                       isOpen={userOpen}
                     />
                   </div>

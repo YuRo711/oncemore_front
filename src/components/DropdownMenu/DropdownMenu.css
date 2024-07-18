@@ -48,6 +48,9 @@
   padding: 10px;
   color: #000;
   text-decoration: none;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
 }
 
 .dropdown__link:hover {
