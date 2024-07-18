@@ -20,6 +20,7 @@ import Cart from "../Pages/Cart/Cart";
 import Gallery from "../Pages/Gallery/Gallery";
 import Liked from "../Pages/Liked/Liked";
 import Profile from "../Pages/Profile/Profile";
+import VideoModal from "../Modals/VideoModal/VideoModal";
 
 export default function App(props) {
   //#region Methods
@@ -90,6 +91,7 @@ export default function App(props) {
   const [modalsActivity, setModalsActivity] = useState({
     signup: false,
     login: false,
+    video: false,
   });
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
@@ -185,6 +187,7 @@ export default function App(props) {
               getUser={getUser}
               videos={videos}
               getProduct={getProduct}
+              openVideoModal={() => handleModalOpen("video")}
             />
           }/>
           <Route path="me" element={
@@ -211,6 +214,11 @@ export default function App(props) {
           onClose={handleModalClose}
           isOpen={modalsActivity["login"]}
           openAnotherModal={() => openAnotherModal("login", "signup")}
+        />
+        <VideoModal
+          name="video"
+          onClose={handleModalClose}
+          isOpen={modalsActivity["video"]}
         />
         <MobileMenu
           isMenuOpen={isMenuOpen}

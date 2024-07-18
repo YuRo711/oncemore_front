@@ -39,7 +39,9 @@ export default function Profile(props) {
         </div>
         {
           isMe ? 
-          <button className="profile__review-button">
+          <button className="profile__review-button"
+            onClick={props.openVideoModal}
+          >
             Новый обзор
           </button>
           : ""

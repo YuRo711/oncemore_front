@@ -162,6 +162,21 @@
   opacity: 20%;
 }
 
+.modal__textarea {
+  border-radius: 5px;
+  border: solid 1px rgba(0, 0, 0);
+  margin-top: 8px;
+  width: 100%;
+  height: 100px;
+  padding: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.modal__textarea:focus {
+  outline: none;
+}
+
 @media screen and (min-width: 600px) and (max-width: 1300px) {
   .modal__container {
     padding: 24px 36px;

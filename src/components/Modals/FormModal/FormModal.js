@@ -21,16 +21,20 @@ function FormModal(props) {
           {props.buttonText}
         </button>
 
-        <p className="modal__alt">
-          или{" "}
-          <button
-            className="modal__link-button"
-            onClick={props.openAnotherModal}
-            tabIndex="0"
-          >
-            {props.altText}
-          </button>
-        </p>
+        {
+          props.altText ? 
+          <p className="modal__alt">
+            или{" "}
+            <button
+              className="modal__link-button"
+              onClick={props.openAnotherModal}
+              tabIndex="0"
+            >
+              {props.altText}
+            </button>
+          </p>
+          : ""
+        }
       </form>
     </Modal>
   );
