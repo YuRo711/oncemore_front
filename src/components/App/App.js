@@ -88,6 +88,14 @@ export default function App(props) {
     handleModalOpen("video");
   }
 
+  function deleteReview(reviewData) {
+    
+  }
+
+  function blockUser(userData) {
+    
+  }
+
   //#endregion
 
 
@@ -98,7 +106,7 @@ export default function App(props) {
     signup: false,
     login: false,
     video: false,
-    user: true,
+    user: false,
   });
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
@@ -176,6 +184,8 @@ export default function App(props) {
               items={products}
               getUser={getUser}
               getProduct={getProduct}
+              deleteReview={deleteReview}
+              blockUser={blockUser}
             />
           }/>
           <Route path="liked" element={
@@ -214,7 +224,6 @@ export default function App(props) {
           contacts={contacts}
         />
 
-        //#region Modals
         <RegisterModal
           name="signup"
           onClose={handleModalClose}
@@ -239,7 +248,6 @@ export default function App(props) {
           isOpen={modalsActivity["user"]}
           onSubmit={() => {}}
         />
-        //#endregion
 
         <MobileMenu
           isMenuOpen={isMenuOpen}

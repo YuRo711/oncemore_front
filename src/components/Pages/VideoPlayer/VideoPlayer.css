@@ -197,3 +197,15 @@
   display: flex;
   gap: 12px;
 }
+
+.player__admin {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.player__admin-button {
+  background: none;
+  border: none;
+  text-decoration: underline;
+}

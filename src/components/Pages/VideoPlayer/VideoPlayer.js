@@ -1,12 +1,13 @@
 import { NavLink, useSearchParams } from "react-router-dom";
 import "./VideoPlayer.css";
 import UserAvatar from "../../UserAvatar/UserAvatar";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {parseViews} from "../../../utils/parsers";
 import playIcon from "../../../images/play.svg";
 import Video from "../../Video/Video";
 import ProductCard from "../../ProductCard/ProductCard";
 import Review from "../../Review/Review";
+import { UserContext } from "../../../contexts/UserContext";
 
 export default function VideoPlayer(props) {
   function goBack() {
@@ -31,7 +32,9 @@ export default function VideoPlayer(props) {
       .then((user) => setUserData(user));
     props.getProduct((productId))
       .then((product) => setProductData(product));
-  }, [])
+  }, []);
+
+  const isAdmin = useContext(UserContext).user.privilege >= 1;
 
   //#endregion
 
@@ -45,22 +48,18 @@ export default function VideoPlayer(props) {
           src={link}
           autoPlay
         />
-        {
-          productData ? 
-            <div className="player__product">
-              <img className="player__product-image"
-                src={productData.images[0]}
-              />
-              <div className="player__product-info">
-                <h4 className="player__price">{productData.price}₽</h4>
-                <h3 className="player__title">{productData.name}</h3>
-              </div>
-              <button className="player__cart-button" 
-                type="button"
-              />
-            </div>
-          : ""
-        }
+        <div className="player__product">
+          <img className="player__product-image"
+            src={productData.images[0]}
+          />
+          <div className="player__product-info">
+            <h4 className="player__price">{productData.price}₽</h4>
+            <h3 className="player__title">{productData.name}</h3>
+          </div>
+          <button className="player__cart-button" 
+            type="button"
+          />
+        </div>
         <div className="player__video-info">
           <div className="player__user">
             <UserAvatar
@@ -104,6 +103,22 @@ export default function VideoPlayer(props) {
         />
       </div>
       <div className="player__products">
+        {
+          isAdmin ?
+          <div className="player__admin">
+            <button className="player__admin-button"
+              onClick={() => props.deleteReview(data)}
+            >
+              Удалить видео
+            </button>
+            <button className="player__admin-button"
+              onClick={() => props.blockUser(userData)}
+            >
+              Заблокировать пользователя
+            </button>
+          </div>
+          : ""
+        }
         <h2 className="player__review-title">
           Обзор продукта {productData.name} от пользователя {userData.name}
         </h2>
