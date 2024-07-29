@@ -3,6 +3,7 @@ import "./Cart.css";
 import { CartContext } from "../../../contexts/CartContext";
 import backIcon from "../../../images/caret-left.svg";
 import HorizontalItem from "../../HorizontalItem/HorizontalItem";
+import { useNavigate } from "react-router";
 
 export default function Cart(props) {
   function conjugateItem(n) {
@@ -12,6 +13,7 @@ export default function Cart(props) {
       return "предмета";
     return "предметов";
   }
+
 
   const items = useContext(CartContext).cart;
   const itemTotal = items
@@ -25,9 +27,14 @@ export default function Cart(props) {
   const discount = -51;
   const total = itemTotal + delivery + tax + discount;
 
+  const navigate = useNavigate();
+
+
   return <main className="cart">
     <div className="cart__header">
-      <button class="cart__back">
+      <button class="cart__back"
+        onClick={() => navigate(-1)}
+      >
         <img class="cart__back-icon"
           src={backIcon}
         />

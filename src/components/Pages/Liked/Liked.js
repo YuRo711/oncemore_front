@@ -3,11 +3,15 @@ import "./Liked.css";
 import { UserContext } from "../../../contexts/UserContext";
 import HorizontalItem from "../../HorizontalItem/HorizontalItem";
 import backIcon from "../../../images/caret-left.svg";
+import { useNavigate } from "react-router";
 
 export default function Liked(props) {
   const user = useContext(UserContext).user;
   const items = props.items.filter(
     (item) => item.likes.includes(user.id));
+  
+    const navigate = useNavigate();
+
 
   if (!props.isLoggedIn || !user) {
     return (
@@ -27,7 +31,9 @@ export default function Liked(props) {
   return (
     <main className="liked">
     <div className="cart__header">
-      <button class="cart__back">
+      <button class="cart__back"
+        onClick={() => navigate(-1)}
+      >
         <img class="cart__back-icon"
           src={backIcon}
         />

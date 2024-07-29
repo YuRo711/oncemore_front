@@ -1,4 +1,4 @@
-import { NavLink, useSearchParams } from "react-router-dom";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import "./VideoPlayer.css";
 import UserAvatar from "../../UserAvatar/UserAvatar";
 import { useContext, useEffect, useState } from "react";
@@ -10,11 +10,9 @@ import Review from "../../Review/Review";
 import { UserContext } from "../../../contexts/UserContext";
 
 export default function VideoPlayer(props) {
-  function goBack() {
-
-  }
-
   //#region Variables
+
+  const navigate = useNavigate();
 
   const searchParams = useSearchParams();
   const id = searchParams[0].get("id");
@@ -93,13 +91,16 @@ export default function VideoPlayer(props) {
             />
           </div>
           <button 
+            className="player__video-button player__video-button_comment"
+          />
+          <button 
             className="player__video-button player__video-button_share"
             onClick={props.openShareModal}
           />
         </div>
         <button 
           className="player__video-button player__video-button_close"
-          onClick={goBack}
+          onClick={() => navigate(-1)}
         />
       </div>
       <div className="player__products">
