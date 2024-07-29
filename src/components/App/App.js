@@ -122,6 +122,11 @@ export default function App(props) {
     
   }
 
+  function addView(videoId) {
+    videos.find((video) => video.id == videoId)
+      .views++;
+  }
+
   //#endregion
 
 
@@ -216,6 +221,7 @@ export default function App(props) {
               deleteComment={deleteComment}
               sendComment={sendComment}
               likeComment={likeComment}
+              addView={addView}
             />
           }/>
           <Route path="liked" element={
