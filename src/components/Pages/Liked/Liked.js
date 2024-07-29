@@ -2,6 +2,7 @@ import { useContext } from "react";
 import "./Liked.css";
 import { UserContext } from "../../../contexts/UserContext";
 import HorizontalItem from "../../HorizontalItem/HorizontalItem";
+import backIcon from "../../../images/caret-left.svg";
 
 export default function Liked(props) {
   const user = useContext(UserContext).user;
@@ -25,10 +26,20 @@ export default function Liked(props) {
 
   return (
     <main className="liked">
+    <div className="cart__header">
+      <button class="cart__back">
+        <img class="cart__back-icon"
+          src={backIcon}
+        />
+        Назад
+      </button>
+      <h1 className="cart__title">Сохранённое</h1>
+    </div>
       <div className="liked__items">
         {
           items.map((item, i) => 
             <HorizontalItem
+              isWide={true}
               data={item}
               key={`cart-item-${i}`}
               isCart={false}
