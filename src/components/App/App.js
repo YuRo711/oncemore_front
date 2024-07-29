@@ -13,7 +13,6 @@ import Catalogue from "../Pages/Catalogue/Catalogue";
 import videoApi from "../../utils/api";
 import VideoPlayer from "../Pages/VideoPlayer/VideoPlayer";
 
-import testVid from "../../temp/video.mp4";
 import { CartContext } from "../../contexts/CartContext";
 import { UserContext } from "../../contexts/UserContext";
 import Cart from "../Pages/Cart/Cart";
@@ -44,6 +43,10 @@ export default function App(props) {
 
   function getVideos() {
     return videoApi.getVideos();
+  }
+
+  function getAllComments() {
+    return videoApi.getComments();
   }
 
   function getUser(id) {
@@ -94,6 +97,17 @@ export default function App(props) {
 
   function blockUser(userData) {
     
+  }
+
+  function deleteComment(commentData) {
+    
+  }
+
+  async function getComments(videoId) {
+    return getAllComments()
+      .then((comments) => comments.filter(
+        (comment) => comment.videoId == videoId
+      ));
   }
 
   //#endregion
@@ -186,6 +200,8 @@ export default function App(props) {
               getProduct={getProduct}
               deleteReview={deleteReview}
               blockUser={blockUser}
+              getComments={getComments}
+              deleteComment={deleteComment}
             />
           }/>
           <Route path="liked" element={

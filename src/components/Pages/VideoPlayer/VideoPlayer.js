@@ -8,6 +8,7 @@ import Video from "../../Video/Video";
 import ProductCard from "../../ProductCard/ProductCard";
 import Review from "../../Review/Review";
 import { UserContext } from "../../../contexts/UserContext";
+import Comments from "../../Comments/Comments";
 
 export default function VideoPlayer(props) {
   //#region Methods
@@ -51,15 +52,22 @@ export default function VideoPlayer(props) {
   const [userData, setUserData] = useState(null);
   const [productData, setProductData] = useState(null);
 
+  const [comments, setComments] = useState(null);
+  const [commentsOpen, setCommentsOpen] = useState(null);
+
   useEffect(() => {
     setData(props.videos[index]);
     ({ link, productId, author, views, tags, reviewText } = props.videos[index]);
+    const _id = props.videos[index].id;
 
-    props.getUser((author))
+    props.getUser(author)
       .then((user) => setUserData(user));
 
-    props.getProduct((productId))
+    props.getProduct(productId)
       .then((product) => setProductData(product));
+
+    props.getComments(_id)
+      .then((commentData) => setComments(commentData));
   }, [index]);
 
   const isAdmin = useContext(UserContext).user.privilege >= 1;
@@ -125,6 +133,7 @@ export default function VideoPlayer(props) {
           </div>
           <button 
             className="player__video-button player__video-button_comment"
+            onClick={() => setCommentsOpen(!commentsOpen)}
           />
           <button 
             className="player__video-button player__video-button_share"
@@ -135,6 +144,16 @@ export default function VideoPlayer(props) {
           className="player__video-button player__video-button_close"
           onClick={() => navigate(-1)}
         />
+        {
+          commentsOpen ? 
+          <Comments
+            comments={comments}
+            getUser={props.getUser}
+            setCommentsOpen={setCommentsOpen}
+            deleteComment={props.deleteComment}
+          />
+          : ""
+        }
       </div>
       <div className="player__products">
         {

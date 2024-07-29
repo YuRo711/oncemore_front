@@ -37,6 +37,18 @@ class videoApi {
     ]
   }
 
+  async getComments()
+  {
+    return [
+      {
+        id: 0,
+        userId: 0,
+        videoId: 1,
+        text: "Отличное видео!"
+      }
+    ]
+  }
+
   async getUser(id) {
     return this.getUsers()
       .then((users) => 
