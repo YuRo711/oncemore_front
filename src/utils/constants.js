@@ -36,11 +36,7 @@ const userLinks = [
   },
   {
     name: "Заказы",
-    link: "/me/orders",
-  },
-  {
-    name: "Обзоры",
-    link: "/reviews",
+    link: "/orders",
   },
 ];
 

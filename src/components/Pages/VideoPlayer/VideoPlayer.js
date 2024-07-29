@@ -22,7 +22,7 @@ export default function VideoPlayer(props) {
   const { link, productId, author, views, tags, reviewText } = data;
   const parsedViews = parseViews(views);
   const videos = props.videos.filter((vid) => vid.productId == productId);
-  const userVideos = props. videos.filter((vid) => vid.author == author)
+  const Profile = props. videos.filter((vid) => vid.author == author)
 
   const [userData, setUserData] = useState(null);
   const [productData, setProductData] = useState(null);
@@ -181,7 +181,7 @@ export default function VideoPlayer(props) {
           </div>
             <div className="player__gallery">
               {
-                userVideos.map((video, i) => 
+                Profile.map((video, i) => 
                   <Video
                     isSmall={true}
                     data={video}

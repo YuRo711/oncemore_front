@@ -2,8 +2,8 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./App.css";
 import { categories, contacts, products, banners, userLinks } from "../../utils/constants";
-import { Route, Routes } from "react-router";
-import { useEffect, useState } from "react";
+import { Navigate, Route, Routes } from "react-router";
+import { useEffect, useRef, useState } from "react";
 import LoginModal from "../Modals/LoginModal/LoginModal";
 import RegisterModal from "../Modals/RegisterModal/RegisterModal";
 import MobileMenu from "../MobileMenu/MobileMenu";
@@ -19,6 +19,9 @@ import { UserContext } from "../../contexts/UserContext";
 import Cart from "../Pages/Cart/Cart";
 import Gallery from "../Pages/Gallery/Gallery";
 import Liked from "../Pages/Liked/Liked";
+import Profile from "../Pages/Profile/Profile";
+import VideoModal from "../Modals/VideoModal/VideoModal";
+import UserModal from "../Modals/UserModal/UserModal";
 
 export default function App(props) {
   //#region Methods
@@ -80,6 +83,11 @@ export default function App(props) {
       item.likes.push(user.id);
   }
 
+  function productVideoModal(productData) {
+    setCurrentProduct(productData);
+    handleModalOpen("video");
+  }
+
   //#endregion
 
 
@@ -89,12 +97,15 @@ export default function App(props) {
   const [modalsActivity, setModalsActivity] = useState({
     signup: false,
     login: false,
+    video: false,
+    user: true,
   });
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
   const [videos, setVideos] = useState([]);
   const [cart, setCart] = useState([]);
   const [user, setUser] = useState({});
+  const [currentProduct, setCurrentProduct] = useState("");
 
   useEffect(() => {
     getVideos()
@@ -135,6 +146,7 @@ export default function App(props) {
               likeItem={likeItem}
               openLoginModal={() => handleModalOpen("login")}
               isLoggedIn={isLoggedIn}
+              openVideoModal={(data) => productVideoModal(data)}
             />
           }/>
           <Route path="items/gallery" element={
@@ -179,6 +191,18 @@ export default function App(props) {
               likeItem={likeItem}
             />
           }/>
+          <Route path="user" element={
+            <Profile
+              getUser={getUser}
+              videos={videos}
+              getProduct={getProduct}
+              openVideoModal={() => handleModalOpen("video")}
+              openUserModal={() => handleModalOpen("user")}
+            />
+          }/>
+          <Route path="me" element={
+            <Navigate to={`/user?id=${user.id}`}/>
+          }/>
           <Route path="/" element={
             <Banners
               banners={banners}
@@ -189,6 +213,8 @@ export default function App(props) {
         <Footer
           contacts={contacts}
         />
+
+        //#region Modals
         <RegisterModal
           name="signup"
           onClose={handleModalClose}
@@ -201,6 +227,20 @@ export default function App(props) {
           isOpen={modalsActivity["login"]}
           openAnotherModal={() => openAnotherModal("login", "signup")}
         />
+        <VideoModal
+          name="video"
+          onClose={handleModalClose}
+          isOpen={modalsActivity["video"]}
+          product={currentProduct}
+        />
+        <UserModal
+          name="user"
+          onClose={handleModalClose}
+          isOpen={modalsActivity["user"]}
+          onSubmit={() => {}}
+        />
+        //#endregion
+
         <MobileMenu
           isMenuOpen={isMenuOpen}
           setMenuOpen={setMenuOpen}
