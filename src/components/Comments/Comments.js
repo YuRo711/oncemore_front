@@ -1,8 +1,16 @@
+import { useState } from "react";
 import Comment from "../Comment/Comment";
 import "./Comments.css";
 
 export default function Comments(props) {
-  const { comments } = props;
+  function sendComment()
+  {
+    props.sendComment(newComment, videoId);
+  }
+
+  const { comments, videoId } = props;
+  const [newComment, setNewComment] = useState("");
+  const [newCommentEmpty, setNewCommentEmpty] = useState(true);
 
   return (
     <div className="comments">
@@ -24,6 +32,21 @@ export default function Comments(props) {
             />
           )
         }
+      </div>
+      <div className="comments__new">
+        <input className="comments__input"
+          type="text"
+          placeholder="Напишите свой комментарий..."
+          value={newComment}
+          onChange={(e) => {
+            setNewComment(e.target.value);
+            setNewCommentEmpty(e.target.value.length == 0);
+          }}
+        />
+        <button className={`comments__send 
+            ${newCommentEmpty ? "" : "comments__send_visible"}`}
+          onClick={sendComment}
+        />
       </div>
     </div>
   );

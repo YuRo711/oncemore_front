@@ -151,6 +151,8 @@ export default function VideoPlayer(props) {
             getUser={props.getUser}
             setCommentsOpen={setCommentsOpen}
             deleteComment={props.deleteComment}
+            sendComment={props.sendComment}
+            videoId={data.id}
           />
           : ""
         }

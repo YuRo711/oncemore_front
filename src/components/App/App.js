@@ -21,6 +21,7 @@ import Liked from "../Pages/Liked/Liked";
 import Profile from "../Pages/Profile/Profile";
 import VideoModal from "../Modals/VideoModal/VideoModal";
 import UserModal from "../Modals/UserModal/UserModal";
+import api from "../../utils/api";
 
 export default function App(props) {
   //#region Methods
@@ -100,7 +101,7 @@ export default function App(props) {
   }
 
   function deleteComment(commentData) {
-    
+
   }
 
   async function getComments(videoId) {
@@ -108,6 +109,12 @@ export default function App(props) {
       .then((comments) => comments.filter(
         (comment) => comment.videoId == videoId
       ));
+  }
+
+  function sendComment(commentText, videoId)
+  {
+    const userId = user.id;
+    api.addComment(commentText, userId, videoId)
   }
 
   //#endregion
@@ -202,6 +209,7 @@ export default function App(props) {
               blockUser={blockUser}
               getComments={getComments}
               deleteComment={deleteComment}
+              sendComment={sendComment}
             />
           }/>
           <Route path="liked" element={

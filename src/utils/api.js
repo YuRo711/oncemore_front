@@ -61,6 +61,10 @@ class videoApi {
     return products
       .filter((product) => product.id == id)[0];
   }
+
+  async addComment(text, user, video) {
+    
+  }
 }
 
 export default new videoApi();
