@@ -153,6 +153,7 @@ export default function VideoPlayer(props) {
             deleteComment={props.deleteComment}
             sendComment={props.sendComment}
             videoId={data.id}
+            likeComment={props.likeComment}
           />
           : ""
         }

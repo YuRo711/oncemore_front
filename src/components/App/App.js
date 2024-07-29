@@ -114,7 +114,12 @@ export default function App(props) {
   function sendComment(commentText, videoId)
   {
     const userId = user.id;
-    api.addComment(commentText, userId, videoId)
+    api.addComment(commentText, userId, videoId);
+  }
+
+  function likeComment(commentId)
+  {
+    
   }
 
   //#endregion
@@ -210,6 +215,7 @@ export default function App(props) {
               getComments={getComments}
               deleteComment={deleteComment}
               sendComment={sendComment}
+              likeComment={likeComment}
             />
           }/>
           <Route path="liked" element={

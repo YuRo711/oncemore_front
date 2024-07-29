@@ -10,6 +10,7 @@
   padding: 16px;
   border-radius: 16px;
   width: 100%;
+  position: relative;
 }
 
 .comment__text {
@@ -20,4 +21,15 @@
 
 .comment__admin {
   margin-top: 16px;
+}
+
+.comment__like {
+  height: 24px;
+  width: 24px;
+  background: none;
+  border: none;
+  background-image: url("../../images/like.svg");
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }

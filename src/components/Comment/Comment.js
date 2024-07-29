@@ -4,7 +4,7 @@ import UserAvatar from "../UserAvatar/UserAvatar";
 import { UserContext } from "../../contexts/UserContext";
 
 export default function Comment(props) {
-  const { data } = props;
+  const { data, likeComment } = props;
   const [author, setAuthor] = useState(null);
   useState(() => {
     props.getUser(data.userId)
@@ -39,6 +39,9 @@ export default function Comment(props) {
           </div>
           : ""
         }
+        <button className="comment__like"
+          onClick={likeComment}
+        />
       </div>
     </div>
   );

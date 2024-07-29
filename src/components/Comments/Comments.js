@@ -29,6 +29,7 @@ export default function Comments(props) {
               data={comment}
               getUser={props.getUser}
               deleteComment={props.deleteComment}
+              likeComment={props.likeComment}
             />
           )
         }
