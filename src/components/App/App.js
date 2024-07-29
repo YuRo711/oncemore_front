@@ -21,6 +21,7 @@ import Gallery from "../Pages/Gallery/Gallery";
 import Liked from "../Pages/Liked/Liked";
 import Profile from "../Pages/Profile/Profile";
 import VideoModal from "../Modals/VideoModal/VideoModal";
+import UserModal from "../Modals/UserModal/UserModal";
 
 export default function App(props) {
   //#region Methods
@@ -97,6 +98,7 @@ export default function App(props) {
     signup: false,
     login: false,
     video: false,
+    user: true,
   });
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
@@ -195,6 +197,7 @@ export default function App(props) {
               videos={videos}
               getProduct={getProduct}
               openVideoModal={() => handleModalOpen("video")}
+              openUserModal={() => handleModalOpen("user")}
             />
           }/>
           <Route path="me" element={
@@ -210,6 +213,8 @@ export default function App(props) {
         <Footer
           contacts={contacts}
         />
+
+        //#region Modals
         <RegisterModal
           name="signup"
           onClose={handleModalClose}
@@ -228,6 +233,14 @@ export default function App(props) {
           isOpen={modalsActivity["video"]}
           product={currentProduct}
         />
+        <UserModal
+          name="user"
+          onClose={handleModalClose}
+          isOpen={modalsActivity["user"]}
+          onSubmit={() => {}}
+        />
+        //#endregion
+
         <MobileMenu
           isMenuOpen={isMenuOpen}
           setMenuOpen={setMenuOpen}

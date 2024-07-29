@@ -17,7 +17,6 @@ export default function Profile(props) {
     setVideos(props.videos
       .filter((data) => data.author == id));
   }, []);
-  console.log(userData);
 
 
   if (!userData) return;
@@ -35,7 +34,14 @@ export default function Profile(props) {
             }
           </UserAvatar>
           <h2 className="profile__name">{userData.name}</h2>
-          <button className="profile__edit-button"/>
+
+          {
+              isMe ? 
+              <button className="profile__edit-button"
+                    onClick={props.openUserModal}
+              />
+              : ""
+            }
         </div>
         {
           isMe ? 
