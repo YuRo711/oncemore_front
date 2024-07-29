@@ -10,34 +10,65 @@ import Review from "../../Review/Review";
 import { UserContext } from "../../../contexts/UserContext";
 
 export default function VideoPlayer(props) {
+  //#region Methods
+
+  function nextVideo()
+  {
+    if (index >= props.videos.length - 1) {
+      return;
+    }
+
+    setIndex(index + 1);
+  }
+
+  function prevVideo()
+  {
+    if (index == 0) {
+      return;
+    }
+
+    setIndex(index - 1);
+  }
+
+  //#endregion
+
+
   //#region Variables
 
   const navigate = useNavigate();
 
   const searchParams = useSearchParams();
   const id = searchParams[0].get("id");
-  const data = props.videos
-    .filter((video) => video.id == id)[0];
-  const { link, productId, author, views, tags, reviewText } = data;
+  const [data, setData] = useState(props.videos
+    .find((video) => video.id == id));
+  const [index, setIndex] = useState(props.videos.indexOf(data));
+
+  let { link, productId, author, views, tags, reviewText } = data;
   const parsedViews = parseViews(views);
   const videos = props.videos.filter((vid) => vid.productId == productId);
   const Profile = props. videos.filter((vid) => vid.author == author)
 
   const [userData, setUserData] = useState(null);
   const [productData, setProductData] = useState(null);
+
   useEffect(() => {
+    setData(props.videos[index]);
+    ({ link, productId, author, views, tags, reviewText } = props.videos[index]);
+
     props.getUser((author))
       .then((user) => setUserData(user));
+
     props.getProduct((productId))
       .then((product) => setProductData(product));
-  }, []);
+  }, [index]);
 
   const isAdmin = useContext(UserContext).user.privilege >= 1;
 
   //#endregion
 
+
   //#region Rendering
-  if (!userData || !productData) return;
+  if (!userData || !productData || !data) return;
 
   return (
     <main className="player">
@@ -85,9 +116,11 @@ export default function VideoPlayer(props) {
           <div className="player__arrows">
             <button 
               className="player__video-button player__video-button_up"
+              onClick={prevVideo}
             />
             <button 
               className="player__video-button player__video-button_down"
+              onClick={nextVideo}
             />
           </div>
           <button 
