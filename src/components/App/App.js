@@ -10,7 +10,7 @@ import MobileMenu from "../MobileMenu/MobileMenu";
 import Banners from "../Pages/Banners/Banners";
 import Product from "../Pages/Product/Product";
 import Catalogue from "../Pages/Catalogue/Catalogue";
-import videoApi from "../../utils/api";
+import api from "../../utils/api";
 import VideoPlayer from "../Pages/VideoPlayer/VideoPlayer";
 
 import { CartContext } from "../../contexts/CartContext";
@@ -21,7 +21,6 @@ import Liked from "../Pages/Liked/Liked";
 import Profile from "../Pages/Profile/Profile";
 import VideoModal from "../Modals/VideoModal/VideoModal";
 import UserModal from "../Modals/UserModal/UserModal";
-import api from "../../utils/api";
 import Admin from "../Pages/Admin/Admin";
 import NewProductModal from "../Modals/NewProductModal/NewProductModal";
 
@@ -45,19 +44,19 @@ export default function App(props) {
   }
 
   function getVideos() {
-    return videoApi.getVideos();
+    return api.getVideos();
   }
 
   function getAllComments() {
-    return videoApi.getComments();
+    return api.getComments();
   }
 
   function getUser(id) {
-    return videoApi.getUser(id);
+    return api.getUser(id);
   }
 
   function getProduct(id) {
-    return videoApi.getProduct(id);
+    return api.getProduct(id);
   }
 
   function addItem(e, id) {
@@ -154,7 +153,10 @@ export default function App(props) {
       .then((res) => setVideos(res));
     getUser(0)
       .then((res) => setUser(res));
+    api._request("/users/66ad17f60a441e010ba89eea", "GET")
+      .then((res) => console.log(res));
   }, [])
+
 
 
   //#endregion

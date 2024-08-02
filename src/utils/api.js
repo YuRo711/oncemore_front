@@ -1,7 +1,29 @@
 import defaultVid from "../temp/video.mp4";
-import {products} from "./constants";
+import {baseUrl, products} from "./constants";
 
-class videoApi {
+class Api {
+  constructor() {
+    this._baseUrl = baseUrl;
+    this._headers = new Headers({
+      "content-type": "application/json",
+    });
+  }
+
+  async _request(url, method, requestBody, headers = this._headers) {
+    return fetch(this._baseUrl + url, {
+      method: method,
+      headers: headers,
+      body: JSON.stringify(requestBody),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject("something went wrong");
+      }
+    });
+  }
+
+
   async getVideos() {
     return [
       {
@@ -67,4 +89,4 @@ class videoApi {
   }
 }
 
-export default new videoApi();
+export default new Api();

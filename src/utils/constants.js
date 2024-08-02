@@ -155,10 +155,13 @@ const banners = [
   },
 ]
 
+const baseUrl = "http://localhost:3001";
+
 export {
   categories,
   contacts,
   products,
   banners,
   userLinks,
+  baseUrl,
 };
