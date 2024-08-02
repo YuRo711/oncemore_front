@@ -29,14 +29,14 @@
   position: relative;
   background-color: #fff;
   border-radius: 16px;
-  width: 430px;
+  min-width: 430px;
   padding: 43px 37px;
   box-sizing: border-box;
 }
 
 .modal__close-button {
   position: absolute;
-  left: 436px;
+  right: -46px;
   top: -46px;
   width: 40px;
   height: 40px;
@@ -88,6 +88,9 @@
   flex-direction: column;
   align-items: center;
   margin: 22px 0 0;
+  max-height: 400px;
+  overflow-y: scroll;
+  max-height: 500px;
 }
 
 .modal__submit-button {
@@ -103,6 +106,7 @@
   box-shadow: 0 5px 15px #0e1a3933;
   margin: 24px 0 0;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .modal__submit-button:hover {
@@ -180,6 +184,7 @@
 .modal__textarea:focus {
   outline: none;
 }
+
 
 @media screen and (min-width: 600px) and (max-width: 1300px) {
   .modal__container {

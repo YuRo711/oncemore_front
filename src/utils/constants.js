@@ -38,6 +38,10 @@ const userLinks = [
     name: "Заказы",
     link: "/orders",
   },
+  {
+    name: "Админка",
+    link: "/admin",
+  },
 ];
 
 const contacts = [

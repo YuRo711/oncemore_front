@@ -22,6 +22,8 @@ import Profile from "../Pages/Profile/Profile";
 import VideoModal from "../Modals/VideoModal/VideoModal";
 import UserModal from "../Modals/UserModal/UserModal";
 import api from "../../utils/api";
+import Admin from "../Pages/Admin/Admin";
+import NewProductModal from "../Modals/NewProductModal/NewProductModal";
 
 export default function App(props) {
   //#region Methods
@@ -138,6 +140,7 @@ export default function App(props) {
     login: false,
     video: false,
     user: false,
+    newproduct: false,
   });
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
@@ -249,6 +252,11 @@ export default function App(props) {
           <Route path="me" element={
             <Navigate to={`/user?id=${user.id}`}/>
           }/>
+          <Route path="/admin" element={
+            <Admin
+              openProductModal={() => handleModalOpen("newproduct")}
+            />
+          }/>
           <Route path="/" element={
             <Banners
               banners={banners}
@@ -282,6 +290,12 @@ export default function App(props) {
           name="user"
           onClose={handleModalClose}
           isOpen={modalsActivity["user"]}
+          onSubmit={() => {}}
+        />
+        <NewProductModal
+          name="newproduct"
+          onClose={handleModalClose}
+          isOpen={modalsActivity["newproduct"]}
           onSubmit={() => {}}
         />
 
