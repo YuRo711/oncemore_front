@@ -15,7 +15,10 @@ function NewProductModal(props) {
   }
 
   function submit() {
-
+    props.addProduct({name, category, brand, color, price, photo,
+      country, size, barcode, article, description, appliance, composition,
+  });
+    props.onClose();
   }
 
   const [isButtonActive, setButtonActivity] = useState(false);
@@ -35,6 +38,9 @@ function NewProductModal(props) {
   const [barcode, setBarcode] = useState("");
   const [article, setArticle] = useState("");
   const [photo, setPhoto] = useState("");
+  const [description, setDescription] = useState("");
+  const [appliance, setAppliance] = useState("");
+  const [composition, setComposition] = useState("");
 
   return (
     <FormModal
@@ -200,6 +206,48 @@ function NewProductModal(props) {
           }}
           value={barcode}
           required
+        />
+      </label>
+
+      <label className="modal__label">
+        <p className="modal__label-text">Описание</p>
+        <textarea
+          className="modal__textarea"
+          id="product-description"
+          placeholder="Описание продукта"
+          onChange={(e) => {
+            setDescription(e.target.value);
+            toggleButtonState();
+          }}
+          value={description}
+        />
+      </label>
+
+      <label className="modal__label">
+        <p className="modal__label-text">Способ применения</p>
+        <textarea
+          className="modal__textarea"
+          id="product-appliance"
+          placeholder="Способ применения"
+          onChange={(e) => {
+            setAppliance(e.target.value);
+            toggleButtonState();
+          }}
+          value={appliance}
+        />
+      </label>
+
+      <label className="modal__label">
+        <p className="modal__label-text">Состав</p>
+        <textarea
+          className="modal__textarea"
+          id="product-composition"
+          placeholder="Состав продукта"
+          onChange={(e) => {
+            setComposition(e.target.value);
+            toggleButtonState();
+          }}
+          value={composition}
         />
       </label>
     </FormModal>

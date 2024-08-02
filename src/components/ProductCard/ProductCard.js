@@ -14,7 +14,7 @@ export default function ProductCard(props) {
     setIsLiked(!isLiked);
   }
 
-  const { images, name, price, color, id, likes } = props.data;
+  const { image, name, price, color, id, likes } = props.data;
   const userId = useContext(UserContext).user.id;
   const [isLiked, setIsLiked] = useState(likes.includes(userId));
 
@@ -24,7 +24,7 @@ export default function ProductCard(props) {
     >
       <div className="item__image-container">
         <img className="item__image"
-          src={images[0]}
+          src={image}
           alt={name}
         />
       </div>

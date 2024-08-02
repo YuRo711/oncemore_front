@@ -1,8 +1,8 @@
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./App.css";
-import { categories, contacts, products, banners, userLinks } from "../../utils/constants";
-import { Navigate, Route, Routes } from "react-router";
+import { categories, contacts, banners, userLinks } from "../../utils/constants";
+import { Navigate, Route, Routes, json } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import LoginModal from "../Modals/LoginModal/LoginModal";
 import RegisterModal from "../Modals/RegisterModal/RegisterModal";
@@ -128,6 +128,17 @@ export default function App(props) {
       .views++;
   }
 
+  function addProduct(productData)
+  {
+    api.addProduct(productData)
+      .then((res) => console.log(res));
+  }
+
+  async function getProducts() {
+    return api.getProducts();
+  }
+
+
   //#endregion
 
 
@@ -144,11 +155,14 @@ export default function App(props) {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
   const [videos, setVideos] = useState([]);
+  const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [user, setUser] = useState({});
   const [currentProduct, setCurrentProduct] = useState("");
 
   useEffect(() => {
+    getProducts()
+      .then((res) => setProducts(res.data));
     getVideos()
       .then((res) => setVideos(res));
     getUser(0)
@@ -156,6 +170,7 @@ export default function App(props) {
     api._request("/users/66ad17f60a441e010ba89eea", "GET")
       .then((res) => console.log(res));
   }, [])
+  console.log(products);
 
 
 
@@ -298,7 +313,7 @@ export default function App(props) {
           name="newproduct"
           onClose={handleModalClose}
           isOpen={modalsActivity["newproduct"]}
-          onSubmit={() => {}}
+          addProduct={addProduct}
         />
 
         <MobileMenu

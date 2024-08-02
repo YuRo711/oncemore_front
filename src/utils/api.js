@@ -23,6 +23,14 @@ class Api {
     });
   }
 
+  async addProduct(productData) {
+    return this._request("/products", "POST", productData);
+  }
+
+  async getProducts() {
+    return this._request("/products", "GET");
+  }
+
 
   async getVideos() {
     return [

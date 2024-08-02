@@ -80,7 +80,6 @@ function VideoModal(props) {
         <p className="modal__label-text">Текст отзыва</p>
         <textarea
           className="modal__textarea"
-          type="url"
           id="video-review"
           placeholder="Ваш отзыв на продукт"
           onChange={(e) => {
