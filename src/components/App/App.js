@@ -23,6 +23,7 @@ import VideoModal from "../Modals/VideoModal/VideoModal";
 import UserModal from "../Modals/UserModal/UserModal";
 import Admin from "../Pages/Admin/Admin";
 import NewProductModal from "../Modals/NewProductModal/NewProductModal";
+import AdminRoute from "../AdminRoute/AdminRoute";
 
 export default function App(props) {
   //#region Methods
@@ -269,11 +270,13 @@ export default function App(props) {
           <Route path="me" element={
             <Navigate to={`/user?id=${user.id}`}/>
           }/>
-          <Route path="/admin" element={
-            <Admin
-              openProductModal={() => handleModalOpen("newproduct")}
-            />
-          }/>
+            <Route path="/admin" element={
+              <AdminRoute>
+                <Admin
+                  openProductModal={() => handleModalOpen("newproduct")}
+                />
+              </AdminRoute>
+            }/>
           <Route path="/" element={
             <Banners
               banners={banners}
