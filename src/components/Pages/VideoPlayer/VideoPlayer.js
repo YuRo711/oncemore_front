@@ -65,7 +65,6 @@ export default function VideoPlayer(props) {
   useEffect(() => {
     if (!data.product) return;
 
-    console.log(data);
     setProductData(props.getProduct(data.product));
     props.getUser(data.author)
       .then((res) => setUserData(res.data));

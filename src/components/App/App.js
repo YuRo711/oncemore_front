@@ -323,7 +323,7 @@ export default function App(props) {
             />
           }/>
           <Route path="me" element={
-            <Navigate to={`/user?id=${user.id}`}/>
+            <Navigate to={`/user?id=${user._id}`}/>
           }/>
             <Route path="admin" element={
               <AdminRoute>

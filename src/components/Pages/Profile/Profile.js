@@ -13,7 +13,8 @@ export default function Profile(props) {
   const [videos, setVideos] = useState([]);
   useEffect(() => {
     props.getUser(id)
-      .then((res) => setUserData(res));
+      .then((res) => setUserData(res.data));
+    console.log(props.videos);
     setVideos(props.videos
       .filter((data) => data.author == id));
   }, []);
