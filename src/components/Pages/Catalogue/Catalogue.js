@@ -79,7 +79,7 @@ export default function Catalogue(props) {
       isLoggedIn={props.isLoggedIn}
     />
   );
-  const videos= props.videos.map((video, i) => 
+  const videos = props.videos.map((video, i) => 
     <Video
       data={video}
       key={`video-${i}`}
@@ -182,6 +182,7 @@ export default function Catalogue(props) {
           />
         </div>
       </section>
+      { props.videos.length > 0 ?
       <section className="catalogue__reviews">
         <div className="catalogue__category">
           <h3 className="catalogue__subtitle">#тренды</h3>
@@ -225,6 +226,8 @@ export default function Catalogue(props) {
           /> 
         </div>
       </section>
+      : ""
+      }
     </main>
   );
 }

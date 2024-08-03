@@ -44,8 +44,9 @@ export default function App(props) {
     });
   }
 
-  function getVideos() {
-    return api.getVideos();
+  async function getVideos() {
+    return api.getVideos()
+      .then((res) => res.data);
   }
 
   function getAllComments() {
@@ -59,6 +60,10 @@ export default function App(props) {
   function getProduct(id) {
     const product = products.find((product) => product.id == id);
     return product ? product : {};
+  }
+
+  async function getProducts() {
+    return api.getProducts();
   }
 
   function addItem(e, id) {
@@ -136,10 +141,6 @@ export default function App(props) {
       .then((res) => console.log(res));
   }
 
-  async function getProducts() {
-    return api.getProducts();
-  }
-
 
   //#endregion
 
@@ -176,7 +177,7 @@ export default function App(props) {
   //#endregion
 
   //#region Rendering
-  if (videos.length == 0 || products.length == 0) {
+  if (products.length == 0) {
     return <div className="page">
       Loading...
     </div>

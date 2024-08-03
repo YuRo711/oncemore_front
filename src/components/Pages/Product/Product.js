@@ -59,7 +59,6 @@ export default function Product(props) {
     const newData = props.items
       .find((item) => item._id == id)
     setData(newData);
-    console.log(newData);
 
     setCurrentImage(newData.photos[currentImageNum]);
     areButtonsDisabled = newData.photos.length < 2;
