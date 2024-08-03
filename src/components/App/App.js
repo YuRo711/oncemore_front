@@ -147,7 +147,7 @@ export default function App(props) {
 
   //#region Variables Setup
 
-  const [isLoggedIn, setLoggedIn] = useState(true);
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const [modalsActivity, setModalsActivity] = useState({
     signup: false,
     login: false,
@@ -168,9 +168,14 @@ export default function App(props) {
       .then((res) => setProducts(res.data));
     getVideos()
       .then((res) => setVideos(res));
-    getUser(0)
-      .then((res) => setUser(res));
   }, []);
+
+  useEffect(() => {
+    if (!isLoggedIn) return;
+    
+    api.getCurrentUser()
+      .then((res) => setUser(res.data));
+  }, [isLoggedIn]);
 
 
 

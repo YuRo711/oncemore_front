@@ -33,7 +33,6 @@ class Api {
 
 
   async getVideos() {
-    
     return this._request("/reviews", "GET");
   }
 
@@ -52,22 +51,15 @@ class Api {
 
   async getComments()
   {
-    return [
-      {
-        id: 0,
-        userId: 0,
-        videoId: 1,
-        text: "Отличное видео!"
-      }
-    ]
+    return [];
   }
 
   async getUser(id) {
-    return this.getUsers()
-      .then((users) => 
-        users.filter((user) => user.id == id)
-        [0]
-    );
+    return this._request(`/users/${id}`, "GET");    
+  }
+
+  async getCurrentUser() {
+    return this._request(`/users/me`, "GET"); 
   }
 
   async getProduct(id) {
