@@ -28,18 +28,19 @@ export default function ProductCard(props) {
           alt={name}
         />
       </div>
-      <h3 className="item__name">{name}</h3>
-      <h4 className="item__price">{price}₽</h4>
-      <button className="item__cart-button"
-        type="button"
-        onClick={(e) => props.addItem(e, id)}
-      >
-        В корзину
-      </button>
-      <button className={`item__like-button 
-          ${isLiked ? "item__like-button_active" : ""}`}
-        onClick={(e) => toggleLike(e)}
-      />
+      <div className="item__info">
+        <h3 className="item__name">{name}</h3>
+        <h4 className="item__price">{price}₽</h4>
+        <button className="item__cart-button"
+          type="button"
+          onClick={(e) => props.addItem(e, id)}
+        >
+        </button>
+        <button className={`item__like-button 
+            ${isLiked ? "item__like-button_active" : ""}`}
+          onClick={(e) => toggleLike(e)}
+        />
+      </div>
     </NavLink>
   );
 }
