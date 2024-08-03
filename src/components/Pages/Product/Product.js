@@ -1,5 +1,5 @@
 import "./Product.css";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, useSearchParams } from "react-router-dom";
 import Video from "../../Video/Video";
 import { UserContext } from "../../../contexts/UserContext";
@@ -8,26 +8,22 @@ export default function Product(props) {
   //#region Methods
 
   function nextImage() {
-    const newNum = (currentImageNum + 1) % images.length;
+    const newNum = (currentImageNum + 1) % data.photos.length;
     setCurrentImageNum(newNum);
-    setCurrentImage(images[newNum]);
+    setCurrentImage(data.photos[newNum]);
   }
 
   function prevImage() {
     const newNum = currentImageNum > 0 ? 
       currentImageNum - 1 :
-      images.length - 1;
+      data.photos.length - 1;
     setCurrentImageNum(newNum);
-    setCurrentImage(images[newNum]);
+    setCurrentImage(data.photos[newNum]);
   }
 
   function selectImage(i) {
     setCurrentImageNum(i);
-    setCurrentImage(images[i]);
-  }
-
-  function toggleDetails() {
-    setDetailsOpen(!detailsOpen);
+    setCurrentImage(data.photos[i]);
   }
 
   function toggleLike(e) {
@@ -46,33 +42,51 @@ export default function Product(props) {
 
   const searchParams = useSearchParams();
   const id = searchParams[0].get("id");
-  const data = props.items
-    .filter((item) => item.id == id)[0];
-  const { name, price, color, images, likes } = data;
+
+  const [data, setData] = useState({});
 
   const [currentImageNum, setCurrentImageNum] = useState(0);
-  const [currentImage, setCurrentImage] = useState(images[currentImageNum]);
-  const [detailsOpen, setDetailsOpen] = useState(false);
-  const areButtonsDisabled = images.length < 2;
+  const [currentImage, setCurrentImage] = useState({});
+
+  const [descriptionOpen, setDescriptionOpen] = useState(false);
+  const [compositionOpen, setCompositionOpen] = useState(false);
+  const [applianceOpen, setApplianceOpen] = useState(false);
+
+  let areButtonsDisabled = true;
+
+
+  useEffect(() => {
+    const newData = props.items
+      .find((item) => item._id == id)
+    setData(newData);
+    console.log(newData);
+
+    setCurrentImage(newData.photos[currentImageNum]);
+    areButtonsDisabled = newData.photos.length < 2;
+    setIsLiked(newData.likes.includes(userId));
+  }, [props.items])
+
 
   const videos = props.videos.filter((vid) => vid.productId == id);
-  const sameItems = props.items.filter((item) => item.name == name);
-  const colorImages = sameItems.map((item) => item.colorImage);
+  const sameItems = props.items.filter((item) => item.name == data.name);
+  const colorPhotos = sameItems.map((item) => item.colorImage);
 
   const userId = useContext(UserContext).user.id;
-  const [isLiked, setIsLiked] = useState(likes.includes(userId));
+  const [isLiked, setIsLiked] = useState(false);
 
   //#endregion
 
   //#region Rendering
 
+  if (!data.photos) return;
+
   return (
     <main className="product">
       <div className="product__page">
-        <div className="product__images">
+        <div className="product__data.photos">
             <div className="product__gallery">
               {
-                images.map((img, i) => (
+                data.photos.map((img, i) => (
                   <img className="product__image"
                     key={`image-${i}`}
                     src={img}
@@ -84,7 +98,7 @@ export default function Product(props) {
             <div className="product__current-image">
               <img className="product__main-image"
                 src={currentImage}
-                alt={name}
+                alt={data.name}
               />
               <button className=
                 "product__image-button product__image-button_left"
@@ -101,17 +115,31 @@ export default function Product(props) {
         <div className="product__info">
           <div className="product__main">
             <div className="product__title">
-              <h2 className="product__name">{name}</h2>
-              <h3 className="product__price">{price}₽</h3>
+              <h2 className="product__name">{data.name}</h2>
+              <h3 className="product__data.price">{data.price}₽</h3>
+            </div>
+            <div className="product__properties">
+              <p className="product__text">
+                <span className="product__quality">Бренд: </span>
+                {data.brand}
+              </p>
+              <p className="product__text">
+                <span className="product__quality">Страна производства: </span>
+                {data.country}
+              </p>
+              <p className="product__text">
+                <span className="product__quality">Вес / объём: </span>
+                {data.size}
+              </p>
             </div>
             <div className="product__color-choice">
               <p className="product__text">
                 <span className="product__quality">Цвет: </span>
-                {color}
+                {data.color}
               </p>
               <div className="product__colors">
                 {
-                  colorImages.map((img, i) => 
+                  colorPhotos.map((img, i) => 
                     <NavLink to={`/item?id=${sameItems[i].id}`}
                       key={`color-${i}`}
                     >
@@ -139,18 +167,49 @@ export default function Product(props) {
               />
             </div>
           </div>
-          <div className="product__details">
-            <div className="product__details-header">
-              О товаре
-              <button className={`product__more-button 
-                product__more-button_${detailsOpen ? "minus" : "plus"}`}
-                onClick={toggleDetails}
-              />
+          <div className="product__all-details">
+            <div className="product__details">
+              <div className="product__details-header">
+                О товаре
+                <button className={`product__more-button 
+                  product__more-button_${descriptionOpen ? "minus" : "plus"}`}
+                  onClick={() => setDescriptionOpen(!descriptionOpen)}
+                />
+              </div>
+              <p className={`product__details-text
+                  ${descriptionOpen ? "product__details-text_visible" : ""}`}
+              >
+                {data.description}
+              </p>
             </div>
-            <p className={`product__details-text
-                ${detailsOpen ? "product__details-text_visible" : ""}`}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </p>
+            <div className="product__details">
+              <div className="product__details-header">
+                Состав
+                <button className={`product__more-button 
+                  product__more-button_${compositionOpen ? "minus" : "plus"}`}
+                  onClick={() => setCompositionOpen(!compositionOpen)}
+                />
+              </div>
+              <p className={`product__details-text
+                  ${compositionOpen ? "product__details-text_visible" : ""}`}
+              >
+                {data.composition}
+              </p>
+            </div>
+            <div className="product__details">
+              <div className="product__details-header">
+                Способ применения
+                <button className={`product__more-button 
+                  product__more-button_${applianceOpen ? "minus" : "plus"}`}
+                  onClick={() => setApplianceOpen(!applianceOpen)}
+                />
+              </div>
+              <p className={`product__details-text
+                  ${applianceOpen ? "product__details-text_visible" : ""}`}
+              >
+                {data.appliance}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -162,7 +221,7 @@ export default function Product(props) {
               <Video
                 data={video}
                 key={`video-${i}`}
-                getProduct={async function () {await data}}
+                getProduct={function () {return data}}
               />
             )
           }
