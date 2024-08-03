@@ -18,9 +18,17 @@ class Api {
       if (res.ok) {
         return res.json();
       } else {
-        return Promise.reject("something went wrong");
+        console.log(res);
+        return Promise.reject(this._processError(res));
       }
     });
+  }
+
+  _processError(res) {
+    if (res.status == 409)
+      return "Пользователь с таким email или handle уже существует";
+    if (res.status == 401)
+      return "Авторизация не удалась: проверьте данные";
   }
 
   async addProduct(productData) {
@@ -69,6 +77,26 @@ class Api {
 
   async addComment(text, user, video) {
     
+  }
+
+  async signIn(email, password) {
+    return this._request(`/signin`, "POST", {email, password}); 
+  }
+
+  async auth(token) {
+    this.setTokenHeader(token);
+    return this._request("/users/me", "GET");
+  }
+
+  setTokenHeader(token) {
+    this._headers = new Headers({
+      "content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    });
+  }
+
+  async createUser(data) {
+    return this._request(`/signup`, "POST", data); 
   }
 }
 

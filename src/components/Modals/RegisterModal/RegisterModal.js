@@ -15,7 +15,7 @@ function RegisterModal(props) {
   }
 
   function submit() {
-    props.registerUser(name, email, password);
+    props.signUp(email, password, name, handle);
   }
 
   const [isButtonActive, setButtonActivity] = useState(false);
@@ -28,6 +28,7 @@ function RegisterModal(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [handle, setHandle] = useState("");
 
   return (
     <FormModal
@@ -86,6 +87,22 @@ function RegisterModal(props) {
             toggleButtonState();
           }}
           value={name}
+          required
+        />
+      </label>
+
+      <label className="modal__label">
+        <p className="modal__label-text">Хэндл</p>
+        <input
+          className="modal__input"
+          type="text"
+          id="signup-username"
+          placeholder="Введите хэндл (уникальное имя, начинается с @)"
+          onChange={(e) => {
+            setHandle(e.target.value);
+            toggleButtonState();
+          }}
+          defaultValue="@"
           required
         />
       </label>

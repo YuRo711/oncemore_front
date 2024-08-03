@@ -24,6 +24,7 @@ import UserModal from "../Modals/UserModal/UserModal";
 import Admin from "../Pages/Admin/Admin";
 import NewProductModal from "../Modals/NewProductModal/NewProductModal";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import { setToken } from "../../utils/token";
 
 export default function App(props) {
   //#region Methods
@@ -141,6 +142,35 @@ export default function App(props) {
       .then((res) => console.log(res));
   }
 
+  async function signIn(email, password) {
+    return api
+      .signIn(email, password)
+      .then((res) => {
+        setToken(res.token);
+        auth(res.token);
+        handleModalClose("login");
+      })
+      .catch((err) => alert(err));
+  }
+
+  function auth(token) {
+    api
+      .auth(token)
+      .then((res) => {
+        setUser(res.data);
+        setLoggedIn(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function signUp(email, password, name, handle) {
+    api.createUser({email, password, name, handle})
+      .then(() => signIn(email, password))
+      .catch((err) => alert(err));
+  }
+
 
   //#endregion
 
@@ -172,7 +202,7 @@ export default function App(props) {
 
   useEffect(() => {
     if (!isLoggedIn) return;
-    
+
     api.getCurrentUser()
       .then((res) => setUser(res.data));
   }, [isLoggedIn]);
@@ -297,12 +327,14 @@ export default function App(props) {
           onClose={handleModalClose}
           isOpen={modalsActivity["signup"]}
           openAnotherModal={() => openAnotherModal("signup", "login")}
+          signUp={signUp}
         />
         <LoginModal
           name="login"
           onClose={handleModalClose}
           isOpen={modalsActivity["login"]}
           openAnotherModal={() => openAnotherModal("login", "signup")}
+          signIn={signIn}
         />
         <VideoModal
           name="video"
