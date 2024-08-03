@@ -120,7 +120,7 @@ export default function Header(props) {
         {
           props.categories.map((category, i) => (
             <NavLink className="header__category"
-              to={`/items?filter=${category.filter}`}
+              to={category.link}
               key={`category-${i}`}
             >
               {category.name}

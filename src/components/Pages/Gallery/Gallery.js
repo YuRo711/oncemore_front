@@ -7,6 +7,7 @@ export default function Gallery(props) {
   const searchParams = useSearchParams();
   const filter = searchParams[0].get("filter");
   const type = searchParams[0].get("type");
+  const items = props.items.filter((item) => item.category == filter);
 
   return (
     <main className="gallery">
@@ -30,7 +31,7 @@ export default function Gallery(props) {
       <div className="gallery__items">
         {
           type == "items" ?
-          props.items.map((data, i) => 
+          items.map((data, i) => 
             <ProductCard
               data={data}
               key={`product-${i}`}

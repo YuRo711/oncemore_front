@@ -20,13 +20,13 @@ export default function Catalogue(props) {
 
   function filterItems()
   {
-    console.log(isNew);
     setFilteredItems(
       props.items.filter((item) => (
         (selectedColors.length === 0 || selectedColors.includes(item.color))
         && (item.price >= minPrice && item.price <= maxPrice)
         && (item.isNew || !isNew)
         && (item.discount || !discount)
+        && (category == "Новинки" ? item.isNew : item.category == category)
       ))
     );
   }
@@ -54,6 +54,9 @@ export default function Catalogue(props) {
 
   const colors = getUniqueItems(props.items.map((data) => data.color));
   const maxItemPrice = Math.max(...(props.items.map((data) => data.price)));
+
+  const searchParams = useSearchParams();
+  const category = searchParams[0].get("filter");
   
   const [isNew, setIsNew] = useState(false);
   const [discount, setDiscount] = useState(false);
@@ -63,7 +66,7 @@ export default function Catalogue(props) {
 
   const [filteredItems, setFilteredItems] = useState(props.items);
   useEffect(filterItems,
-    [selectedColors, maxPrice, minPrice, isNew, discount]
+    [selectedColors, maxPrice, minPrice, isNew, discount, category]
   );
 
   const items = filteredItems.map((data, i) => 
@@ -85,9 +88,6 @@ export default function Catalogue(props) {
   );
   const itemCarousel = useRef();
   const videoCarousel = useRef();
-
-  const searchParams = useSearchParams();
-  const filter = searchParams[0].get("filter");
 
   //#endregion
 
@@ -143,7 +143,7 @@ export default function Catalogue(props) {
         <div className="catalogue__category">
           <h3 className="catalogue__subtitle">#лучшее</h3>
           <NavLink className="catalogue__more"
-            to={`/items/gallery?filter=${filter}&type=items`}
+            to={`/items/gallery?filter=${category}&type=items`}
           >
             Посмотреть всё
           </NavLink>
@@ -186,7 +186,7 @@ export default function Catalogue(props) {
         <div className="catalogue__category">
           <h3 className="catalogue__subtitle">#тренды</h3>
           <NavLink className="catalogue__more"
-            to={`/items/gallery?filter=${filter}&type=videos`}
+            to={`/items/gallery?filter=${category}&type=videos`}
           >
             Посмотреть всё
           </NavLink>

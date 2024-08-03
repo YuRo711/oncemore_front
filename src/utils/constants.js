@@ -13,19 +13,19 @@ import banner2 from "../temp/banner 2.png"
 const categories = [
   {
     name: "Новинки",
-    link: "/items?filter=new"
+    link: "/items?filter=Новинки"
   },
   {
     name: "Глаза",
-    link: "/items?filter=eyes"
+    link: "/items?filter=Глаза"
   },
   {
     name: "Губы",
-    link: "/items?filter=lips"
+    link: "/items?filter=Губы"
   },
   {
     name: "Брови",
-    link: "/items?filter=eyebrows"
+    link: "/items?filter=Брови"
   },
 ];
 
