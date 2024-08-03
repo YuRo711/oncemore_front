@@ -20,7 +20,7 @@ export default function Catalogue(props) {
 
   function filterItems()
   {
-    console.log(isNew)
+    console.log(isNew);
     setFilteredItems(
       props.items.filter((item) => (
         (selectedColors.length === 0 || selectedColors.includes(item.color))
@@ -102,7 +102,7 @@ export default function Catalogue(props) {
               <input className="catalogue__checkbox"
                 type="checkbox"
                 id="filter-new"
-                onChange={(e) => setIsNew(e.target.value)}
+                onChange={(e) => setIsNew(e.target.checked)}
               />
             </label>
             <label className="catalogue__label">
@@ -110,7 +110,7 @@ export default function Catalogue(props) {
               <input className="catalogue__checkbox"
                 type="checkbox"
                 id="filter-discount"
-                onChange={(e) => setDiscount(e.target.value)}
+                onChange={(e) => setDiscount(e.target.checked)}
               />
             </label>
             <MultiSelect
