@@ -83,7 +83,9 @@ export default function Header(props) {
               </div>
               <NavLink className="header__link" to="/points">
                 <p className="header__link-title">Баллы</p>
-                <p className="header__subtitle">{points}₽</p>
+                <p className="header__subtitle">
+                  {points ? points : 0}₽
+                </p>
               </NavLink>
             </div>
           ) : (

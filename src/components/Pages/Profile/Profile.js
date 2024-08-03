@@ -36,15 +36,15 @@ export default function Profile(props) {
           <h2 className="profile__name">{userData.name}</h2>
 
           {
-              isMe ? 
-              <button className="profile__edit-button"
-                    onClick={props.openUserModal}
-              />
-              : ""
-            }
+            isMe ? 
+            <button className="profile__edit-button"
+                  onClick={props.openUserModal}
+            />
+            : ""
+          }
         </div>
         {
-          isMe ? 
+          false ? 
           <button className="profile__review-button"
             onClick={props.openVideoModal}
           >

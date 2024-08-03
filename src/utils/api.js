@@ -98,6 +98,10 @@ class Api {
   async createUser(data) {
     return this._request(`/signup`, "POST", data); 
   }
+
+  async addReview(data) {
+    return this._request("/reviews", "POST", data);
+  }
 }
 
 export default new Api();

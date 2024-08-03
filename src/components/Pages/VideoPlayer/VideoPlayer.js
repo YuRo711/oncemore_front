@@ -40,14 +40,13 @@ export default function VideoPlayer(props) {
 
   const searchParams = useSearchParams();
   const id = searchParams[0].get("id");
-  const [data, setData] = useState(props.videos
-    .find((video) => video.id == id));
+
+  const [data, setData] = useState({});
   const [index, setIndex] = useState(props.videos.indexOf(data));
 
-  let { link, productId, author, views, tags, reviewText } = data;
-  const parsedViews = parseViews(views);
-  const videos = props.videos.filter((vid) => vid.productId == productId);
-  const Profile = props. videos.filter((vid) => vid.author == author)
+  const [parsedViews, setParsedViews] = useState("");
+  const [videos, setVideos] = useState([]);
+  const [profile, setProfile] = useState({});
 
   const [userData, setUserData] = useState(null);
   const [productData, setProductData] = useState(null);
@@ -56,22 +55,39 @@ export default function VideoPlayer(props) {
   const [commentsOpen, setCommentsOpen] = useState(null);
 
   useEffect(() => {
-    setData(props.videos[index]);
-    ({ link, productId, author, views, tags, reviewText } = props.videos[index]);
-    const _id = props.videos[index].id;
+      if (!props.videos || props.videos.length == 0) return;
 
-    props.getUser(author)
-      .then((user) => setUserData(user));
-
-    props.getProduct(productId)
-      .then((product) => setProductData(product));
-
-    props.getComments(_id)
-      .then((commentData) => setComments(commentData));
-  }, [index]);
+      setData(props.videos
+        .find((video) => video._id == id));
+    },
+  [props.videos]);
 
   useEffect(() => {
-    props.addView(data.id);
+    if (!data.product) return;
+
+    console.log(data);
+    setProductData(props.getProduct(data.product));
+    props.getUser(data.author)
+      .then((res) => setUserData(res.data));
+    setVideos(props.videos.filter((vid) => vid.product == data.product));
+    setProfile(props.videos.filter((vid) => vid.author == data.author));
+  }, [data]);
+
+  // useEffect(() => {
+  //   setData(props.videos[index]);
+  //   const _id = props.videos[index].id;
+
+  //   props.getUser(author)
+  //     .then((user) => setUserData(user));
+
+  //     setProductData(props.getProduct(product));
+
+  //   props.getComments(data._id)
+  //     .then((commentData) => setComments(commentData));
+  // }, [index]);
+
+  useEffect(() => {
+    props.addView(data._id);
   }, []);
 
   const isAdmin = useContext(UserContext).user.privilege >= 1;
@@ -86,12 +102,12 @@ export default function VideoPlayer(props) {
     <main className="player">
       <div className="player__main">
         <video className="player__video"
-          src={link}
+          src={data.video}
           autoPlay
         />
         <div className="player__product">
           <img className="player__product-image"
-            src={productData.images[0]}
+            src={productData.photos[0]}
           />
           <div className="player__product-info">
             <h4 className="player__price">{productData.price}₽</h4>
@@ -109,13 +125,13 @@ export default function VideoPlayer(props) {
               <button className="avatar__user-button"/>
             </UserAvatar>
             <div className="player__author">
-              @{userData.handle}
+              {userData.handle}
             </div>
             <div className="player__tags">
               {
-                tags.map((tag, i) => 
-                  <p className="player__tag" key={`tag-${i}`}>#{tag}</p>
-              )
+                // tags.map((tag, i) => 
+                //   <p className="player__tag" key={`tag-${i}`}>#{tag}</p>
+                // )
               }
             </div>
           </div>
@@ -232,7 +248,7 @@ export default function VideoPlayer(props) {
             </div>
         </div>
         {
-          !reviewText ? "" :
+          !data.text ? "" :
           <div className="player__review">
             <h3 className="player__subtitle">
               Что {userData.name} говорит о {productData.name}
@@ -256,7 +272,7 @@ export default function VideoPlayer(props) {
           </div>
             <div className="player__gallery">
               {
-                Profile.map((video, i) => 
+                profile.map((video, i) => 
                   <Video
                     isSmall={true}
                     data={video}

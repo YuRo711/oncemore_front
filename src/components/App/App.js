@@ -60,7 +60,7 @@ export default function App(props) {
   }
 
   function getProduct(id) {
-    const product = products.find((product) => product.id == id);
+    const product = products.find((product) => product._id == id);
     return product ? product : {};
   }
 
@@ -133,8 +133,10 @@ export default function App(props) {
   }
 
   function addView(videoId) {
-    videos.find((video) => video.id == videoId)
-      .views++;
+    if (videos.length == 0) return;
+    
+    // videos.find((video) => video.id == videoId)
+    //   .views++;
   }
 
   function addProduct(productData)
@@ -184,6 +186,11 @@ export default function App(props) {
     }
   }
 
+  async function addReview(video, product, text) {
+    const author = user._id;
+    api.addReview({video, product, author, text});
+  }
+
 
   //#endregion
 
@@ -211,7 +218,7 @@ export default function App(props) {
       .then((res) => setProducts(res.data));
     getVideos()
       .then((res) => setVideos(res));
-    checkToken()
+    checkToken();
   }, []);
 
   useEffect(() => {
@@ -358,6 +365,7 @@ export default function App(props) {
           onClose={handleModalClose}
           isOpen={modalsActivity["video"]}
           product={currentProduct}
+          loadVideo={addReview}
         />
         <UserModal
           name="user"
