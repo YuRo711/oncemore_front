@@ -46,7 +46,6 @@
   margin-top: 14px;
   color: #000;
   overflow: hidden;
-  white-space: wrap;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;

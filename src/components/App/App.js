@@ -57,7 +57,8 @@ export default function App(props) {
   }
 
   function getProduct(id) {
-    return api.getProduct(id);
+    const product = products.find((product) => product.id == id);
+    return product ? product : {};
   }
 
   function addItem(e, id) {
@@ -168,10 +169,7 @@ export default function App(props) {
       .then((res) => setVideos(res));
     getUser(0)
       .then((res) => setUser(res));
-    api._request("/users/66ad17f60a441e010ba89eea", "GET")
-      .then((res) => console.log(res));
-  }, [])
-  console.log(products);
+  }, []);
 
 
 

@@ -20,10 +20,13 @@ export default function Catalogue(props) {
 
   function filterItems()
   {
+    console.log(isNew)
     setFilteredItems(
       props.items.filter((item) => (
         (selectedColors.length === 0 || selectedColors.includes(item.color))
         && (item.price >= minPrice && item.price <= maxPrice)
+        && (item.isNew || !isNew)
+        && (item.discount || !discount)
       ))
     );
   }
@@ -52,7 +55,6 @@ export default function Catalogue(props) {
   const colors = getUniqueItems(props.items.map((data) => data.color));
   const maxItemPrice = Math.max(...(props.items.map((data) => data.price)));
   
-  const [recommended, setRecommended] = useState(false);
   const [isNew, setIsNew] = useState(false);
   const [discount, setDiscount] = useState(false);
   const [selectedColors, setColors] = useState([]);
@@ -61,7 +63,7 @@ export default function Catalogue(props) {
 
   const [filteredItems, setFilteredItems] = useState(props.items);
   useEffect(filterItems,
-    [selectedColors, maxPrice, minPrice]
+    [selectedColors, maxPrice, minPrice, isNew, discount]
   );
 
   const items = filteredItems.map((data, i) => 
@@ -96,19 +98,11 @@ export default function Catalogue(props) {
         <div className="catalogue__filters">
           <form className="catalogue__filter-form">
             <label className="catalogue__label">
-              Рекомендуемые
-              <input className="catalogue__checkbox"
-                type="checkbox"
-                id="filter-recommended"
-                onChange={(value) => setRecommended(value)}
-              />
-            </label>
-            <label className="catalogue__label">
               Новинки
               <input className="catalogue__checkbox"
                 type="checkbox"
                 id="filter-new"
-                onChange={(value) => setIsNew(value)}
+                onChange={(e) => setIsNew(e.target.value)}
               />
             </label>
             <label className="catalogue__label">
@@ -116,7 +110,7 @@ export default function Catalogue(props) {
               <input className="catalogue__checkbox"
                 type="checkbox"
                 id="filter-discount"
-                onChange={(value) => setDiscount(value)}
+                onChange={(e) => setDiscount(e.target.value)}
               />
             </label>
             <MultiSelect

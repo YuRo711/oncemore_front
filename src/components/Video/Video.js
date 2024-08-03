@@ -7,11 +7,7 @@ import { useEffect, useState } from "react";
 export default function Video(props) {
   const { link, productId, views, id } = props.data;
   const parsedViews = parseViews(views);
-  const [productData, setProductData] = useState(null);
-  useEffect(() => {
-    props.getProduct((productId))
-      .then((product) => setProductData(product));
-  }, [])
+  const [productData, setProductData] = useState(props.getProduct());
 
   if (!productData) return;
 
