@@ -10,17 +10,17 @@ export default function ProductCard(props) {
       return;
     }
 
-    props.likeItem(e, id);
+    props.likeItem(e, _id);
     setIsLiked(!isLiked);
   }
 
-  const { photos, name, price, color, id, likes } = props.data;
+  const { photos, name, price, color, _id, likes } = props.data;
   const userId = useContext(UserContext).user.id;
   const [isLiked, setIsLiked] = useState(likes.includes(userId));
 
   return (
     <NavLink className={`item ${props.isSmall ? "item_small" : ""}`}
-      to={`/item?id=${id}`}
+      to={`/item?id=${_id}`}
     >
       <div className="item__image-container">
         <img className="item__image"
@@ -33,7 +33,7 @@ export default function ProductCard(props) {
         <h4 className="item__price">{price}₽</h4>
         <button className="item__cart-button"
           type="button"
-          onClick={(e) => props.addItem(e, id)}
+          onClick={(e) => props.addItem(e, _id)}
         >
         </button>
         <button className={`item__like-button 
