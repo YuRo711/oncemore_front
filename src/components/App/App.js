@@ -24,7 +24,7 @@ import UserModal from "../Modals/UserModal/UserModal";
 import Admin from "../Pages/Admin/Admin";
 import NewProductModal from "../Modals/NewProductModal/NewProductModal";
 import AdminRoute from "../AdminRoute/AdminRoute";
-import { removeToken, setToken } from "../../utils/token";
+import { getToken, removeToken, setToken } from "../../utils/token";
 import Logout from "../Pages/Logout/Logout";
 
 export default function App(props) {
@@ -177,6 +177,13 @@ export default function App(props) {
     setLoggedIn(false);
   }
 
+  function checkToken() {
+    const token = getToken();
+    if (token) {
+      auth(token);
+    }
+  }
+
 
   //#endregion
 
@@ -204,6 +211,7 @@ export default function App(props) {
       .then((res) => setProducts(res.data));
     getVideos()
       .then((res) => setVideos(res));
+    checkToken()
   }, []);
 
   useEffect(() => {
