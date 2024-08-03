@@ -42,6 +42,10 @@ const userLinks = [
     name: "Админка",
     link: "/admin",
   },
+  {
+    name: "Выход",
+    link: "/logout",
+  },
 ];
 
 const contacts = [

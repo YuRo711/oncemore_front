@@ -24,7 +24,8 @@ import UserModal from "../Modals/UserModal/UserModal";
 import Admin from "../Pages/Admin/Admin";
 import NewProductModal from "../Modals/NewProductModal/NewProductModal";
 import AdminRoute from "../AdminRoute/AdminRoute";
-import { setToken } from "../../utils/token";
+import { removeToken, setToken } from "../../utils/token";
+import Logout from "../Pages/Logout/Logout";
 
 export default function App(props) {
   //#region Methods
@@ -171,6 +172,11 @@ export default function App(props) {
       .catch((err) => alert(err));
   }
 
+  function logOut() {
+    removeToken();
+    setLoggedIn(false);
+  }
+
 
   //#endregion
 
@@ -304,13 +310,16 @@ export default function App(props) {
           <Route path="me" element={
             <Navigate to={`/user?id=${user.id}`}/>
           }/>
-            <Route path="/admin" element={
+            <Route path="admin" element={
               <AdminRoute>
                 <Admin
                   openProductModal={() => handleModalOpen("newproduct")}
                 />
               </AdminRoute>
             }/>
+          <Route path="logout" element={
+            <Logout logOut={logOut}/>
+          }/>
           <Route path="/" element={
             <Banners
               banners={banners}
