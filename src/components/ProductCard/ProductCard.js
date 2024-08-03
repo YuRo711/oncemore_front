@@ -15,7 +15,6 @@ export default function ProductCard(props) {
   }
 
   const { photos, name, price, color, id, likes } = props.data;
-  console.log(props.data);
   const userId = useContext(UserContext).user.id;
   const [isLiked, setIsLiked] = useState(likes.includes(userId));
 

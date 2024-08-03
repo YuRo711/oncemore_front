@@ -23,6 +23,7 @@ export default function Catalogue(props) {
     setFilteredItems(
       props.items.filter((item) => (
         (selectedColors.length === 0 || selectedColors.includes(item.color))
+        && (item.price >= minPrice && item.price <= maxPrice)
       ))
     );
   }
@@ -55,12 +56,12 @@ export default function Catalogue(props) {
   const [isNew, setIsNew] = useState(false);
   const [discount, setDiscount] = useState(false);
   const [selectedColors, setColors] = useState([]);
-  const [minPrice, setMinPrice] = useState(false);
-  const [maxPrice, setMaxPrice] = useState(false);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(maxItemPrice);
 
   const [filteredItems, setFilteredItems] = useState(props.items);
-  useEffect(() => filterItems(),
-    [selectedColors]
+  useEffect(filterItems,
+    [selectedColors, maxPrice, minPrice]
   );
 
   const items = filteredItems.map((data, i) => 
@@ -129,7 +130,8 @@ export default function Catalogue(props) {
                 type="number"
                 id="filter-min-price"
                 min={0}
-                onChange={(value) => setMinPrice(value)}
+                onChange={(e) => setMinPrice(e.target.value)}
+                defaultValue={minPrice}
                 placeholder="0"
               />
               до 
@@ -137,7 +139,8 @@ export default function Catalogue(props) {
                 type="number"
                 id="filter-max-price"
                 min={0}
-                onChange={(value) => setMaxPrice(value)}
+                onChange={(e) => setMaxPrice(e.target.value)}
+                defaultValue={maxPrice}
                 placeholder={maxItemPrice}
               />
             </label>

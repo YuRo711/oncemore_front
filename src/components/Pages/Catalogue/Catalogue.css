@@ -101,18 +101,18 @@
   border: none;
   border-radius: 25px;
   position: absolute;
-  top: 50%;
+  top: 40%;
   cursor: pointer;
 }
 
 .catalogue__carousel-btn_prev {
   background-image: url('../../../images/arrow-circle-left.svg');
-  left: 0;
+  left: 2px;
 }
 
 .catalogue__carousel-btn_next {
   background-image: url('../../../images/arrow-circle-right.svg');
-  right: 0;
+  right: 2px;
 }
 
 @import url('./AliceCarousel.css');
