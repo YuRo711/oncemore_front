@@ -51,10 +51,6 @@ export default function App(props) {
       .then((res) => res.data);
   }
 
-  function getAllComments() {
-    return api.getComments();
-  }
-
   function getUser(id) {
     return api.getUser(id);
   }
@@ -115,16 +111,15 @@ export default function App(props) {
   }
 
   async function getComments(videoId) {
-    return getAllComments()
-      .then((comments) => comments.filter(
-        (comment) => comment.videoId == videoId
-      ));
+    return api.getComments(videoId);
   }
 
   function sendComment(commentText, videoId)
   {
-    const userId = user.id;
-    api.addComment(commentText, userId, videoId);
+    const userId = user._id;
+    api.addComment(commentText, userId, videoId)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   }
 
   function likeComment(commentId)

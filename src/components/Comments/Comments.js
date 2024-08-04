@@ -5,10 +5,10 @@ import "./Comments.css";
 export default function Comments(props) {
   function sendComment()
   {
-    props.sendComment(newComment, videoId);
+    props.sendComment(newComment);
   }
 
-  const { comments, videoId } = props;
+  const { comments } = props;
   const [newComment, setNewComment] = useState("");
   const [newCommentEmpty, setNewCommentEmpty] = useState(true);
 
@@ -24,8 +24,9 @@ export default function Comments(props) {
       </div>
       <div className="comments__main">
         {
-          comments.map((comment) =>
+          comments.map((comment, i) =>
             <Comment
+              key={`comment-${i}`}
               data={comment}
               getUser={props.getUser}
               deleteComment={props.deleteComment}

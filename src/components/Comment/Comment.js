@@ -7,9 +7,13 @@ export default function Comment(props) {
   const { data, likeComment } = props;
   const [author, setAuthor] = useState(null);
   useState(() => {
-    props.getUser(data.userId)
-      .then((user) => setAuthor(user));
-  }, []);
+
+    console.log(data);
+    if (!data.author) return;
+
+    props.getUser(data.author)
+      .then((user) => setAuthor(user.data));
+  }, [data]);
 
   const isAdmin = useContext(UserContext).user.privilege >= 1;
 

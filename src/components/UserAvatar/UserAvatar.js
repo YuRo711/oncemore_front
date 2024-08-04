@@ -10,6 +10,8 @@ export default function UserAvatar(props) {
 
   const {avatar, name} = props.userData;
 
+  if(!name) return;
+
   return (
     <div className="avatar">
       <div className="avatar__container">

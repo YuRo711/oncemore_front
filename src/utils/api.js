@@ -57,9 +57,9 @@ class Api {
     ]
   }
 
-  async getComments()
+  async getComments(videoId)
   {
-    return [];
+    return this._request(`/comments/${videoId}`, "GET");
   }
 
   async getUser(id) {
@@ -75,8 +75,8 @@ class Api {
       .filter((product) => product.id == id)[0];
   }
 
-  async addComment(text, user, video) {
-    
+  async addComment(text, author, review) {
+    return this._request(`/comments`, "POST", {text, author, review});     
   }
 
   async signIn(email, password) {

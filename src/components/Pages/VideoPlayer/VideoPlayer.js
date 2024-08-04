@@ -31,6 +31,14 @@ export default function VideoPlayer(props) {
     setIndex(index - 1);
   }
 
+  function sendComment(commentText)
+  {
+    props.sendComment(commentText, data._id)
+      .then(() => props.getComments(data._id))
+      .then((commentData) => setComments(commentData));
+
+  }
+
   //#endregion
 
 
@@ -73,9 +81,11 @@ export default function VideoPlayer(props) {
   }, [data]);
 
   useEffect(() => {
+    if (!data._id) return; 
+
     props.getComments(data._id)
-      .then((commentData) => setComments(commentData));
-  }, [index]);
+      .then((commentData) => setComments(commentData.data));
+  }, [data]);
 
   useEffect(() => {
     props.addView(data._id);
@@ -161,8 +171,7 @@ export default function VideoPlayer(props) {
             getUser={props.getUser}
             setCommentsOpen={setCommentsOpen}
             deleteComment={props.deleteComment}
-            sendComment={props.sendComment}
-            videoId={data.id}
+            sendComment={sendComment}
             likeComment={props.likeComment}
           />
           : ""
