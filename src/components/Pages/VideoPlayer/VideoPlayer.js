@@ -100,9 +100,8 @@ export default function VideoPlayer(props) {
   return (
     <main className="player">
       <div className="player__main">
-        <video className="player__video"
+        <iframe className="player__video"
           src={data.video}
-          autoPlay
         />
         <div className="player__product">
           <img className="player__product-image"
@@ -138,7 +137,7 @@ export default function VideoPlayer(props) {
             <img className="player__views-icon"
               src={playIcon}
             />
-            {parsedViews}
+            {parsedViews ? parsedViews : 0}
           </div>
           <div className="player__arrows">
             <button 
