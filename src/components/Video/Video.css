@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   width: 200px;
-  max-height: 320px;
+  height: 320px;
   border: 1px solid rgb(230, 232, 241);
   transition: box-shadow 0.2s;
   overflow: hidden;
@@ -27,13 +27,14 @@
   overflow: hidden;
   position: relative;
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .video__vid {
   border: none;
-  width: 250px;
+  height: 100%;
 }
 
 .video__views {

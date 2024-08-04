@@ -96,7 +96,7 @@ function RegisterModal(props) {
         <input
           className="modal__input"
           type="text"
-          id="signup-username"
+          id="signup-handle"
           placeholder="Введите хэндл (уникальное имя, начинается с @)"
           onChange={(e) => {
             setHandle(e.target.value);

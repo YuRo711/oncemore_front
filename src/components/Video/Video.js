@@ -6,6 +6,10 @@ import { useEffect, useState } from "react";
 
 export default function Video(props) {
   const { video, views, product, _id } = props.data;
+  if (video.includes("watch?v=")) {
+    video = video.replace("watch?v=", "embed/");
+  }
+
   const parsedViews = parseViews(views);
   const [productData, setProductData] = useState(props.getProduct(product));
 
@@ -16,10 +20,11 @@ export default function Video(props) {
       to={`/review?id=${_id}`}
     >
       <div className="video__container">
-        <video className="video__vid"
+        <iframe className="video__vid"
           src={video}
-          onMouseOver={event => event.target.play()}
-          onMouseOut={event => event.target.pause()}
+          muted
+          // onMouseOver={event => event.target.play()}
+          // onMouseOut={event => event.target.pause()}
         />
         <div className="video__views">
           <img className="video__view-icon"
