@@ -4,7 +4,7 @@ import ("./Review.css");
 
 export default function Review(props) {
   const { isVideo, videoData, author } = props;
-  const { reviewText, views } = videoData;
+  const { text, views } = videoData;
 
   return (
     <div className="review">
@@ -25,7 +25,7 @@ export default function Review(props) {
           </div>
         </div>
         <p className="review__text">
-          {reviewText}
+          {text}
         </p>
       </div>
     </div>
