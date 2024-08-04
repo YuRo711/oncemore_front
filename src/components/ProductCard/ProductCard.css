@@ -43,7 +43,7 @@
 .item__info {
   z-index: -1;
   background-color: rgb(251, 251, 254);
-  padding: 20px;
+  padding: 10px 20px 20px;
   box-sizing: border-box;
   border-top: 1px solid rgb(230, 232, 241);
 }

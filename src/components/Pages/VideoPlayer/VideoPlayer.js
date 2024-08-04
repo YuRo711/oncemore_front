@@ -72,18 +72,10 @@ export default function VideoPlayer(props) {
     setProfile(props.videos.filter((vid) => vid.author == data.author));
   }, [data]);
 
-  // useEffect(() => {
-  //   setData(props.videos[index]);
-  //   const _id = props.videos[index].id;
-
-  //   props.getUser(author)
-  //     .then((user) => setUserData(user));
-
-  //     setProductData(props.getProduct(product));
-
-  //   props.getComments(data._id)
-  //     .then((commentData) => setComments(commentData));
-  // }, [index]);
+  useEffect(() => {
+    props.getComments(data._id)
+      .then((commentData) => setComments(commentData));
+  }, [index]);
 
   useEffect(() => {
     props.addView(data._id);
