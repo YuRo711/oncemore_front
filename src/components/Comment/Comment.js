@@ -43,9 +43,9 @@ export default function Comment(props) {
           </div>
           : ""
         }
-        <button className="comment__like"
+        {/* <button className="comment__like"
           onClick={likeComment}
-        />
+        /> */}
       </div>
     </div>
   );

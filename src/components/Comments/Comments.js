@@ -5,7 +5,11 @@ import "./Comments.css";
 export default function Comments(props) {
   function sendComment()
   {
-    props.sendComment(newComment);
+    props.sendComment(newComment)
+      .then(() => {
+        setNewComment("");
+        setNewCommentEmpty(true);
+      });
   }
 
   const { comments } = props;

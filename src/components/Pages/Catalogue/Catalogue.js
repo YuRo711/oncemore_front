@@ -93,7 +93,7 @@ export default function Catalogue(props) {
 
   return (
     <main className="catalogue">
-      <h2 className="catalogue__title">Глаза</h2>
+      <h2 className="catalogue__title">{category}</h2>
       <section className="catalogue__products">
         <div className="catalogue__filters">
           <form className="catalogue__filter-form">
