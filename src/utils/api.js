@@ -31,6 +31,25 @@ class Api {
       return "Авторизация не удалась: проверьте данные";
   }
 
+  //#region Reviews & Comments
+
+  async getVideos() {
+    return this._request("/reviews", "GET");
+  }
+
+  async addReview(data) {
+    return this._request("/reviews", "POST", data);
+  }
+
+  async getComments(videoId)
+  {
+    return this._request(`/comments/${videoId}`, "GET");
+  }
+
+  //#endregion
+
+  //#region Product
+
   async addProduct(productData) {
     return this._request("/products", "POST", productData);
   }
@@ -40,36 +59,6 @@ class Api {
   }
 
 
-  async getVideos() {
-    return this._request("/reviews", "GET");
-  }
-
-  async getUsers() {
-    return [
-      {
-        id: 0,
-        name: "Иван Иванов",
-        handle: "testuser",
-        avatar: null,
-        points: 18.01,
-        privilege: 1
-      },
-    ]
-  }
-
-  async getComments(videoId)
-  {
-    return this._request(`/comments/${videoId}`, "GET");
-  }
-
-  async getUser(id) {
-    return this._request(`/users/${id}`, "GET");    
-  }
-
-  async getCurrentUser() {
-    return this._request(`/users/me`, "GET"); 
-  }
-
   async getProduct(id) {
     return products
       .filter((product) => product.id == id)[0];
@@ -78,6 +67,18 @@ class Api {
   async addComment(text, author, review) {
     return this._request(`/comments`, "POST", {text, author, review});     
   }
+
+  async likeProduct(id) {
+    return this._request(`/products/${id}/like`, "PATCH");
+  }
+
+  async unlikeProduct(id) {
+    return this._request(`/products/${id}/unlike`, "PATCH");
+  }
+
+  //#endregion
+
+  //#region User
 
   async signIn(email, password) {
     return this._request(`/signin`, "POST", {email, password}); 
@@ -99,21 +100,36 @@ class Api {
     return this._request(`/signup`, "POST", data); 
   }
 
-  async addReview(data) {
-    return this._request("/reviews", "POST", data);
-  }
-
   async editUser(data) {
     return this._request("/users/me", "PATCH", data);
   }
 
-  async likeProduct(id) {
-    return this._request(`/products/${id}/like`, "PATCH");
+  async getUser(id) {
+    return this._request(`/users/${id}`, "GET");    
   }
 
-  async unlikeProduct(id) {
-    return this._request(`/products/${id}/unlike`, "PATCH");
+  async getCurrentUser() {
+    return this._request(`/users/me`, "GET"); 
   }
+
+
+  //#endregion
+
+  //#region Categories & Banners
+
+  async createCategory(data) {
+    return this._request(`/categories`, "POST", data); 
+  }
+
+  async deleteCategory(data) {
+    return this._request(`/categories`, "DELETE", data); 
+  }
+
+  async getCategories() {
+    return this._request(`/categories`, "GET"); 
+  }
+
+  //#endregion
 }
 
 export default new Api();

@@ -26,6 +26,8 @@ import NewProductModal from "../Modals/NewProductModal/NewProductModal";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import { getToken, removeToken, setToken } from "../../utils/token";
 import Logout from "../Pages/Logout/Logout";
+import CategoryModal from "../Modals/CategoryModal/CategoryModal";
+import CategoryDeleteModal from "../Modals/CategoryModal/CategoryDeleteModal";
 
 export default function App(props) {
   //#region Methods
@@ -194,6 +196,20 @@ export default function App(props) {
     api.editUser({image});
   }
 
+  async function deleteCategory(name) {
+    api.deleteCategory({name});
+  }
+
+  async function createCategory(name) {
+    const link = `/items?filter=${name}`;
+    api.createCategory({name, link});
+  }
+
+  async function getCategories() {
+    return api.getCategories()
+      .then((res) => res.data);
+  }
+
 
   //#endregion
 
@@ -207,11 +223,14 @@ export default function App(props) {
     video: false,
     user: false,
     newproduct: false,
+    category: false,
+    categorydelete: false,
   });
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
   const [videos, setVideos] = useState([]);
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [cart, setCart] = useState([]);
   const [user, setUser] = useState({});
   const [currentProduct, setCurrentProduct] = useState("");
@@ -221,6 +240,8 @@ export default function App(props) {
       .then((res) => setProducts(res.data));
     getVideos()
       .then((res) => setVideos(res));
+    getCategories()
+      .then((res) => setCategories(res));
     checkToken();
   }, []);
 
@@ -334,6 +355,8 @@ export default function App(props) {
               <AdminRoute>
                 <Admin
                   openProductModal={() => handleModalOpen("newproduct")}
+                  openCategoryModal={() => handleModalOpen("category")}
+                  openDeleteCategoryModal={() => handleModalOpen("categorydelete")}
                 />
               </AdminRoute>
             }/>
@@ -351,40 +374,56 @@ export default function App(props) {
           contacts={contacts}
         />
 
-        <RegisterModal
-          name="signup"
-          onClose={handleModalClose}
-          isOpen={modalsActivity["signup"]}
-          openAnotherModal={() => openAnotherModal("signup", "login")}
-          signUp={signUp}
-        />
-        <LoginModal
-          name="login"
-          onClose={handleModalClose}
-          isOpen={modalsActivity["login"]}
-          openAnotherModal={() => openAnotherModal("login", "signup")}
-          signIn={signIn}
-        />
-        <VideoModal
-          name="video"
-          onClose={handleModalClose}
-          isOpen={modalsActivity["video"]}
-          product={currentProduct}
-          loadVideo={addReview}
-        />
-        <UserModal
-          name="user"
-          onClose={handleModalClose}
-          isOpen={modalsActivity["user"]}
-          onSubmit={editUser}
-        />
-        <NewProductModal
-          name="newproduct"
-          onClose={handleModalClose}
-          isOpen={modalsActivity["newproduct"]}
-          addProduct={addProduct}
-        />
+        <div className="modals">
+          <RegisterModal
+            name="signup"
+            onClose={handleModalClose}
+            isOpen={modalsActivity["signup"]}
+            openAnotherModal={() => openAnotherModal("signup", "login")}
+            signUp={signUp}
+          />
+          <LoginModal
+            name="login"
+            onClose={handleModalClose}
+            isOpen={modalsActivity["login"]}
+            openAnotherModal={() => openAnotherModal("login", "signup")}
+            signIn={signIn}
+          />
+          <VideoModal
+            name="video"
+            onClose={handleModalClose}
+            isOpen={modalsActivity["video"]}
+            product={currentProduct}
+            loadVideo={addReview}
+          />
+          <UserModal
+            name="user"
+            onClose={handleModalClose}
+            isOpen={modalsActivity["user"]}
+            onSubmit={editUser}
+          />
+          <NewProductModal
+            name="newproduct"
+            onClose={handleModalClose}
+            isOpen={modalsActivity["newproduct"]}
+            addProduct={addProduct}
+          />
+          <CategoryModal
+            name="category"
+            onClose={handleModalClose}
+            isOpen={modalsActivity["category"]}
+            addProduct={addProduct}
+            onSubmit={createCategory}
+          />
+          <CategoryDeleteModal
+            name="categorydelete"
+            onClose={handleModalClose}
+            isOpen={modalsActivity["categorydelete"]}
+            addProduct={addProduct}
+            onSubmit={deleteCategory}
+          />
 
+        </div>
         <MobileMenu
           isMenuOpen={isMenuOpen}
           setMenuOpen={setMenuOpen}
