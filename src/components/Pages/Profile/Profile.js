@@ -8,7 +8,7 @@ import Video from "../../Video/Video";
 export default function Profile(props) {
   const searchParams = useSearchParams();
   const id = searchParams[0].get("id");
-  const isMe = useContext(UserContext).user.id == id;
+  const isMe = useContext(UserContext).user._id == id;
   const [userData, setUserData] = useState(null);
   const [videos, setVideos] = useState([]);
   useEffect(() => {

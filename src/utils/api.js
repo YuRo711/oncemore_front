@@ -9,7 +9,7 @@ class Api {
     });
   }
 
-  async _request(url, method, requestBody, headers = this._headers) {
+  async _request(url, method, requestBody, headers = this._headers, files = null) {
     return fetch(this._baseUrl + url, {
       method: method,
       headers: headers,
@@ -101,6 +101,10 @@ class Api {
 
   async addReview(data) {
     return this._request("/reviews", "POST", data);
+  }
+
+  async editUser(data) {
+    return this._request("/users/me", "PATCH", data);
   }
 }
 

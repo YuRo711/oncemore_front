@@ -186,6 +186,10 @@ export default function App(props) {
     api.addReview({video, product, author, text});
   }
 
+  async function editUser(image) {
+    api.editUser({image});
+  }
+
 
   //#endregion
 
@@ -366,7 +370,7 @@ export default function App(props) {
           name="user"
           onClose={handleModalClose}
           isOpen={modalsActivity["user"]}
-          onSubmit={() => {}}
+          onSubmit={editUser}
         />
         <NewProductModal
           name="newproduct"
