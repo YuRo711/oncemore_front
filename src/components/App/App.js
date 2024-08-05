@@ -87,10 +87,14 @@ export default function App(props) {
     }
 
     const item = products.find((item) => item.id == id);
-    if (item.likes.includes(user.id))
+    if (item.likes.includes(user.id)) {
       item.likes.pop(user.id);
-    else
+      api.unlikeProduct(id);
+    }
+    else {
       item.likes.push(user.id);
+      api.likeProduct(id);
+    }
   }
 
   function productVideoModal(productData) {

@@ -106,6 +106,14 @@ class Api {
   async editUser(data) {
     return this._request("/users/me", "PATCH", data);
   }
+
+  async likeProduct(id) {
+    return this._request(`/products/${id}/like`, "PATCH");
+  }
+
+  async unlikeProduct(id) {
+    return this._request(`/products/${id}/unlike`, "PATCH");
+  }
 }
 
 export default new Api();
