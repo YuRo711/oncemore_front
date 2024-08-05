@@ -2,14 +2,14 @@ import { NavLink } from "react-router-dom";
 import "./HorizontalItem.css";
 
 export default function HorizontalItem(props) {
-  const { images, name, price, color, id } = props.data;
+  const { photos, name, price, color, _id } = props.data;
   const { isCart } = props;
 
   return (
-    <NavLink className="cart-item" to={`/item?id=${id}`}>
+    <NavLink className="cart-item" to={`/item?id=${_id}`}>
       <div className="cart-item__main">
         <img className="cart-item__image"
-          src={images[0]}
+          src={photos[0]}
           alt={name}
         />
         <div className="cart-item__info">

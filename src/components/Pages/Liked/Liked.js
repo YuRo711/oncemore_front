@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 export default function Liked(props) {
   const user = useContext(UserContext).user;
   const items = props.items.filter(
-    (item) => item.likes.includes(user.id));
+    (item) => item.likes.includes(user._id));
   
     const navigate = useNavigate();
 
