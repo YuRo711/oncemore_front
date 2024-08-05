@@ -1,10 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./ProductCard.css";
 import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
 export default function ProductCard(props) {
   function toggleLike(e) {
+    e.stopPropagation()
+
     if (!props.isLoggedIn) {
       props.openLoginModal();
       return;
@@ -14,15 +16,31 @@ export default function ProductCard(props) {
     setIsLiked(!isLiked);
   }
 
-  const { photos, name, price, color, _id, likes } = props.data;
+
+  function onHover(e) {
+    console.log(e.currentTarget)
+  }
+
+  function navigateTo(e, url) {
+    console.log(e.currentTarget);
+    console.log(e.target);
+
+    navigate(url);
+  }
+
+
+  const { photos, name, price, _id, likes } = props.data;
   const userId = useContext(UserContext).user.id;
   const [isLiked, setIsLiked] = useState(likes.includes(userId));
+  const navigate = useNavigate();
 
   return (
-    <NavLink className={`item ${props.isSmall ? "item_small" : ""}`}
-      to={`/item?id=${_id}`}
+    <div className={`item ${props.isSmall ? "item_small" : ""}`}
+    onClick={(e) => navigateTo(e, `/item?id=${_id}`)}
     >
-      <div className="item__image-container">
+      <div className="item__image-container"
+        onClick={(e) => navigateTo(e, `/item?id=${_id}`)}
+      >
         <img className="item__image"
           src={photos[0]}
           alt={name}
@@ -31,16 +49,15 @@ export default function ProductCard(props) {
       <div className="item__info">
         <h3 className="item__name">{name}</h3>
         <h4 className="item__price">{price}₽</h4>
-        <button className="item__cart-button"
-          type="button"
-          onClick={(e) => props.addItem(e, _id)}
-        >
-        </button>
-        <button className={`item__like-button 
-            ${isLiked ? "item__like-button_active" : ""}`}
-          onClick={(e) => toggleLike(e)}
-        />
       </div>
-    </NavLink>
+      <button className="item__cart-button"
+        type="button"
+        onClick={(e) => props.addItem(e, _id)}
+      />
+      <button className={`item__like-button 
+          ${isLiked ? "item__like-button_active" : ""}`}
+        onClick={(e) => toggleLike(e)}
+      />
+    </div>
   );
 }

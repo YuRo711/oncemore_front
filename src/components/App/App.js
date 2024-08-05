@@ -224,7 +224,8 @@ export default function App(props) {
     if (!isLoggedIn) return;
 
     api.getCurrentUser()
-      .then((res) => setUser(res.data));
+      .then((res) => setUser(res.data))
+      .catch(() => setLoggedIn(false));
   }, [isLoggedIn]);
 
 
