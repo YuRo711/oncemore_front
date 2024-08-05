@@ -7,6 +7,7 @@ import item1 from "../images/canvas.png";
 import item2 from "../images/canvas 2.png";
 import brown from "../images/Screenshot from 2024-07-11 19-46-27.png";
 import blue from "../images/Screenshot from 2024-07-11 19-46-31.png";
+import banner1 from '../temp/banner\ 2.jpg';
 import banner2 from "../temp/banner 2.png"
 
 
@@ -145,7 +146,8 @@ const banners = [
       "Воспользуйтесь удобным сервисом: оформлением заказа, доставкой, онлайн-поддержкой.",
       "Шоппинг – это разговор, а покупка – новая история.",
       "Это будет здорово.",
-    ]
+    ],
+    image: banner1,
   },
   {
     title: "Получайте баллы за покупки и отзывы о товаре",

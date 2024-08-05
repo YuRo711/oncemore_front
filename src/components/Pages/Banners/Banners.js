@@ -27,6 +27,9 @@ export default function Banners(props) {
             )
           }
         </div>
+        <img className="banners__main-bg"
+          src={mainBanner.image}
+        />
       </div>
       {
         subBanners.map((banner, i) => 
