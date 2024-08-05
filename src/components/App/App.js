@@ -66,12 +66,18 @@ export default function App(props) {
     return api.getProducts();
   }
 
-  function addItem(e, id) {
-    e.stopPropagation();
-    e.preventDefault();
-
+  function addItem(id) {
     const item = products.find((pr) => pr._id == id);
-    setCart([...cart, item]);
+    if (item.stock == 0) return;
+
+    if (cart.includes(item)) {
+      const index = cart.indexOf(item);
+      if (cartAmounts[index] >= item.stock) return;
+      cartAmounts[index]++;
+    } else {
+      setCart([...cart, item]);
+      cartAmounts.push(1);
+    }
   }
 
   function clearCart() {
@@ -231,6 +237,7 @@ export default function App(props) {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [cart, setCart] = useState([]);
+  const [cartAmounts, setCartAmounts] = useState([]);
   const [user, setUser] = useState({});
   const [currentProduct, setCurrentProduct] = useState("");
 
@@ -265,7 +272,7 @@ export default function App(props) {
 
   return (
     <div className="page">
-      <CartContext.Provider value={{ cart, addItem }}>
+      <CartContext.Provider value={{ cart, addItem, cartAmounts }}>
       <UserContext.Provider value={{ user }}>      
         <Header
           categories={categories}

@@ -18,8 +18,9 @@ export default function Cart(props) {
     setItemTotal(itemTotal + price);
   }
 
-
-  const items = useContext(CartContext).cart;
+  const cartContext = useContext(CartContext);
+  const items = cartContext.cart;
+  const amounts =  cartContext.cartAmounts;
   const [itemTotal, setItemTotal] = useState(0);
   const delivery = 100;
   const tax = 0;
@@ -62,6 +63,7 @@ export default function Cart(props) {
           items.map((item, i) => 
             <HorizontalItem
               data={item}
+              amount={amounts[i]}
               key={`cart-item-${i}`}
               isCart={true}
               likeItem={props.likeItem}

@@ -58,7 +58,11 @@ export default function ProductCard(props) {
       </div>
       <button className="item__cart-button"
         type="button"
-        onClick={(e) => props.addItem(e, _id)}
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          props.addItem(_id)
+        }}
       />
       <button className={`item__like-button 
           ${isLiked ? "item__like-button_active" : ""}`}

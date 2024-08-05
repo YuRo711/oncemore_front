@@ -12,7 +12,8 @@ import icon from "../../images/grid-2.svg"
 
 export default function Header(props) {
   const currentPath = useLocation().pathname;
-  const cartItemsNum = useContext(CartContext).cart.length;
+  const cartItemsNum = useContext(CartContext).cartAmounts
+    .reduce((i, sum) => sum + i, 0);
   const userData = useContext(UserContext).user;
   const points = userData.points;
 
