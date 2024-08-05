@@ -86,7 +86,7 @@ export default function App(props) {
       return;
     }
 
-    const item = products.find((item) => item.id == id);
+    const item = products.find((item) => item._id == id);
     if (item.likes.includes(user.id)) {
       item.likes.pop(user.id);
       api.unlikeProduct(id);

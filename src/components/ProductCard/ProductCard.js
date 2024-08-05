@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./ProductCard.css";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
 export default function ProductCard(props) {
@@ -30,9 +30,15 @@ export default function ProductCard(props) {
 
 
   const { photos, name, price, _id, likes } = props.data;
-  const userId = useContext(UserContext).user.id;
+  const userId = useContext(UserContext).user._id;
   const [isLiked, setIsLiked] = useState(likes.includes(userId));
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userId) return;
+
+    setIsLiked(likes.includes(userId));
+  }, [props.data.likes, userId]);
 
   return (
     <div className={`item ${props.isSmall ? "item_small" : ""}`}
