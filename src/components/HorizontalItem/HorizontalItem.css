@@ -86,3 +86,13 @@
 .cart-item__num-button_plus {
   background-image: url('../../images/Plus.svg');
 }
+
+.cart-item__input {
+  border: none;
+  width: 10px;
+  font-size: 16px;
+}
+
+.cart-item__input:disabled {
+  color: #000;
+}

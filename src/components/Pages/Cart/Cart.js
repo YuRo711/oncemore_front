@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Cart.css";
 import { CartContext } from "../../../contexts/CartContext";
 import backIcon from "../../../images/caret-left.svg";
@@ -14,18 +14,21 @@ export default function Cart(props) {
     return "предметов";
   }
 
+  function addToTotal(price) {
+    setItemTotal(itemTotal + price);
+  }
+
 
   const items = useContext(CartContext).cart;
-  const itemTotal = items
-    .map((item) => item.price)
-    .reduce(
-      (accumulator, currentValue) => accumulator + currentValue, 
-      0
-  );
+  const [itemTotal, setItemTotal] = useState(0);
   const delivery = 100;
   const tax = 0;
   const discount = -51;
-  const total = itemTotal + delivery + tax + discount;
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    setTotal(itemTotal + delivery + tax + discount);
+  }, [itemTotal]);
 
   const navigate = useNavigate();
 
@@ -62,6 +65,7 @@ export default function Cart(props) {
               key={`cart-item-${i}`}
               isCart={true}
               likeItem={props.likeItem}
+              addToTotal={addToTotal}
             />
           )
         }

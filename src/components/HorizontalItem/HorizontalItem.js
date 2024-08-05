@@ -1,9 +1,35 @@
 import { NavLink } from "react-router-dom";
 import "./HorizontalItem.css";
+import { useEffect, useState } from "react";
 
 export default function HorizontalItem(props) {
-  const { photos, name, price, color, _id } = props.data;
+  function increaseAmount(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    if (amount >= stock)
+      return;
+
+    setAmount(amount + 1);
+    props.addToTotal(price);
+  }
+  function decreaseAmount(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    props.addToTotal(-price);
+    if (amount == 1) {
+      props.deleteItem();
+      return;
+    }
+    setAmount(amount - 1);
+  }
+
+
+  const { photos, name, price, color, stock, _id } = props.data;
   const { isCart } = props;
+  const [amount, setAmount] = useState(1);
+  useEffect(() => props.addToTotal(price), [])
 
   return (
     <NavLink className="cart-item" to={`/item?id=${_id}`}>
@@ -21,6 +47,7 @@ export default function HorizontalItem(props) {
       <div className="cart-item__buttons">
         <button className="cart-item__text-button"
           type="button"
+          onClick={props.deleteItem}
         >
           Удалить
         </button>
@@ -44,13 +71,16 @@ export default function HorizontalItem(props) {
             <button 
               className="cart-item__num-button cart-item__num-button_minus"
               type="button"
+              onClick={(e) => decreaseAmount(e)}
             />
             <input className="cart-item__input"
-              defaultValue={1}
+              value={amount}
+              disabled
             />
             <button 
               className="cart-item__num-button cart-item__num-button_plus"
               type="button"
+              onClick={(e) => increaseAmount(e)}
             />
           </div>
           : ""

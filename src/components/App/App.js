@@ -70,8 +70,7 @@ export default function App(props) {
     e.stopPropagation();
     e.preventDefault();
 
-    const item = products.find((pr) => pr.id == id);
-    console.log(item);
+    const item = products.find((pr) => pr._id == id);
     setCart([...cart, item]);
   }
 
