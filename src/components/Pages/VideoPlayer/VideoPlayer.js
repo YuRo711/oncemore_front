@@ -203,7 +203,7 @@ export default function VideoPlayer(props) {
                 Другие обзоры
               </h3>
               <NavLink className="catalogue__more"
-                to={`/items/gallery?filter=${""}&type=videos`}
+                to={`/items/gallery?filtering=item&filter=${data.product}&type=videos`}
               >
                 Посмотреть всё
               </NavLink>
@@ -229,7 +229,7 @@ export default function VideoPlayer(props) {
               Похожие товары
             </h3>
             <NavLink className="catalogue__more"
-              to={`/items/gallery?filter=${""}&type=items`}
+              to={`/items/gallery?filtering=category&filter=${productData.category}&type=items`}
             >
               Посмотреть всё
             </NavLink>
@@ -264,7 +264,7 @@ export default function VideoPlayer(props) {
               Обзоры пользователя {userData.name}
             </h3>
             <NavLink className="catalogue__more"
-              to={`/items/gallery?filter=${""}&type=videos`}
+              to={`/items/gallery?filtering=user&filter=${data.author}&type=videos`}
             >
               Посмотреть всё
             </NavLink>

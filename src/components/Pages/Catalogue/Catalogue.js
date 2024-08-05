@@ -143,7 +143,7 @@ export default function Catalogue(props) {
         <div className="catalogue__category">
           <h3 className="catalogue__subtitle">#лучшее</h3>
           <NavLink className="catalogue__more"
-            to={`/items/gallery?filter=${category}&type=items`}
+            to={`/items/gallery?filtering=category&filter=${category}&type=items`}
           >
             Посмотреть всё
           </NavLink>
@@ -187,7 +187,7 @@ export default function Catalogue(props) {
         <div className="catalogue__category">
           <h3 className="catalogue__subtitle">#тренды</h3>
           <NavLink className="catalogue__more"
-            to={`/items/gallery?filter=${category}&type=videos`}
+            to={`/items/gallery?filtering=category&filter=${category}&type=videos`}
           >
             Посмотреть всё
           </NavLink>
