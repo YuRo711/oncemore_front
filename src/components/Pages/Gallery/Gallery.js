@@ -2,16 +2,21 @@ import { NavLink, useSearchParams } from "react-router-dom";
 import "./Gallery.css";
 import ProductCard from "../../ProductCard/ProductCard";
 import Video from "../../Video/Video";
+import { useEffect } from "react";
 
 export default function Gallery(props) {
   function getFilter()
   {
-    if (filtering == "category")
+      if (filtering == "category")
       return (item) => item.category == filter;
     if (filtering == "item")
       return (video) => video.product == filter;
     if (filtering == "user")
       return (video) => video.author == filter;
+    if (filtering == "search") {
+      const newFilter = filter.toLowerCase();
+      return (item) => item.name.toLowerCase().includes(newFilter);
+    }
     return () => true;
   }
 
@@ -19,8 +24,14 @@ export default function Gallery(props) {
   const filter = searchParams[0].get("filter");
   const type = searchParams[0].get("type");
   const filtering = searchParams[0].get("filtering");
-  const items = props.items.filter(getFilter());
-  const videos = props.videos.filter(getFilter());
+  let items = props.items;
+  let videos = props.videos;
+  
+  if (type == "items")
+    items = props.items.filter(getFilter())
+  else
+    videos = props.videos.filter(getFilter());
+
 
   return (
     <main className="gallery">
@@ -33,7 +44,7 @@ export default function Gallery(props) {
         /
 
         {
-          type == "items" ?
+          filtering == "category" ?
         <NavLink className="gallery__link" 
           to={`/items?filter=${filter}`}
         >
