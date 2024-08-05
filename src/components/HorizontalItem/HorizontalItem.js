@@ -26,6 +26,16 @@ export default function HorizontalItem(props) {
         </button>
         <button className="cart-item__text-button"
           type="button"
+          onClick={
+            isCart ? (e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              props.likeItem(_id)
+            } :
+            (e) => {
+              props.addItem(e, _id)
+            }
+          }
         >
           {isCart ? "Сохранить" : "В корзину"}
         </button>
@@ -35,7 +45,9 @@ export default function HorizontalItem(props) {
               className="cart-item__num-button cart-item__num-button_minus"
               type="button"
             />
-            1
+            <input className="cart-item__input"
+              defaultValue={1}
+            />
             <button 
               className="cart-item__num-button cart-item__num-button_plus"
               type="button"

@@ -34,7 +34,7 @@ export default function Liked(props) {
       <button class="cart__back"
         onClick={() => navigate(-1)}
       >
-        <img class="cart__back-icon"
+        <img className="cart__back-icon"
           src={backIcon}
         />
         Назад
@@ -49,6 +49,7 @@ export default function Liked(props) {
               data={item}
               key={`cart-item-${i}`}
               isCart={false}
+              addItem={props.addItem}
             />
           )
         }

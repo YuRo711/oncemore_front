@@ -309,6 +309,7 @@ export default function App(props) {
               isLoggedIn={isLoggedIn}
               openSignUp={() => handleModalOpen("signup")}
               items={products}
+              addItem={addItem}
             />
           }/>
           <Route path="cart" element={
