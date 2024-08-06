@@ -9,7 +9,7 @@ class Api {
     });
   }
 
-  async _request(url, method, requestBody, headers = this._headers, files = null) {
+  async _request(url, method, requestBody, headers = this._headers) {
     return fetch(this._baseUrl + url, {
       method: method,
       headers: headers,
@@ -98,6 +98,24 @@ class Api {
 
   async createUser(data) {
     return this._request(`/signup`, "POST", data); 
+  }
+  
+  async uploadImage(data) {
+    this._headers.delete("Content-type");
+
+    return fetch(this._baseUrl + "/upload", {
+      method: "POST",
+      headers: this._headers,
+      body: data,
+    }).then((res) => {
+      this._headers.set("content-type", "application/json");
+      if (res.ok) {
+        return res.json();
+      } else {
+        console.log(res);
+        return Promise.reject(this._processError(res));
+      }
+    })
   }
 
   async editUser(data) {

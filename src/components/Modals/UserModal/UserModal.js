@@ -78,7 +78,7 @@ function UserModal(props) {
           id="user-avatar"
           accept="image/png, image/jpeg"
           onChange={(e) => {
-            setAvatar(e.target.value);
+            setAvatar(e.target.files[0]);
             checkFileSize(e.target.value);
             toggleButtonState();
           }}

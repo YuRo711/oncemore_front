@@ -68,8 +68,6 @@ export default function App(props) {
 
   function addItem(id) {
     const item = products.find((pr) => pr._id == id);
-    if (item.stock == 0) return;
-
     if (cart.includes(item)) {
       const index = cart.indexOf(item);
       if (cartAmounts[index] >= item.stock) return;
@@ -198,7 +196,13 @@ export default function App(props) {
   }
 
   async function editUser(image) {
-    api.editUser({image});
+    const formData = new FormData();
+    formData.append("file", image);
+    
+    api.uploadImage(formData)
+      .then((res) => res.data.path)
+      .then((avatar) => api.editUser({avatar}))
+      .then((data) => console.log(data));
   }
 
   async function deleteCategory(name) {
