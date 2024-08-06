@@ -1,7 +1,7 @@
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./App.css";
-import { categories, contacts, banners, userLinks } from "../../utils/constants";
+import { categories, contacts, banners, userLinks, baseUrl } from "../../utils/constants";
 import { Navigate, Route, Routes, json } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import LoginModal from "../Modals/LoginModal/LoginModal";
@@ -201,7 +201,10 @@ export default function App(props) {
     
     api.uploadImage(formData)
       .then((res) => res.data.path)
-      .then((avatar) => api.editUser({avatar}))
+      .then((avatar) => {
+        avatar = baseUrl + "/" + avatar;
+        return api.editUser({avatar});
+      })
       .then((data) => console.log(data));
   }
 

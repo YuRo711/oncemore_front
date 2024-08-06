@@ -15,15 +15,11 @@ export default function UserAvatar(props) {
   return (
     <div className="avatar">
       <div className="avatar__container">
-        {
-          avatar ?
-            <img className="avatar__image"
-              src={avatar}
-              alt={name}
-            />
-            :
-            getFirstLetter(name)
-        }
+        <img className="avatar__image"
+          src={avatar}
+          crossOrigin=""
+          alt={getFirstLetter(name)}
+        />
       </div>
       {props.children}
     </div>

@@ -6,6 +6,7 @@ class Api {
     this._baseUrl = baseUrl;
     this._headers = new Headers({
       "content-type": "application/json",
+      "Access-Control-Allow-Origin": "*",
     });
   }
 
