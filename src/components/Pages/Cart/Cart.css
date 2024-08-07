@@ -109,3 +109,23 @@
   box-shadow: 2px 3px 5px #27203650;
   transition: background-color 0.2s ease-in-out;
 }
+
+
+@media screen and (max-width: 600px) {
+  .cart {
+    padding: 50px 20px;
+  }
+
+  .cart__main {
+    flex-direction: column;
+  }
+
+  .cart__items {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .cart__summary {
+    width: 100%;
+  }
+}
