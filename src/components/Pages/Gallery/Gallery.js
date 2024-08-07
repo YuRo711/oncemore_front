@@ -7,8 +7,8 @@ import { useEffect } from "react";
 export default function Gallery(props) {
   function getFilter()
   {
-      if (filtering == "category")
-      return (item) => item.category == filter;
+    if (filtering == "category")
+      return (item) => item.category == filter || filter == "Новинки";
     if (filtering == "item")
       return (video) => video.product == filter;
     if (filtering == "user")

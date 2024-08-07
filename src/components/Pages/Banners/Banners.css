@@ -89,3 +89,28 @@
   padding-right: 200px;
   margin-top: 50px;
 }
+
+
+@media screen and (max-width: 600px) {
+  .banners__main {
+    padding: 20px;
+  }
+
+  .banners__logo {
+    font-weight: 400;
+    font-size: 70px;
+  }
+
+  .banners__title {
+    font-size: 30px;
+  }
+
+  .banners__banner {
+    padding: 20px;
+  }
+
+  .banners__info {
+    flex-direction: column;
+    padding: 0;
+  }
+}

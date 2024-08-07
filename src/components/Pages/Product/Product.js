@@ -1,4 +1,5 @@
 import "./Product.css";
+import "./Product_adaptive.css";
 import { useContext, useEffect, useState } from "react";
 import { NavLink, useSearchParams } from "react-router-dom";
 import Video from "../../Video/Video";

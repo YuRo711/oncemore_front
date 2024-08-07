@@ -384,6 +384,7 @@ export default function App(props) {
               items={products}
               videos={videos}
               likeItem={likeItem}
+              addItem={addItem}
               openLoginModal={() => handleModalOpen("login")}
               isLoggedIn={isLoggedIn}
               getProduct={getProduct}

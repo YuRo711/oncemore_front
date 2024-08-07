@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import logoutWhite from "../../images/logout white.svg";
 import "./MobileMenu.css";
+import cart from "../../images/icon _shopping cart.svg";
 
 function MobileMenu(props) {
   function openLoginModal() {
@@ -24,6 +25,16 @@ function MobileMenu(props) {
           <nav className="menu__nav">
             <NavLink
               className="menu__link"
+              to="/cart"
+              onClick={() => props.setMenuOpen(false)}
+            >
+              <img className="menu__icon"
+                src={cart}
+              />
+              Корзина
+            </NavLink>
+            <NavLink
+              className="menu__link"
               to="/"
               onClick={() => props.setMenuOpen(false)}
             >
@@ -32,8 +43,9 @@ function MobileMenu(props) {
             {
               props.categories.map((category, i) => (
                 <NavLink className="menu__link"
-                  to={`/items?filter=${category.filter}`}
+                  to={category.link}
                   key={`category-${i}`}
+                  onClick={() => props.setMenuOpen(false)}
                 >
                   {category.name}
                 </NavLink>
