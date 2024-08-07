@@ -251,10 +251,25 @@ export default function App(props) {
   }
 
   async function deleteBanner(id) {
+    api.deleteBanner(id);
   }
 
   async function createBanner(title, subtitle, image, text) {
+    const formData = new FormData();
+    formData.append("file", image);
+    
+    api.uploadImage(formData)
+      .then((res) => res.data.path)
+      .then((image) => {
+        image = baseUrl + "/" + image;
+        return api.createBanner({title, subtitle, text, image});
+      })
+      .then((data) => console.log(data));
+  }
 
+  async function getBanners() {
+    return api.getBanners()
+      .then((res) => res.data);
   }
 
   //#endregion

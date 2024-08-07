@@ -148,6 +148,18 @@ class Api {
     return this._request(`/categories`, "GET"); 
   }
 
+  async getBanners() {
+    return this._request(`/banners`, "GET"); 
+  }
+
+  async createBanner(data) {
+    return this._request(`/banners`, "POST", data); 
+  }
+
+  async deleteBanner(id) {
+    return this._request(`/banners/${id}`, "DELETE"); 
+  }
+
   //#endregion
 }
 
