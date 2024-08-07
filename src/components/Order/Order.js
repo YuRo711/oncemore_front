@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./Order.css";
 
 export default function Order(props) {
-  const {_id, date, items, quantity} = props.data;
+  const {_id, date, items, quantity, name, address, phone, email} = props.data;
 
   return (
     <div className="order">
@@ -12,6 +12,22 @@ export default function Order(props) {
       <p className="order__text">
         <span className="order__accent">Дата: </span>
         {date.split("T")[0]}
+      </p>
+      <p className="order__text">
+        <span className="order__accent">ФИО: </span>
+        {name}
+      </p>
+      <p className="order__text">
+        <span className="order__accent">Адрес: </span>
+        {address}
+      </p>
+      <p className="order__text">
+        <span className="order__accent">Email: </span>
+        {email}
+      </p>
+      <p className="order__text">
+        <span className="order__accent">Телефон: </span>
+        {phone}
       </p>
       <div className="order__items">
       {
