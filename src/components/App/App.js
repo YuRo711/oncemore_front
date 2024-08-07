@@ -1,3 +1,5 @@
+//#region Imports
+
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./App.css";
@@ -22,15 +24,21 @@ import Profile from "../Pages/Profile/Profile";
 import VideoModal from "../Modals/VideoModal/VideoModal";
 import UserModal from "../Modals/UserModal/UserModal";
 import Admin from "../Pages/Admin/Admin";
-import NewProductModal from "../Modals/NewProductModal/NewProductModal";
+import NewProductModal from "../Modals/Product Modals/NewProductModal";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import { getToken, removeToken, setToken } from "../../utils/token";
 import Logout from "../Pages/Logout/Logout";
-import CategoryModal from "../Modals/CategoryModal/CategoryModal";
-import CategoryDeleteModal from "../Modals/CategoryModal/CategoryDeleteModal";
+import CategoryModal from "../Modals/Category Modals/CategoryModal";
+import CategoryDeleteModal from "../Modals/Category Modals/CategoryDeleteModal";
+import BannerDeleteModal from "../Modals/Banner Modals/BannerDeleteModal";
+import BannerModal from "../Modals/Banner Modals/BannerModal";
+
+//#endregion
 
 export default function App(props) {
   //#region Methods
+
+  //#region Modals
 
   function handleModalClose(modalId) {
     setModalsActivity({ ...modalsActivity, [modalId]: false });
@@ -48,14 +56,9 @@ export default function App(props) {
     });
   }
 
-  async function getVideos() {
-    return api.getVideos()
-      .then((res) => res.data);
-  }
+  //#endregion
 
-  function getUser(id) {
-    return api.getUser(id);
-  }
+  //#region Products & Cart
 
   function getProduct(id) {
     const product = products.find((product) => product._id == id);
@@ -102,18 +105,45 @@ export default function App(props) {
     }
   }
 
+  function addProduct(productData)
+  {
+    api.addProduct(productData)
+      .then((res) => console.log(res));
+  }
+
+  //#endregion
+
+  //#region Reviews
+
   function productVideoModal(productData) {
     setCurrentProduct(productData);
     handleModalOpen("video");
+  }
+
+  async function getVideos() {
+    return api.getVideos()
+      .then((res) => res.data);
   }
 
   function deleteReview(reviewData) {
     
   }
 
-  function blockUser(userData) {
+  function addView(videoId) {
+    if (videos.length == 0) return;
     
+    // videos.find((video) => video.id == videoId)
+    //   .views++;
   }
+
+  async function addReview(video, product, text) {
+    const author = user._id;
+    api.addReview({video, product, author, text});
+  }
+
+  //#endregion
+
+  //#region Comments
 
   function deleteComment(commentData) {
 
@@ -136,18 +166,9 @@ export default function App(props) {
     
   }
 
-  function addView(videoId) {
-    if (videos.length == 0) return;
-    
-    // videos.find((video) => video.id == videoId)
-    //   .views++;
-  }
+  //#endregion
 
-  function addProduct(productData)
-  {
-    api.addProduct(productData)
-      .then((res) => console.log(res));
-  }
+  //#region User
 
   async function signIn(email, password) {
     return api
@@ -190,9 +211,12 @@ export default function App(props) {
     }
   }
 
-  async function addReview(video, product, text) {
-    const author = user._id;
-    api.addReview({video, product, author, text});
+  function getUser(id) {
+    return api.getUser(id);
+  }
+  
+  function blockUser(userData) {
+    
   }
 
   async function editUser(image) {
@@ -208,6 +232,10 @@ export default function App(props) {
       .then((data) => console.log(data));
   }
 
+  //#endregion
+
+  //#region Categories & Banners
+
   async function deleteCategory(name) {
     api.deleteCategory({name});
   }
@@ -221,6 +249,15 @@ export default function App(props) {
     return api.getCategories()
       .then((res) => res.data);
   }
+
+  async function deleteBanner(id) {
+  }
+
+  async function createBanner(title, subtitle, image, text) {
+
+  }
+
+  //#endregion
 
 
   //#endregion
@@ -237,6 +274,8 @@ export default function App(props) {
     newproduct: false,
     category: false,
     categorydelete: false,
+    bannerdelete: false,
+    banner: false,
   });
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
@@ -370,6 +409,8 @@ export default function App(props) {
                   openProductModal={() => handleModalOpen("newproduct")}
                   openCategoryModal={() => handleModalOpen("category")}
                   openDeleteCategoryModal={() => handleModalOpen("categorydelete")}
+                  openBannerModal={() => handleModalOpen("banner")}
+                  openDeleteBannerModal={() => handleModalOpen("bannerdelete")}
                 />
               </AdminRoute>
             }/>
@@ -434,6 +475,20 @@ export default function App(props) {
             isOpen={modalsActivity["categorydelete"]}
             addProduct={addProduct}
             onSubmit={deleteCategory}
+          />
+          <BannerDeleteModal
+            name="bannerdelete"
+            onClose={handleModalClose}
+            isOpen={modalsActivity["bannerdelete"]}
+            addProduct={addProduct}
+            onSubmit={deleteBanner}
+          />
+          <BannerModal
+            name="banner"
+            onClose={handleModalClose}
+            isOpen={modalsActivity["banner"]}
+            addProduct={addProduct}
+            onSubmit={createBanner}
           />
 
         </div>

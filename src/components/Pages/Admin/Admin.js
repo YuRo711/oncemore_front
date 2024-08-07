@@ -15,13 +15,13 @@ export default function Admin(props) {
           Редактировать продукт
         </button>
         <button className="admin__button"
-          onClick={props.openProductModal}
+          onClick={props.openBannerModal}
         >
 
           Добавить баннер
         </button>
         <button className="admin__button"
-          onClick={props.openProductModal}
+          onClick={props.openDeleteBannerModal}
         >
           Удалить баннер
         </button>

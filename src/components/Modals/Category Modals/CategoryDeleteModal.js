@@ -3,7 +3,7 @@ import FormModal from "../FormModal/FormModal";
 import { FormValidator } from "../../../utils/FormValidator";
 import { UserContext } from "../../../contexts/UserContext";
 
-function CategoryModal(props) {
+function CategoryDeleteModal(props) {
   function enableValidation() {
     const formElement = formRef.current;
     const newValidator = new FormValidator(formElement, setButtonActivity);
@@ -29,16 +29,15 @@ function CategoryModal(props) {
     enableValidation();
   }, [formRef]);
 
-  const currentName = useContext(UserContext).user.name;
-  const [name, setName] = useState(currentName);
+  const [name, setName] = useState("");
 
   return (
     <FormModal
       name={props.name}
       onClose={props.onClose}
       isOpen={props.isOpen}
-      title="Новая категория"
-      buttonText="Сохранить"
+      title="Удалить категорию"
+      buttonText="Удалить"
       formRef={formRef}
       isButtonActive={isButtonActive}
       onSubmit={submit}
@@ -50,17 +49,17 @@ function CategoryModal(props) {
           type="text"
           id="newcategory-name"
           minLength={2}
+          required
           maxLength={64}
           placeholder="Введите название категории"
           onChange={(e) => {
             setName(e.target.value);
             toggleButtonState();
           }}
-          value={name}
         />
       </label>
     </FormModal>
   );
 }
 
-export default CategoryModal;
+export default CategoryDeleteModal;

@@ -3,7 +3,7 @@ import FormModal from "../FormModal/FormModal";
 import { FormValidator } from "../../../utils/FormValidator";
 import { UserContext } from "../../../contexts/UserContext";
 
-function CategoryDeleteModal(props) {
+function BannerDeleteModal(props) {
   function enableValidation() {
     const formElement = formRef.current;
     const newValidator = new FormValidator(formElement, setButtonActivity);
@@ -16,7 +16,7 @@ function CategoryDeleteModal(props) {
   }
 
   function submit() {
-    props.onSubmit(name)
+    props.onSubmit(id)
       .then(() => props.onClose())
       .catch((err) => console.log(err));
   }
@@ -29,38 +29,36 @@ function CategoryDeleteModal(props) {
     enableValidation();
   }, [formRef]);
 
-  const currentName = useContext(UserContext).user.name;
-  const [name, setName] = useState(currentName);
+  const [id, setId] = useState(0);
 
   return (
     <FormModal
       name={props.name}
       onClose={props.onClose}
       isOpen={props.isOpen}
-      title="Удалить категорию"
+      title="Удалить баннер"
       buttonText="Удалить"
       formRef={formRef}
       isButtonActive={isButtonActive}
       onSubmit={submit}
     >
       <label className="modal__label">
-        <p className="modal__label-text">Название</p>
+        <p className="modal__label-text">Номер баннера (0-...)</p>
         <input
           className="modal__input"
-          type="text"
-          id="newcategory-name"
-          minLength={2}
-          maxLength={64}
-          placeholder="Введите название категории"
+          type="number"
+          id="deletebanner-id"
+          min={0}
+          required
+          placeholder="Введите номер баннера (0-...)"
           onChange={(e) => {
-            setName(e.target.value);
+            setId(e.target.value);
             toggleButtonState();
           }}
-          value={name}
         />
       </label>
     </FormModal>
   );
 }
 
-export default CategoryDeleteModal;
+export default BannerDeleteModal;
