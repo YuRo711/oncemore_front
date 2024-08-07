@@ -17,6 +17,10 @@
   text-transform: uppercase;
 }
 
+.avatar__image {
+  max-width: 100%;
+}
+
 .avatar__user-button {
   position: absolute;
   bottom: -5px;
