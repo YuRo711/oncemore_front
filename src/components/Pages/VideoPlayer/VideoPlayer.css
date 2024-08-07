@@ -34,8 +34,18 @@
   padding: 20px;
 }
 
+.player__image-container {
+  max-height: 120px;
+  max-width: 120px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
 .player__product-image {
-  max-height: 80%;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .player__product-info {
@@ -72,6 +82,7 @@
   padding: 18px;
   background-repeat: no-repeat;
   background-position: center;
+  flex-shrink: 0;
 }
 
 .player__cart-button:hover {

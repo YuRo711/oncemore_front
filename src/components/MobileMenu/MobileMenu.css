@@ -94,3 +94,7 @@
   width: 20px;
   margin-right: 8px;
 }
+
+.menu__categories {
+  border-top: #fff 1px solid;
+}

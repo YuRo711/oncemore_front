@@ -1,5 +1,6 @@
 import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import "./VideoPlayer.css";
+import "./VideoPlayer_adaptive.css";
 import UserAvatar from "../../UserAvatar/UserAvatar";
 import { useContext, useEffect, useState } from "react";
 import {parseViews} from "../../../utils/parsers";
@@ -106,9 +107,11 @@ export default function VideoPlayer(props) {
           src={data.video}
         />
         <div className="player__product">
-          <img className="player__product-image"
-            src={productData.photos[0]}
-          />
+          <div className="player__image-container">
+            <img className="player__product-image"
+              src={productData.photos[0]}
+            />
+          </div>
           <div className="player__product-info">
             <h4 className="player__price">{productData.price}₽</h4>
             <h3 className="player__title">{productData.name}</h3>
