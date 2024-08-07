@@ -275,6 +275,15 @@ export default function App(props) {
 
   //#endregion
 
+  //#region Orders
+
+  function createOrder() {
+    const items = cart;
+    const quantity = cartAmounts;
+    api.createOrder({items, quantity});
+  }
+
+  //#endregion
 
   //#endregion
 
@@ -407,6 +416,7 @@ export default function App(props) {
             <Cart
               clearCart={clearCart}
               likeItem={likeItem}
+              createOrder={createOrder}
             />
           }/>
           <Route path="user" element={

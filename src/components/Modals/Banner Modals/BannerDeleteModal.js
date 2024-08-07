@@ -17,7 +17,6 @@ function BannerDeleteModal(props) {
 
   function submit() {
     props.onSubmit(id)
-      .then(() => props.onClose())
       .catch((err) => console.log(err));
   }
 

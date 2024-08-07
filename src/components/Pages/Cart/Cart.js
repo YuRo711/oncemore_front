@@ -36,10 +36,10 @@ export default function Cart(props) {
 
   return <main className="cart">
     <div className="cart__header">
-      <button class="cart__back"
+      <button className="cart__back"
         onClick={() => navigate(-1)}
       >
-        <img class="cart__back-icon"
+        <img className="cart__back-icon"
           src={backIcon}
         />
         Назад
@@ -99,6 +99,7 @@ export default function Cart(props) {
         </div>
         <button className="cart__checkout-button"
           type="button"
+          onClick={props.createOrder}
         >
           Оформить заказ
         </button>

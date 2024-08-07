@@ -26,7 +26,6 @@ export default function HorizontalItem(props) {
   }
 
 
-  console.log(props.amount);
   const { photos, name, price, color, stock, _id } = props.data;
   const { isCart } = props;
   const [amount, setAmount] = useState(props.amount);

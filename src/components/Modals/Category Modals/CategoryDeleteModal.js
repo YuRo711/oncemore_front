@@ -16,7 +16,6 @@ function CategoryDeleteModal(props) {
   }
 
   function submit() {
-    props.onClose();
     props.onSubmit(name)
       .catch((err) => console.log(err));
   }

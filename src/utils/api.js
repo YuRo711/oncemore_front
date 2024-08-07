@@ -162,6 +162,15 @@ class Api {
   }
 
   //#endregion
+
+  //#region Orders
+
+  async createOrder(data) {
+    console.log(data);
+    return this._request("/orders", "POST", data);
+  }
+
+  //#endregion
 }
 
 export default new Api();
