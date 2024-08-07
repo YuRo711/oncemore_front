@@ -254,7 +254,7 @@ export default function App(props) {
     api.deleteBanner(id);
   }
 
-  async function createBanner(title, subtitle, image, text) {
+  async function createBanner(title, subtitle, image, paragraphs) {
     const formData = new FormData();
     formData.append("file", image);
     
@@ -262,9 +262,10 @@ export default function App(props) {
       .then((res) => res.data.path)
       .then((image) => {
         image = baseUrl + "/" + image;
-        return api.createBanner({title, subtitle, text, image});
+        return api.createBanner({title, subtitle, paragraphs, image});
       })
-      .then((data) => console.log(data));
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
   }
 
   async function getBanners() {
@@ -308,6 +309,8 @@ export default function App(props) {
     getVideos()
       .then((res) => setVideos(res));
     getCategories()
+      .then((res) => setCategories(res));
+    getBanners()
       .then((res) => setCategories(res));
     checkToken();
   }, []);

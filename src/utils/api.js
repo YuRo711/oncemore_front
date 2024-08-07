@@ -153,6 +153,7 @@ class Api {
   }
 
   async createBanner(data) {
+    console.log(data);
     return this._request(`/banners`, "POST", data); 
   }
 

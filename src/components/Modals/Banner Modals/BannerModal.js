@@ -16,7 +16,8 @@ function BannerModal(props) {
   }
 
   function submit() {
-    props.onSubmit(title, subtitle, image, text)
+    const paragraphs = text.split("\n");
+    props.onSubmit(title, subtitle, image, paragraphs)
       .then(() => props.onClose())
       .catch((err) => console.log(err));
   }
@@ -29,10 +30,10 @@ function BannerModal(props) {
     enableValidation();
   }, [formRef]);
 
-  const [title, setTitle] = useState();
-  const [subtitle, setSubtitle] = useState();
-  const [image, setImage] = useState();
-  const [text, setText] = useState();
+  const [title, setTitle] = useState("");
+  const [subtitle, setSubtitle] = useState("");
+  const [image, setImage] = useState("");
+  const [text, setText] = useState("");
 
   return (
     <FormModal
