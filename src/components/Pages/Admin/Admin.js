@@ -1,16 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import "./Admin.css";
 import { UserContext } from "../../../contexts/UserContext";
+import Order from "../../Order/Order";
 
 export default function Admin(props) {
   const user = useContext(UserContext).user;
   const [orders, setOrders] = useState([]);
 
-
   useEffect(() => {
     if (user.privilege < 1) return;
     props.getOrders()
-      .then((res) => setOrders(res.data));
+      .then((res) => setOrders(res));
   }, []);
 
   return (
@@ -56,6 +56,17 @@ export default function Admin(props) {
         user.privilege < 1 ? "" :
         <div className="admin__orders">
           <h2 className="admin__title">Заказы</h2>
+          <div className="admin__order-cards">
+            {
+              orders.map((order, i) => (
+                <Order
+                  data={order}
+                  getProduct={props.getProduct}
+                  key={`order-${i}`}
+                />
+              ))
+            }
+          </div>
         </div>
       }
     </main>

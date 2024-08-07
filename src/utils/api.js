@@ -170,6 +170,10 @@ class Api {
     return this._request("/orders", "POST", data);
   }
 
+  async getOrders() {
+    return this._request("/orders", "GET");
+  }
+
   //#endregion
 }
 

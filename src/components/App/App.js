@@ -291,8 +291,9 @@ export default function App(props) {
     return [];
   }
 
-  function getOrders() {
-    return [];
+  async function getOrders() {
+    return api.getOrders()
+      .then((res) => res.data);
   }
 
   //#endregion
@@ -325,12 +326,12 @@ export default function App(props) {
   const [currentProduct, setCurrentProduct] = useState("");
 
   useEffect(() => {
+    getCategories()
+      .then((res) => setCategories(res));
     getProducts()
       .then((res) => setProducts(res.data));
     getVideos()
       .then((res) => setVideos(res));
-    getCategories()
-      .then((res) => setCategories(res));
     getBanners()
       .then((res) => setCategories(res));
     checkToken();
@@ -447,6 +448,7 @@ export default function App(props) {
               <AdminRoute>
                 <Admin
                   getOrders={getOrders}
+                  getProduct={getProduct}
                   openProductModal={() => handleModalOpen("newproduct")}
                   openCategoryModal={() => handleModalOpen("category")}
                   openDeleteCategoryModal={() => handleModalOpen("categorydelete")}
