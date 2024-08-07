@@ -16,7 +16,7 @@ function VideoModal(props) {
   }
 
   function submit() {
-    props.loadVideo(video, productId, reviewText)
+    return props.loadVideo(video, productId, reviewText)
       .then(props.onClose);
   }
 

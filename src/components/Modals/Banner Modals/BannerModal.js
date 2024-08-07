@@ -17,7 +17,7 @@ function BannerModal(props) {
 
   function submit() {
     const paragraphs = text.split("\n");
-    props.onSubmit(title, subtitle, image, paragraphs)
+    return props.onSubmit(title, subtitle, image, paragraphs)
       .then(() => props.onClose())
       .catch((err) => console.log(err));
   }

@@ -283,6 +283,18 @@ export default function App(props) {
     api.createOrder({items, quantity});
   }
 
+  function updateOrderStatus() {
+    return [];
+  }
+
+  function getMyOrders() {
+    return [];
+  }
+
+  function getOrders() {
+    return [];
+  }
+
   //#endregion
 
   //#endregion
@@ -434,6 +446,7 @@ export default function App(props) {
             <Route path="admin" element={
               <AdminRoute>
                 <Admin
+                  getOrders={getOrders}
                   openProductModal={() => handleModalOpen("newproduct")}
                   openCategoryModal={() => handleModalOpen("category")}
                   openDeleteCategoryModal={() => handleModalOpen("categorydelete")}

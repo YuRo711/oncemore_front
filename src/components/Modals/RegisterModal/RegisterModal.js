@@ -15,7 +15,7 @@ function RegisterModal(props) {
   }
 
   function submit() {
-    props.signUp(email, password, name, handle);
+    return props.signUp(email, password, name, handle);
   }
 
   const [isButtonActive, setButtonActivity] = useState(false);

@@ -1,14 +1,22 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Admin.css";
 import { UserContext } from "../../../contexts/UserContext";
 
 export default function Admin(props) {
-  const privelege = useContext(UserContext).user.privelege;
+  const user = useContext(UserContext).user;
+  const [orders, setOrders] = useState([]);
+
+
+  useEffect(() => {
+    if (user.privilege < 1) return;
+    props.getOrders()
+      .then((res) => setOrders(res.data));
+  }, []);
 
   return (
     <main className="admin">
       {
-        privelege > 1 ?
+        user.privilege < 2 ? "" :
         <div className="admin__buttons">
           <button className="admin__button"
             onClick={props.openProductModal}
@@ -43,7 +51,12 @@ export default function Admin(props) {
             Удалить категорию
           </button>
         </div>
-        : ""
+      }
+      {
+        user.privilege < 1 ? "" :
+        <div className="admin__orders">
+          <h2 className="admin__title">Заказы</h2>
+        </div>
       }
     </main>
   );

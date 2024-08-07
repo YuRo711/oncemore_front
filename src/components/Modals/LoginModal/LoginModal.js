@@ -15,7 +15,7 @@ function LoginModal(props) {
   }
 
   function submit() {
-    props.signIn(email, password);
+    return props.signIn(email, password);
   }
 
   const [isButtonActive, setButtonActivity] = useState(false);

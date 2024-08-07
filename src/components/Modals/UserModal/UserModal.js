@@ -16,7 +16,7 @@ function UserModal(props) {
   }
 
   function submit() {
-    props.onSubmit(avatar)
+    return props.onSubmit(avatar)
       .then(() => props.onClose())
       .catch((err) => console.log(err));
   }
