@@ -332,8 +332,6 @@ export default function App(props) {
       .then((res) => setProducts(res.data));
     getVideos()
       .then((res) => setVideos(res));
-    getBanners()
-      .then((res) => setCategories(res));
     checkToken();
   }, []);
 
