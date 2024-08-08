@@ -34,6 +34,7 @@ import BannerDeleteModal from "../Modals/Banner Modals/BannerDeleteModal";
 import BannerModal from "../Modals/Banner Modals/BannerModal";
 import Orders from "../Pages/Orders/Orders";
 import ShareModal from "../Modals/ShareModal/ShareModal";
+import Confidential from "../Documents/Confidential";
 
 //#endregion
 
@@ -448,20 +449,20 @@ export default function App(props) {
           <Route path="me" element={
             <Navigate to={`/user?id=${user._id}`}/>
           }/>
-            <Route path="admin" element={
-              <AdminRoute>
-                <Admin
-                  getOrders={getOrders}
-                  getProduct={getProduct}
-                  updateOrderStatus={updateOrderStatus}
-                  openProductModal={() => handleModalOpen("newproduct")}
-                  openCategoryModal={() => handleModalOpen("category")}
-                  openDeleteCategoryModal={() => handleModalOpen("categorydelete")}
-                  openBannerModal={() => handleModalOpen("banner")}
-                  openDeleteBannerModal={() => handleModalOpen("bannerdelete")}
-                />
-              </AdminRoute>
-            }/>
+          <Route path="admin" element={
+            <AdminRoute>
+              <Admin
+                getOrders={getOrders}
+                getProduct={getProduct}
+                updateOrderStatus={updateOrderStatus}
+                openProductModal={() => handleModalOpen("newproduct")}
+                openCategoryModal={() => handleModalOpen("category")}
+                openDeleteCategoryModal={() => handleModalOpen("categorydelete")}
+                openBannerModal={() => handleModalOpen("banner")}
+                openDeleteBannerModal={() => handleModalOpen("bannerdelete")}
+              />
+            </AdminRoute>
+          }/>
           <Route path="logout" element={
             <Logout logOut={logOut}/>
           }/>
@@ -469,6 +470,9 @@ export default function App(props) {
             <Orders
               loadOrders={getMyOrders}
             />
+          }/>
+          <Route path="confidentiality" element={
+            <Confidential/>
           }/>
           <Route path="/" element={
             <Banners

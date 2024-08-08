@@ -1,5 +1,5 @@
 import defaultVid from "../temp/video.mp4";
-import {baseUrl, products} from "./constants";
+import {baseUrl} from "./constants";
 
 class Api {
   constructor() {
@@ -81,12 +81,6 @@ class Api {
 
   async getProducts() {
     return this._request("/products", "GET");
-  }
-
-
-  async getProduct(id) {
-    return products
-      .filter((product) => product.id == id)[0];
   }
 
   async addComment(text, author, review) {

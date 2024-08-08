@@ -14,9 +14,9 @@ export default function Footer(props) {
           <h2 className="footer__title">
             Юридическая информация
           </h2>
-          <p className="footer__text">
-          [вставьте юридическую информацию]
-          </p>
+          <NavLink className="footer__link" to="/confidentiality">
+            Политика конфиденциальности
+          </NavLink>
         </div>
         <div className="footer__contacts">
           <h2 className="footer__title">
