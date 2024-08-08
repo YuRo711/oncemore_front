@@ -37,6 +37,16 @@ export default function Product(props) {
     setIsLiked(!isLiked);
   }
 
+  function updateData() {
+    const newData = props.items
+      .find((item) => item._id == id)
+    setData(newData);  
+
+    setCurrentImage(newData.photos[currentImageNum]);
+    areButtonsDisabled = newData.photos.length < 2;
+    setIsLiked(newData.likes.includes(userId));
+  }
+
   //#endregion
   
   //#region Variables
@@ -57,19 +67,13 @@ export default function Product(props) {
 
 
   useEffect(() => {
-    const newData = props.items
-      .find((item) => item._id == id)
-    setData(newData);
-
-    setCurrentImage(newData.photos[currentImageNum]);
-    areButtonsDisabled = newData.photos.length < 2;
-    setIsLiked(newData.likes.includes(userId));
-  }, [props.items])
+    updateData();
+  }, [props.items, searchParams])
 
 
   const videos = props.videos.filter((vid) => vid.productId == id);
-  const sameItems = props.items.filter((item) => item.name == data.name);
-  const colorPhotos = sameItems.map((item) => item.colorImage);
+  const sameItems = props.items.filter((item) => item.type == data.type);
+  const colorHexes = sameItems.map((item) => item.colorImage);
 
   const userId = useContext(UserContext).user.id;
   const [isLiked, setIsLiked] = useState(false);
@@ -83,7 +87,7 @@ export default function Product(props) {
   return (
     <main className="product">
       <div className="product__page">
-        <div className="product__data.photos">
+        <div className="product__photos">
             <div className="product__gallery">
               {
                 data.photos.map((img, i) => (
@@ -139,15 +143,12 @@ export default function Product(props) {
               </p>
               <div className="product__colors">
                 {
-                  colorPhotos.map((img, i) => 
-                    <NavLink to={`/item?id=${sameItems[i].id}`}
+                  sameItems.map((item, i) => 
+                    <NavLink to={`/item?id=${item._id}`}
                       key={`color-${i}`}
                     >
-                      <img 
-                        className={`product__color ${
-                          sameItems[i].id == id ? "product__color_selected" : ""
-                        }`}
-                        src={img}
+                      <div className="product__color-image"
+                        style={{backgroundColor: colorHexes[i]}}
                       />
                     </NavLink>
                   )
