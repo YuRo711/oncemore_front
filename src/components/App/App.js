@@ -34,8 +34,8 @@ import BannerDeleteModal from "../Modals/Banner Modals/BannerDeleteModal";
 import BannerModal from "../Modals/Banner Modals/BannerModal";
 import Orders from "../Pages/Orders/Orders";
 import ShareModal from "../Modals/ShareModal/ShareModal";
-import Confidential from "../Documents/Confidential";
-import PersonalData from "../Documents/PersonalData";
+import Confidential from "../Pages/Documents/Confidential";
+import PersonalData from "../Pages/Documents/PersonalData";
 
 //#endregion
 
