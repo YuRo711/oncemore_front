@@ -17,6 +17,9 @@ export default function Footer(props) {
           <NavLink className="footer__link" to="/confidentiality">
             Политика конфиденциальности
           </NavLink>
+          <NavLink className="footer__link" to="/personal-data">
+            Политика обработки персональных данных
+          </NavLink>
         </div>
         <div className="footer__contacts">
           <h2 className="footer__title">

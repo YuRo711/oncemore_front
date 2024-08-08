@@ -43,6 +43,12 @@
   height: 24px;
 }
 
+.footer__legal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .footer__link {
   color: #000;
 }

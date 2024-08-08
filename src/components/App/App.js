@@ -35,6 +35,7 @@ import BannerModal from "../Modals/Banner Modals/BannerModal";
 import Orders from "../Pages/Orders/Orders";
 import ShareModal from "../Modals/ShareModal/ShareModal";
 import Confidential from "../Documents/Confidential";
+import PersonalData from "../Documents/PersonalData";
 
 //#endregion
 
@@ -473,6 +474,9 @@ export default function App(props) {
           }/>
           <Route path="confidentiality" element={
             <Confidential/>
+          }/>
+          <Route path="personal-data" element={
+            <PersonalData/>
           }/>
           <Route path="/" element={
             <Banners
