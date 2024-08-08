@@ -66,6 +66,11 @@ class Api {
     return this._request(`/comments/${videoId}`, "GET");
   }
 
+  async addView(videoId)
+  {
+    return this._request(`/reviews/${videoId}`, "PATCH");
+  }
+
   //#endregion
 
   //#region Product

@@ -65,13 +65,10 @@ export default function VideoPlayer(props) {
   useEffect(() => {
     if (!data._id) return; 
 
+    props.addView(data._id);
     props.getComments(data._id)
       .then((commentData) => setComments(commentData.data));
-  }, [data]);
-
-  useEffect(() => {
-    props.addView(data._id);
-  }, []);
+  }, [data._id]);
 
   const isAdmin = useContext(UserContext).user.privilege >= 1;
 

@@ -33,6 +33,7 @@ import CategoryDeleteModal from "../Modals/Category Modals/CategoryDeleteModal";
 import BannerDeleteModal from "../Modals/Banner Modals/BannerDeleteModal";
 import BannerModal from "../Modals/Banner Modals/BannerModal";
 import Orders from "../Pages/Orders/Orders";
+import ShareModal from "../Modals/ShareModal/ShareModal";
 
 //#endregion
 
@@ -131,10 +132,8 @@ export default function App(props) {
   }
 
   function addView(videoId) {
-    if (videos.length == 0) return;
-    
-    // videos.find((video) => video.id == videoId)
-    //   .views++;
+    console.log(videoId);
+    return api.addView(videoId);
   }
 
   async function addReview(video, product, text) {
@@ -315,6 +314,7 @@ export default function App(props) {
     categorydelete: false,
     bannerdelete: false,
     banner: false,
+    share: false,
   });
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
@@ -418,6 +418,7 @@ export default function App(props) {
               sendComment={sendComment}
               likeComment={likeComment}
               addView={addView}
+              openShareModal={() => handleModalOpen("share")}
             />
           }/>
           <Route path="liked" element={
@@ -533,15 +534,18 @@ export default function App(props) {
             name="bannerdelete"
             onClose={handleModalClose}
             isOpen={modalsActivity["bannerdelete"]}
-            addProduct={addProduct}
             onSubmit={deleteBanner}
           />
           <BannerModal
             name="banner"
             onClose={handleModalClose}
             isOpen={modalsActivity["banner"]}
-            addProduct={addProduct}
             onSubmit={createBanner}
+          />
+          <ShareModal
+            name="share"
+            onClose={handleModalClose}
+            isOpen={modalsActivity["share"]}
           />
 
         </div>
