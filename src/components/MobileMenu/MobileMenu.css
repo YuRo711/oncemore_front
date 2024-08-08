@@ -98,3 +98,10 @@
 .menu__categories {
   border-top: #fff 1px solid;
 }
+
+.menu__button {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}

@@ -46,3 +46,19 @@
   display: flex;
   gap: 20px;
 }
+
+
+@media screen and (max-width: 600px) {
+  .order__item {
+    flex-direction: column;
+    max-height: fit-content;
+  }
+
+  .order__image {
+    width: 100px;
+  }
+
+  .order__item-info {
+    margin: 0;
+  }
+}

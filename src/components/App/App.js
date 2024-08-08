@@ -550,6 +550,8 @@ export default function App(props) {
           setMenuOpen={setMenuOpen}
           openLoginModal={() => handleModalOpen("login")}
           categories={categories}
+          isLoggedIn={isLoggedIn}
+          userLinks={userLinks}
         />
       </UserContext.Provider>
       </CartContext.Provider>

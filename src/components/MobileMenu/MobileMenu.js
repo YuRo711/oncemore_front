@@ -68,11 +68,10 @@ function MobileMenu(props) {
               <UserAvatar
                 userData={userData}
               />
-              <div className="header__user-info">
+              <div className="menu__user-info">
                 <p className="header__link-title">{userData.name}</p>
-                <p className="header__subtitle">Аккаунт</p>
               </div>
-              <div className="header__dropdown">
+              <div className="menu__dropdown">
                 <DropdownMenu
                   links={props.userLinks}
                   isOpen={userOpen}
