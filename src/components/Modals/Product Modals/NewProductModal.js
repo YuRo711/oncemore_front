@@ -94,7 +94,7 @@ function NewProductModal(props) {
           id="product-photo"
           accept="image/png, image/jpeg"
           onChange={(e) => {
-            setPhoto(e.target.value);
+            setPhoto(e.target.files[0]);
             toggleButtonState();
           }}
         />
