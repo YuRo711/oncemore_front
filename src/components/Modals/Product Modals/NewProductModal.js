@@ -41,7 +41,7 @@ function NewProductModal(props) {
   const [description, setDescription] = useState("");
   const [appliance, setAppliance] = useState("");
   const [composition, setComposition] = useState("");
-  const [colorImage, setColorImage] = useState("");
+  const [colorImage, setColorImage] = useState("#000000");
   const [type, setType] = useState("");
 
   return (
