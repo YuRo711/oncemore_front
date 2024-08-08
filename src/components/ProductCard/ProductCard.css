@@ -17,8 +17,8 @@
 }
 
 .item_small {
-  width: 200px;
-  height: 280px;
+  width: 150px;
+  height: 240px;
   flex-shrink: 0;
 }
 

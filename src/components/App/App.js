@@ -440,6 +440,7 @@ export default function App(props) {
               getUser={getUser}
               videos={videos}
               getProduct={getProduct}
+              isOnMobile={isOnMobile}
               openVideoModal={() => handleModalOpen("video")}
               openUserModal={() => handleModalOpen("user")}
             />

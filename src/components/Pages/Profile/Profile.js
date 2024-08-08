@@ -60,6 +60,7 @@ export default function Profile(props) {
               data={video}
               key={`video-${i}`}
               getProduct={props.getProduct}
+              isSmall={props.isOnMobile}
             />
           )
         }
