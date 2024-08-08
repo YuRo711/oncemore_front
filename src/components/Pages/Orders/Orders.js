@@ -10,7 +10,6 @@ export default function Orders(props) {
     props.loadOrders()
       .then((res) => setOrders(res));
   }, []);
-  console.log(orders);
 
   return (
     <main className="orders">

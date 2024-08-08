@@ -179,6 +179,10 @@ class Api {
     return this._request("/orders/my", "GET");
   }
 
+  async updateOrderStatus(id, data) {
+    return this._request(`/orders/${id}`, "PATCH", data);
+  }
+
   //#endregion
 }
 

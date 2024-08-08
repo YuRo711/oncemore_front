@@ -283,8 +283,8 @@ export default function App(props) {
     api.createOrder({items, quantity});
   }
 
-  function updateOrderStatus() {
-    return [];
+  function updateOrderStatus(id, status) {
+    return api.updateOrderStatus(id, {status});
   }
 
   async function getMyOrders() {
@@ -452,6 +452,7 @@ export default function App(props) {
                 <Admin
                   getOrders={getOrders}
                   getProduct={getProduct}
+                  updateOrderStatus={updateOrderStatus}
                   openProductModal={() => handleModalOpen("newproduct")}
                   openCategoryModal={() => handleModalOpen("category")}
                   openDeleteCategoryModal={() => handleModalOpen("categorydelete")}

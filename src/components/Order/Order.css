@@ -40,3 +40,9 @@
   font-size: 18px;
   margin-left: auto;
 }
+
+.order__admin {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
