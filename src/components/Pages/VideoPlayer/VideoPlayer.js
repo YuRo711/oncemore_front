@@ -65,7 +65,7 @@ export default function VideoPlayer(props) {
   useEffect(() => {
     if (!data._id) return; 
 
-    props.addView(data._id);
+    props.addView(data._id, data.views);
     props.getComments(data._id)
       .then((commentData) => setComments(commentData.data));
   }, [data._id]);

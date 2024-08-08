@@ -131,9 +131,8 @@ export default function App(props) {
     
   }
 
-  function addView(videoId) {
-    console.log(videoId);
-    return api.addView(videoId);
+  function addView(videoId, views) {
+    return api.addView(videoId, {views});
   }
 
   async function addReview(video, product, text) {
