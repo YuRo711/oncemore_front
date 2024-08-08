@@ -15,7 +15,7 @@ function FormModal(props) {
           setLoading(true);
           props.onSubmit()
             .then(() => {
-              props.onClose();
+              props.onClose(props.name);
               setLoading(false); 
             });
         }}
