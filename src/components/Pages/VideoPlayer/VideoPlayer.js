@@ -104,7 +104,7 @@ export default function VideoPlayer(props) {
             <UserAvatar
               userData={userData}
             >
-              <button className="avatar__user-button"/>
+              {/* <button className="avatar__user-button"/> */}
             </UserAvatar>
             <div className="player__author">
               {userData.handle}

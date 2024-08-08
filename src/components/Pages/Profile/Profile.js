@@ -29,8 +29,8 @@ export default function Profile(props) {
             userData={userData}
           >
             {
-              isMe ? "" : 
-              <button className="avatar__user-button"/>
+              // isMe ? "" : 
+              // <button className="avatar__user-button"/>
             }
           </UserAvatar>
           <h2 className="profile__name">{userData.name}</h2>
