@@ -17,8 +17,8 @@ function NewProductModal(props) {
   function submit() {
     return props.addProduct({name, category, brand, color, price, photo,
       country, size, barcode, article, description, appliance, composition,
+      colorImage, type,
   });
-    props.onClose();
   }
 
   const [isButtonActive, setButtonActivity] = useState(false);
@@ -41,6 +41,8 @@ function NewProductModal(props) {
   const [description, setDescription] = useState("");
   const [appliance, setAppliance] = useState("");
   const [composition, setComposition] = useState("");
+  const [colorImage, setColorImage] = useState("");
+  const [type, setType] = useState("");
 
   return (
     <FormModal
@@ -85,7 +87,6 @@ function NewProductModal(props) {
         />
       </label>
 
-
       <label className="modal__label">
         <p className="modal__label-text">Фото</p>
         <input
@@ -116,13 +117,14 @@ function NewProductModal(props) {
         />
       </label>
 
+
       <label className="modal__label">
         <p className="modal__label-text">Цвет</p>
         <input
           className="modal__input"
           type="text"
           id="product-color"
-          placeholder="Введите цвет"
+          placeholder="Введите название цвета"
           onChange={(e) => {
             setColor(e.target.value);
             toggleButtonState();
@@ -131,6 +133,36 @@ function NewProductModal(props) {
           required
         />
       </label>
+
+      <label className="modal__label">
+        <p className="modal__label-text">Тип продукта (для цвета)</p>
+        <input
+          className="modal__input"
+          type="text"
+          id="product-color-type"
+          placeholder="Введите тип"
+          onChange={(e) => {
+            setType(e.target.value);
+            toggleButtonState();
+          }}
+          value={type}
+          required
+        />
+      </label>
+
+      <label className="modal__label">
+        <p className="modal__label-text">Цвет (для выбора)</p>
+        <input
+          className="modal__input modal__input_file"
+          type="color"
+          id="product-color-image"
+          onChange={(e) => {
+            setColorImage(e.target.value);
+            toggleButtonState();
+          }}
+        />
+      </label>
+
 
       <label className="modal__label">
         <p className="modal__label-text">Цена</p>

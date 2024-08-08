@@ -109,7 +109,7 @@ export default function App(props) {
 
   function addProduct(productData)
   {
-    api.addProduct(productData)
+    return api.addProduct(productData)
       .then((res) => console.log(res));
   }
 
