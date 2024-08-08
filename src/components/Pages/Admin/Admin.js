@@ -61,6 +61,7 @@ export default function Admin(props) {
               orders.map((order, i) => (
                 <Order
                   data={order}
+                  isAdmin={true}
                   getProduct={props.getProduct}
                   key={`order-${i}`}
                 />

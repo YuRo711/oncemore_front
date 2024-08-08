@@ -32,6 +32,7 @@ import CategoryModal from "../Modals/Category Modals/CategoryModal";
 import CategoryDeleteModal from "../Modals/Category Modals/CategoryDeleteModal";
 import BannerDeleteModal from "../Modals/Banner Modals/BannerDeleteModal";
 import BannerModal from "../Modals/Banner Modals/BannerModal";
+import Orders from "../Pages/Orders/Orders";
 
 //#endregion
 
@@ -286,8 +287,9 @@ export default function App(props) {
     return [];
   }
 
-  function getMyOrders() {
-    return [];
+  async function getMyOrders() {
+    return api.getMyOrders()
+      .then((res) => res.data);
   }
 
   async function getOrders() {
@@ -336,7 +338,6 @@ export default function App(props) {
       .then((res) => setBanners(res));
     checkToken();
   }, []);
-  console.log(banners);
 
   useEffect(() => {
     if (!isLoggedIn) return;
@@ -461,6 +462,11 @@ export default function App(props) {
             }/>
           <Route path="logout" element={
             <Logout logOut={logOut}/>
+          }/>
+          <Route path="orders" element={
+            <Orders
+              loadOrders={getMyOrders}
+            />
           }/>
           <Route path="/" element={
             <Banners

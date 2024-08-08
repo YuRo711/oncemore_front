@@ -175,6 +175,10 @@ class Api {
     return this._request("/orders", "GET");
   }
 
+  async getMyOrders() {
+    return this._request("/orders/my", "GET");
+  }
+
   //#endregion
 }
 

@@ -1,0 +1,14 @@
+.orders {
+  padding: 70px;
+}
+
+.orders__title {
+  font-weight: 500;
+}
+
+.orders__cards {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
