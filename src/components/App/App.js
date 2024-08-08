@@ -36,6 +36,7 @@ import Orders from "../Pages/Orders/Orders";
 import ShareModal from "../Modals/ShareModal/ShareModal";
 import Confidential from "../Pages/Documents/Confidential";
 import PersonalData from "../Pages/Documents/PersonalData";
+import EditProductModal from "../Modals/Product Modals/EditProductModal";
 
 //#endregion
 
@@ -109,10 +110,24 @@ export default function App(props) {
     }
   }
 
-  async function addProduct(productData)
+  async function addProduct(photo, productData)
   {
-    return api.addProduct(productData)
-      .then((res) => console.log(res));
+    const formData = new FormData();
+    formData.append("file", photo);
+    
+    return api.uploadImage(formData)
+      .then((res) => res.data.path)
+      .then((image) => {
+        productData.photo = baseUrl + "/" + image;
+        return api.addProduct(productData);
+      })
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  }
+
+  async function editProduct(id, productData)
+  {
+    api.editProduct(id, productData);
   }
 
   //#endregion
@@ -311,6 +326,7 @@ export default function App(props) {
     video: false,
     user: false,
     newproduct: false,
+    editproduct: false,
     category: false,
     categorydelete: false,
     bannerdelete: false,
@@ -461,6 +477,7 @@ export default function App(props) {
                 openDeleteCategoryModal={() => handleModalOpen("categorydelete")}
                 openBannerModal={() => handleModalOpen("banner")}
                 openDeleteBannerModal={() => handleModalOpen("bannerdelete")}
+                openEditProductModal={() => handleModalOpen("editproduct")}
               />
             </AdminRoute>
           }/>
@@ -522,6 +539,12 @@ export default function App(props) {
             onClose={handleModalClose}
             isOpen={modalsActivity["newproduct"]}
             addProduct={addProduct}
+          />
+          <EditProductModal
+            name="editproduct"
+            onClose={handleModalClose}
+            isOpen={modalsActivity["editproduct"]}
+            editProduct={editProduct}
           />
           <CategoryModal
             name="category"

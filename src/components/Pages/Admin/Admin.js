@@ -24,7 +24,7 @@ export default function Admin(props) {
             Новый продукт
           </button>
           <button className="admin__button"
-            onClick={props.openProductModal}
+            onClick={props.openEditProductModal}
           >
             Редактировать продукт
           </button>

@@ -61,6 +61,10 @@ class Api {
     return this._request("/reviews", "POST", data);
   }
 
+  async addComment(text, author, review) {
+    return this._request(`/comments`, "POST", {text, author, review});     
+  }
+
   async getComments(videoId)
   {
     return this._request(`/comments/${videoId}`, "GET");
@@ -83,8 +87,8 @@ class Api {
     return this._request("/products", "GET");
   }
 
-  async addComment(text, author, review) {
-    return this._request(`/comments`, "POST", {text, author, review});     
+  async editProduct(id, data) {
+    return this._request(`/products/${id}`, "PATCH", data);
   }
 
   async likeProduct(id) {
