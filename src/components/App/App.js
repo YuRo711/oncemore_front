@@ -3,7 +3,7 @@
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./App.css";
-import { categories, contacts, banners, userLinks, baseUrl } from "../../utils/constants";
+import { contacts, userLinks, baseUrl } from "../../utils/constants";
 import { Navigate, Route, Routes, json } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import LoginModal from "../Modals/LoginModal/LoginModal";
@@ -176,13 +176,12 @@ export default function App(props) {
       .then((res) => {
         setToken(res.token);
         auth(res.token);
-        handleModalClose("login");
       })
       .catch((err) => alert(err));
   }
 
-  function auth(token) {
-    api
+  async function auth(token) {
+    return api
       .auth(token)
       .then((res) => {
         setUser(res.data);
@@ -194,7 +193,7 @@ export default function App(props) {
   }
 
   function signUp(email, password, name, handle) {
-    api.createUser({email, password, name, handle})
+    return api.createUser({email, password, name, handle})
       .then(() => signIn(email, password))
       .catch((err) => alert(err));
   }
@@ -223,7 +222,7 @@ export default function App(props) {
     const formData = new FormData();
     formData.append("file", image);
     
-    api.uploadImage(formData)
+    return api.uploadImage(formData)
       .then((res) => res.data.path)
       .then((avatar) => {
         avatar = baseUrl + "/" + avatar;
@@ -237,12 +236,12 @@ export default function App(props) {
   //#region Categories & Banners
 
   async function deleteCategory(name) {
-    api.deleteCategory({name});
+    return api.deleteCategory({name});
   }
 
   async function createCategory(name) {
     const link = `/items?filter=${name}`;
-    api.createCategory({name, link});
+    return api.createCategory({name, link});
   }
 
   async function getCategories() {
@@ -251,14 +250,14 @@ export default function App(props) {
   }
 
   async function deleteBanner(id) {
-    api.deleteBanner(id);
+    return api.deleteBanner(id);
   }
 
   async function createBanner(title, subtitle, image, paragraphs) {
     const formData = new FormData();
     formData.append("file", image);
     
-    api.uploadImage(formData)
+    return api.uploadImage(formData)
       .then((res) => res.data.path)
       .then((image) => {
         image = baseUrl + "/" + image;
@@ -319,6 +318,7 @@ export default function App(props) {
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
   const [videos, setVideos] = useState([]);
   const [products, setProducts] = useState([]);
+  const [banners, setBanners] = useState([]);
   const [categories, setCategories] = useState([]);
   const [cart, setCart] = useState([]);
   const [cartAmounts, setCartAmounts] = useState([]);
@@ -332,8 +332,11 @@ export default function App(props) {
       .then((res) => setProducts(res.data));
     getVideos()
       .then((res) => setVideos(res));
+    getBanners()
+      .then((res) => setBanners(res));
     checkToken();
   }, []);
+  console.log(banners);
 
   useEffect(() => {
     if (!isLoggedIn) return;

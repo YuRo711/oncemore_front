@@ -84,7 +84,7 @@ function BannerModal(props) {
           required
           id="banner-image"
           onChange={(e) => {
-            setImage(e.target.value);
+            setImage(e.target.files[0]);
             toggleButtonState();
           }}
         />

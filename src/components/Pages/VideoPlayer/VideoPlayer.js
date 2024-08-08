@@ -14,24 +14,6 @@ import Comments from "../../Comments/Comments";
 export default function VideoPlayer(props) {
   //#region Methods
 
-  function nextVideo()
-  {
-    if (index >= props.videos.length - 1) {
-      return;
-    }
-
-    setIndex(index + 1);
-  }
-
-  function prevVideo()
-  {
-    if (index == 0) {
-      return;
-    }
-
-    setIndex(index - 1);
-  }
-
   function sendComment(commentText)
   {
     props.sendComment(commentText, data._id)
@@ -51,7 +33,6 @@ export default function VideoPlayer(props) {
   const id = searchParams[0].get("id");
 
   const [data, setData] = useState({});
-  const [index, setIndex] = useState(props.videos.indexOf(data));
 
   const [parsedViews, setParsedViews] = useState("");
   const [videos, setVideos] = useState([]);
@@ -130,13 +111,6 @@ export default function VideoPlayer(props) {
             <div className="player__author">
               {userData.handle}
             </div>
-            <div className="player__tags">
-              {
-                // tags.map((tag, i) => 
-                //   <p className="player__tag" key={`tag-${i}`}>#{tag}</p>
-                // )
-              }
-            </div>
           </div>
           <div className="player__views">
             <img className="player__views-icon"
@@ -144,7 +118,7 @@ export default function VideoPlayer(props) {
             />
             {parsedViews ? parsedViews : 0}
           </div>
-          <div className="player__arrows">
+          {/* <div className="player__arrows">
             <button 
               className="player__video-button player__video-button_up"
               onClick={prevVideo}
@@ -153,7 +127,7 @@ export default function VideoPlayer(props) {
               className="player__video-button player__video-button_down"
               onClick={nextVideo}
             />
-          </div>
+          </div> */}
           <button 
             className="player__video-button player__video-button_comment"
             onClick={() => setCommentsOpen(!commentsOpen)}

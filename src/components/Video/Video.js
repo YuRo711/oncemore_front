@@ -23,8 +23,6 @@ export default function Video(props) {
         <iframe className="video__vid"
           src={video}
           muted
-          // onMouseOver={event => event.target.play()}
-          // onMouseOut={event => event.target.pause()}
         />
         <div className="video__views">
           <img className="video__view-icon"

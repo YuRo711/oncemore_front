@@ -24,6 +24,25 @@ class Api {
       }
     });
   }
+  
+  async uploadImage(data) {
+    console.log(data);
+    this._headers.delete("Content-type");
+
+    return fetch(this._baseUrl + "/upload", {
+      method: "POST",
+      headers: this._headers,
+      body: data,
+    }).then((res) => {
+      this._headers.set("content-type", "application/json");
+      if (res.ok) {
+        return res.json();
+      } else {
+        console.log(res);
+        return Promise.reject(this._processError(res));
+      }
+    })
+  }
 
   _processError(res) {
     if (res.status == 409)
@@ -99,24 +118,6 @@ class Api {
 
   async createUser(data) {
     return this._request(`/signup`, "POST", data); 
-  }
-  
-  async uploadImage(data) {
-    this._headers.delete("Content-type");
-
-    return fetch(this._baseUrl + "/upload", {
-      method: "POST",
-      headers: this._headers,
-      body: data,
-    }).then((res) => {
-      this._headers.set("content-type", "application/json");
-      if (res.ok) {
-        return res.json();
-      } else {
-        console.log(res);
-        return Promise.reject(this._processError(res));
-      }
-    })
   }
 
   async editUser(data) {
