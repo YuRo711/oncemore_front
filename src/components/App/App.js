@@ -88,6 +88,7 @@ export default function App(props) {
       setCart([...cart, item]);
       cartAmounts.push(1);
     }
+    setCartItemsNum(cartItemsNum + 1);
   }
 
   function clearCart() {
@@ -375,6 +376,7 @@ export default function App(props) {
   const [cartAmounts, setCartAmounts] = useState([]);
   const [user, setUser] = useState({});
   const [currentProduct, setCurrentProduct] = useState("");
+  const [cartItemsNum, setCartItemsNum] = useState(0);
 
   useEffect(() => {
     getCategories()
@@ -393,6 +395,8 @@ export default function App(props) {
     const storageCartAmounts = localStorage.getItem("cartAmounts");
     if (storageCartAmounts)
       setCartAmounts(JSON.parse(storageCartAmounts));
+    setCartItemsNum(JSON.parse(storageCartAmounts)
+      .reduce((i, sum) => sum + i, 0));
   }, []);
 
   useEffect(() => {
@@ -425,7 +429,7 @@ export default function App(props) {
           handleModalOpen={handleModalOpen}
           isOnMobile={isOnMobile}
           setMenuOpen={setMenuOpen}
-          cartAmounts={cartAmounts}
+          cartItemsNum={cartItemsNum}
         />
         <div className="page__main">
         <Routes>

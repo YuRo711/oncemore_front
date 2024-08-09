@@ -46,7 +46,7 @@ export default function ProductCard(props) {
       if (cartAmounts[index] >= stock)
         setDisabled(true);
     }
-  }, [cart]);
+  }, [cartAmounts]);
   
 
   useEffect(() => {

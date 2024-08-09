@@ -25,7 +25,7 @@ export default function Catalogue(props) {
         (selectedColors.length === 0 || selectedColors.includes(item.color))
         && (item.price >= minPrice && item.price <= maxPrice)
         && (item.isNew || !isNew)
-        && (item.discount || !discount)
+        && (item.discount > 0 || !discount)
         && (category == "Новинки" ? item.isNew : item.category == category)
       ))
     );

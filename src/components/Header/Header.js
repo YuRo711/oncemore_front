@@ -12,17 +12,12 @@ import icon from "../../images/grid-2.svg"
 
 export default function Header(props) {
   const currentPath = useLocation().pathname;
-  const [cartItemsNum, setItemsNum] = useState(0);
+  const {cartItemsNum} = props;
   const userData = useContext(UserContext).user;
   const points = userData.points;
 
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
-
-  useEffect(() => {
-    setItemsNum(props.cartAmounts
-      .reduce((i, sum) => sum + i, 0));
-  }, [props.cartAmounts]);
 
   
   if (props.isOnMobile) {
