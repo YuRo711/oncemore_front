@@ -41,6 +41,7 @@ import DeleteProductModal from "../Modals/Product Modals/DeleteProductModal";
 import ProductPhotoModal from "../Modals/Product Modals/ProductPhotoModal";
 import Contract from "../Pages/Documents/Contract";
 import ProductStockModal from "../Modals/Product Modals/ProductStockModal";
+import DiscountModal from "../Modals/Product Modals/DiscountModal";
 
 //#endregion
 
@@ -156,7 +157,11 @@ export default function App(props) {
   }
 
   async function addProductStock(id, stock) {
-    return api.editProduct(id, {stock: stock});
+    return api.editProduct(id, {stock});
+  }
+
+  async function editDiscount(id, discount) {
+    return api.editProduct(id, {discount});
   }
 
   //#endregion
@@ -372,6 +377,7 @@ export default function App(props) {
     deleteproduct: false,
     productphoto: false,
     productstock: false,
+    discount: false,
   });
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
@@ -532,6 +538,7 @@ export default function App(props) {
                 openEditProductModal={() => handleModalOpen("editproduct")}
                 openProductPhotoModal={() => handleModalOpen("productphoto")}
                 openProductStockModal={() => handleModalOpen("productstock")}
+                openDiscountModal={() => handleModalOpen("discount")}
               />
             </AdminRoute>
           }/>
@@ -591,6 +598,7 @@ export default function App(props) {
             isOpen={modalsActivity["user"]}
             onSubmit={editUser}
           />
+
           <NewProductModal
             name="newproduct"
             onClose={handleModalClose}
@@ -621,6 +629,14 @@ export default function App(props) {
             isOpen={modalsActivity["productstock"]}
             onSubmit={addProductStock}
           />
+          <DiscountModal
+            name="discount"
+            onClose={handleModalClose}
+            isOpen={modalsActivity["discount"]}
+            onSubmit={editDiscount}
+          />
+          
+
           <CategoryModal
             name="category"
             onClose={handleModalClose}
