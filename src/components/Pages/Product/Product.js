@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { NavLink, useSearchParams } from "react-router-dom";
 import Video from "../../Video/Video";
 import { UserContext } from "../../../contexts/UserContext";
+import { CartContext } from "../../../contexts/CartContext";
 
 export default function Product(props) {
   //#region Methods
@@ -65,6 +66,22 @@ export default function Product(props) {
 
   let areButtonsDisabled = true;
 
+  const cart = useContext(CartContext).cart;
+  const cartAmounts = useContext(CartContext).cartAmounts;
+  const [isDisabled, setDisabled] = useState();
+
+  useEffect(() => {
+    if (!data._id) return;
+    if (data.stock == 0)
+      setDisabled(true);
+
+    const index = cart.findIndex((cartItem) => cartItem._id == data._id)
+    if (index != -1) {
+      if (cartAmounts[index] >= data.stock)
+        setDisabled(true);
+    }
+  }, [cartAmounts, data]);
+
 
   useEffect(() => {
     updateData();
@@ -120,7 +137,7 @@ export default function Product(props) {
           <div className="product__main">
             <div className="product__title">
               <h2 className="product__name">{data.name}</h2>
-              <h3 className="product__data.price">{data.price}₽</h3>
+              <h3 className="product__price">{data.price}₽</h3>
             </div>
             <div className="product__properties">
               <p className="product__text">
@@ -134,6 +151,18 @@ export default function Product(props) {
               <p className="product__text">
                 <span className="product__quality">Вес / объём: </span>
                 {data.size}
+              </p>
+              <p className="product__text">
+                <span className="product__quality">Артикул: </span>
+                {data.article}
+              </p>
+              <p className="product__text">
+                <span className="product__quality">Штрихкод: </span>
+                {data.barcode}
+              </p>
+              <p className="product__text">
+                <span className="product__quality">Кол-во на складе: </span>
+                {data.stock}
               </p>
             </div>
             <div className="product__color-choice">
@@ -158,6 +187,7 @@ export default function Product(props) {
             <div className="product__buttons">
               <button className="product__cart-button"
                 type="button"
+                disabled={isDisabled}
                 onClick={() => props.addItem(id)}
               >
                 Добавить в корзину

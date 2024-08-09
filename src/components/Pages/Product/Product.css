@@ -103,6 +103,7 @@
 .product__price {
   font-weight: 500;
   font-size: 30px;
+  margin-left: 20px;
 }
 
 .product__text {
@@ -160,6 +161,13 @@
 
 .product__cart-button:active {
   background-color: #d87aa9;
+}
+
+.product__cart-button:disabled {
+  background-color: #F0F0F0;
+  color: #888;
+  box-shadow: none;
+  cursor: default;
 }
 
 .product__like-button {
