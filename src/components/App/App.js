@@ -251,8 +251,8 @@ export default function App(props) {
       });
   }
 
-  function signUp(email, password, name, handle) {
-    return api.createUser({email, password, name, handle})
+  function signUp(email, password, name, handle, phone) {
+    return api.createUser({email, password, name, handle, phone})
       .then(() => signIn(email, password))
       .catch((err) => alert(err));
   }

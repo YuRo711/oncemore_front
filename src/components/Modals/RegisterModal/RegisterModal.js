@@ -15,7 +15,7 @@ function RegisterModal(props) {
   }
 
   function submit() {
-    return props.signUp(email, password, name, handle);
+    return props.signUp(email, password, name, handle, phone);
   }
 
   const [isButtonActive, setButtonActivity] = useState(false);
@@ -29,6 +29,7 @@ function RegisterModal(props) {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [handle, setHandle] = useState("");
+  const [phone, setPhone] = useState("+7");
 
   return (
     <FormModal
@@ -56,6 +57,20 @@ function RegisterModal(props) {
           }}
           value={email}
           required
+        />
+      </label>
+
+      <label className="modal__label">
+        <p className="modal__label-text checkout__label-text">Телефон</p>
+        <input className="modal__input"
+          type="tel"
+          required
+          value={phone}
+          pattern="\+7[0-9]{10}"
+          onChange={(e) => {
+            setPhone(e.target.value);
+            toggleButtonState();
+          }}
         />
       </label>
 
