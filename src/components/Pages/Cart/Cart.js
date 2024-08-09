@@ -28,7 +28,7 @@ export default function Cart(props) {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    const newDiscount = Math.min(itemTotal / 2, points);
+    const newDiscount = points ? Math.min(itemTotal / 2, points) : 0;
     setDiscount(newDiscount);
     setTotal(itemTotal - newDiscount);
     localStorage.setItem("totalPrice", itemTotal - newDiscount);

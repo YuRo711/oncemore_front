@@ -335,10 +335,8 @@ export default function App(props) {
 
   //#region Orders
 
-  function createOrder() {
-    const items = cart;
-    const quantity = cartAmounts;
-    api.createOrder({items, quantity});
+  function createOrder(data) {
+    api.createOrder(data);
   }
 
   function updateOrderStatus(id, status) {
@@ -527,6 +525,7 @@ export default function App(props) {
           }/>
           <Route path="checkout" element={
             <Checkout
+              onSubmit={createOrder}
             />
           }/>
           <Route path="admin" element={

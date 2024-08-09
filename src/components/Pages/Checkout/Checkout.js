@@ -16,32 +16,44 @@ export default function Checkout(props) {
     validator.toggleButtonState();
   }
 
+  function submit(e) {
+    e.preventDefault();
+    
+    props.onSubmit({name, email, phone, address, items, quantity});
+  }
+
 
   const [isButtonActive, setButtonActivity] = useState(false);
   const [validator, setValidator] = useState(null);
   const totalPrice = localStorage.getItem("totalPrice");
+  const items = localStorage.getItem("cart");
+  const quantity = localStorage.getItem("cartAmounts");
   const user = useContext(UserContext).user;
   const formRef = useRef();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("+7");
+  const [address, setAddress] = useState("");
 
   useEffect(() => {
     if (!user) return;
 
     setEmail(user.email);
     setPhone(user.phone);
-  }, [user])
+  }, [user]);
 
   useEffect(() => {
     enableValidation();
-  }, [])
+  }, []);
 
 
   return (
     <main className="checkout">
-      <form className="checkout__form" ref={formRef}>
+      <form className="checkout__form"
+        ref={formRef}
+        onSubmit={(e) => submit(e)}
+      >
         <label className="modal__label">
           <p className="modal__label-text checkout__label-text">ФИО</p>
           <input className="modal__input"
@@ -83,6 +95,24 @@ export default function Checkout(props) {
             }}
           />
         </label>
+
+        <label className="modal__label">
+          <p className="modal__label-text checkout__label-text">Адрес</p>
+          <input className="modal__input"
+            type="text"
+            placeholder="Ввведите адрес..."
+            required
+            value={address}
+            onChange={(e) => {
+              setAddress(e.target.value);
+              toggleButtonState();
+            }}
+          />
+        </label>
+
+        <p className="checkout__total">
+          Итого: {totalPrice}₽
+        </p>
 
         <button className="checkout__button"
           type="submit"
