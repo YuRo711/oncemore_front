@@ -68,6 +68,12 @@
   color: #000;
 }
 
+.item__old-price {
+  color: #888;
+  font-size: 14px;
+  text-decoration: line-through;
+}
+
 .item__cart-button {
   margin-top: 16px;
   background-color: #fff;

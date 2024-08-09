@@ -30,7 +30,7 @@ export default function ProductCard(props) {
   }
 
 
-  const { photos, name, price, _id, likes, stock } = props.data;
+  const { photos, name, price, _id, likes, stock, discount } = props.data;
   const userId = useContext(UserContext).user._id;
   const [isLiked, setIsLiked] = useState(likes.includes(userId));
   const navigate = useNavigate();
@@ -69,7 +69,16 @@ export default function ProductCard(props) {
       </div>
       <div className="item__info">
         <h3 className="item__name">{name}</h3>
-        <h4 className="item__price">{price}₽</h4>
+        <h4 className="item__price">
+          {
+            discount ? 
+            <div className="item__prices">
+              <span className="item__old-price">{price}₽</span>
+              {price - discount}₽
+            </div> :
+            `${price}₽`
+          }
+        </h4>
       </div>
       {
         isDisabled ? "" :
