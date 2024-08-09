@@ -143,6 +143,10 @@ class Api {
     return this._request(`/users/me`, "GET"); 
   }
 
+  async changeUserPoints(id, data) {
+    return this._request(`/users/points/${id}`, "PATCH"); 
+  }
+
 
   //#endregion
 

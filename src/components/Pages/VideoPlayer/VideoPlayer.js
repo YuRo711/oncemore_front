@@ -66,7 +66,7 @@ export default function VideoPlayer(props) {
     if (!data._id) return; 
 
     setParsedViews(parseViews(data.views + 1));
-    props.addView(data._id, data.views);
+    props.addView(data._id, data.views, data.author);
     props.getComments(data._id)
       .then((commentData) => setComments(commentData.data));
   }, [data._id]);

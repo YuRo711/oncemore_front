@@ -168,8 +168,16 @@ export default function App(props) {
     
   }
 
-  function addView(videoId, views) {
-    return api.addView(videoId, {views});
+  function addView(videoId, views, userId) {
+    api.addView(videoId, {views});
+
+    if ((views + 1) % 1000 == 0) {
+      const addedPoints = (views + 1) == 1000 ? 100 : 10;
+      api.getUser(userId)
+        .then((res) => res.data.points)
+        .then((points) => api.changeUserPoints(points + addedPoints))
+        .catch((err) => console.log(err));
+    }
   }
 
   async function addReview(video, product, text) {
