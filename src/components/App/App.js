@@ -39,6 +39,7 @@ import PersonalData from "../Pages/Documents/PersonalData";
 import EditProductModal from "../Modals/Product Modals/EditProductModal";
 import DeleteProductModal from "../Modals/Product Modals/DeleteProductModal";
 import ProductPhotoModal from "../Modals/Product Modals/ProductPhotoModal";
+import Contract from "../Pages/Documents/Contract";
 
 //#endregion
 
@@ -393,10 +394,11 @@ export default function App(props) {
     if (storageCart)
       setCart(JSON.parse(storageCart));
     const storageCartAmounts = localStorage.getItem("cartAmounts");
-    if (storageCartAmounts)
+    if (storageCartAmounts) {
       setCartAmounts(JSON.parse(storageCartAmounts));
-    setCartItemsNum(JSON.parse(storageCartAmounts)
-      .reduce((i, sum) => sum + i, 0));
+      setCartItemsNum(JSON.parse(storageCartAmounts)
+        .reduce((i, sum) => sum + i, 0));
+    }
   }, []);
 
   useEffect(() => {
@@ -539,6 +541,9 @@ export default function App(props) {
           }/>
           <Route path="personal-data" element={
             <PersonalData/>
+          }/>
+          <Route path="contract" element={
+            <Contract/>
           }/>
           <Route path="/" element={
             <Banners
