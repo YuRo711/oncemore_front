@@ -42,6 +42,7 @@ import ProductPhotoModal from "../Modals/Product Modals/ProductPhotoModal";
 import Contract from "../Pages/Documents/Contract";
 import ProductStockModal from "../Modals/Product Modals/ProductStockModal";
 import DiscountModal from "../Modals/Product Modals/DiscountModal";
+import Checkout from "../Pages/Checkout/Checkout";
 
 //#endregion
 
@@ -434,7 +435,7 @@ export default function App(props) {
 
   return (
     <div className="page">
-      <CartContext.Provider value={{ cart, addItem, cartAmounts }}>
+      <CartContext.Provider value={{ cart, addItem, cartAmounts}}>
       <UserContext.Provider value={{ user }}>      
         <Header
           categories={categories}
@@ -523,6 +524,10 @@ export default function App(props) {
           }/>
           <Route path="me" element={
             <Navigate to={`/user?id=${user._id}`}/>
+          }/>
+          <Route path="checkout" element={
+            <Checkout
+            />
           }/>
           <Route path="admin" element={
             <AdminRoute>

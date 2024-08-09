@@ -4,6 +4,7 @@ import { CartContext } from "../../../contexts/CartContext";
 import backIcon from "../../../images/caret-left.svg";
 import HorizontalItem from "../../HorizontalItem/HorizontalItem";
 import { useNavigate } from "react-router";
+import { UserContext } from "../../../contexts/UserContext";
 
 export default function Cart(props) {
   function conjugateItem(n) {
@@ -20,16 +21,18 @@ export default function Cart(props) {
 
   const cartContext = useContext(CartContext);
   const items = cartContext.cart;
-  const amounts =  cartContext.cartAmounts;
+  const amounts = cartContext.cartAmounts;
+  const points = useContext(UserContext).user.points;
   const [itemTotal, setItemTotal] = useState(0);
-  const delivery = 100;
-  const tax = 0;
-  const discount = -51;
+  const [discount, setDiscount] = useState(0);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    setTotal(itemTotal + delivery + tax + discount);
-  }, [itemTotal]);
+    const newDiscount = Math.min(itemTotal / 2, points);
+    setDiscount(newDiscount);
+    setTotal(itemTotal - newDiscount);
+    localStorage.setItem("totalPrice", itemTotal - newDiscount);
+  }, [itemTotal, points]);
 
   const navigate = useNavigate();
 
@@ -78,14 +81,6 @@ export default function Cart(props) {
             Стоимость товаров
             <span className="cart__price">{itemTotal}₽</span>
           </div>
-          <div className="cart__cost">
-            Доставка
-            <span className="cart__price">{delivery}₽</span>
-          </div>
-          <div className="cart__cost">
-            Налог
-            <span className="cart__price">{tax}₽</span>
-          </div>
           <div className="cart__cost cart__cost_discount">
             Скидка
             <span className="cart__price cart__price_discount">
@@ -99,7 +94,7 @@ export default function Cart(props) {
         </div>
         <button className="cart__checkout-button"
           type="button"
-          onClick={props.createOrder}
+          onClick={() => navigate("/checkout")}
         >
           Оформить заказ
         </button>
