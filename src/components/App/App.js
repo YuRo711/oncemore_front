@@ -78,11 +78,13 @@ export default function App(props) {
 
   function addItem(id) {
     const item = products.find((pr) => pr._id == id);
-    if (cart.includes(item)) {
-      const index = cart.indexOf(item);
-      if (cartAmounts[index] >= item.stock) return;
+    const index = cart.findIndex((cartItem) => cartItem._id == item._id)
+    if (index != -1) {
       cartAmounts[index]++;
+      localStorage.setItem("cartAmounts", JSON.stringify(cartAmounts));
     } else {
+      localStorage.setItem("cartAmounts", JSON.stringify([...cartAmounts, 1]));
+      localStorage.setItem("cart", JSON.stringify([...cart, item]));
       setCart([...cart, item]);
       cartAmounts.push(1);
     }
@@ -384,6 +386,13 @@ export default function App(props) {
     getBanners()
       .then((res) => setBanners(res));
     checkToken();
+
+    const storageCart = localStorage.getItem("cart");
+    if (storageCart)
+      setCart(JSON.parse(storageCart));
+    const storageCartAmounts = localStorage.getItem("cartAmounts");
+    if (storageCartAmounts)
+      setCartAmounts(JSON.parse(storageCartAmounts));
   }, []);
 
   useEffect(() => {
@@ -416,6 +425,7 @@ export default function App(props) {
           handleModalOpen={handleModalOpen}
           isOnMobile={isOnMobile}
           setMenuOpen={setMenuOpen}
+          cartAmounts={cartAmounts}
         />
         <div className="page__main">
         <Routes>
