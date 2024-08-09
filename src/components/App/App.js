@@ -40,6 +40,7 @@ import EditProductModal from "../Modals/Product Modals/EditProductModal";
 import DeleteProductModal from "../Modals/Product Modals/DeleteProductModal";
 import ProductPhotoModal from "../Modals/Product Modals/ProductPhotoModal";
 import Contract from "../Pages/Documents/Contract";
+import ProductStockModal from "../Modals/Product Modals/ProductStockModal";
 
 //#endregion
 
@@ -152,6 +153,10 @@ export default function App(props) {
         return api.addProductPhoto(id, {photo: image})
       })
       .catch((err) => console.log(err));
+  }
+
+  async function addProductStock(id, stock) {
+    return api.editProduct(id, {stock: stock});
   }
 
   //#endregion
@@ -366,6 +371,7 @@ export default function App(props) {
     share: false,
     deleteproduct: false,
     productphoto: false,
+    productstock: false,
   });
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
@@ -525,6 +531,7 @@ export default function App(props) {
                 openDeleteBannerModal={() => handleModalOpen("bannerdelete")}
                 openEditProductModal={() => handleModalOpen("editproduct")}
                 openProductPhotoModal={() => handleModalOpen("productphoto")}
+                openProductStockModal={() => handleModalOpen("productstock")}
               />
             </AdminRoute>
           }/>
@@ -607,6 +614,12 @@ export default function App(props) {
             onClose={handleModalClose}
             isOpen={modalsActivity["productphoto"]}
             onSubmit={addProductPhoto}
+          />
+          <ProductStockModal
+            name="productstock"
+            onClose={handleModalClose}
+            isOpen={modalsActivity["productstock"]}
+            onSubmit={addProductStock}
           />
           <CategoryModal
             name="category"

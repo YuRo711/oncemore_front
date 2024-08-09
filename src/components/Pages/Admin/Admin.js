@@ -34,6 +34,11 @@ export default function Admin(props) {
             Добавить фото продукта
           </button>
           <button className="admin__button"
+            onClick={props.openProductStockModal}
+          >
+            Добавить продукт на склад
+          </button>
+          <button className="admin__button"
             onClick={props.openBannerModal}
           >
 
