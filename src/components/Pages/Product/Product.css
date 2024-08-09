@@ -106,6 +106,12 @@
   margin-left: 20px;
 }
 
+.product__old-price {
+  text-decoration: line-through;
+  font-size: 16px;
+  color: #888;
+}
+
 .product__text {
   margin-top: 16px;
 }

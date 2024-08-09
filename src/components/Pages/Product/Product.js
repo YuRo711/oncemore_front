@@ -137,7 +137,19 @@ export default function Product(props) {
           <div className="product__main">
             <div className="product__title">
               <h2 className="product__name">{data.name}</h2>
-              <h3 className="product__price">{data.price}₽</h3>
+              <h3 className="product__price">
+                {
+                  data.discount ? 
+                  <div className="product__prices">
+                    <span className="product__old-price">
+                      {data.price}₽
+                    </span>
+                    {data.price - data.discount}₽
+                  </div> :
+                  `${data.price}₽`
+
+                }
+              </h3>
             </div>
             <div className="product__properties">
               <p className="product__text">
