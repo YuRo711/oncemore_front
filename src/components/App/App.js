@@ -37,6 +37,7 @@ import ShareModal from "../Modals/ShareModal/ShareModal";
 import Confidential from "../Pages/Documents/Confidential";
 import PersonalData from "../Pages/Documents/PersonalData";
 import EditProductModal from "../Modals/Product Modals/EditProductModal";
+import DeleteProductModal from "../Modals/Product Modals/DeleteProductModal";
 
 //#endregion
 
@@ -128,6 +129,11 @@ export default function App(props) {
   async function editProduct(id, productData)
   {
     api.editProduct(id, productData);
+  }
+
+  async function deleteProduct(id)
+  {
+    api.deleteProduct(id);
   }
 
   //#endregion
@@ -332,6 +338,7 @@ export default function App(props) {
     bannerdelete: false,
     banner: false,
     share: false,
+    deleteproduct: false,
   });
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
@@ -545,6 +552,12 @@ export default function App(props) {
             onClose={handleModalClose}
             isOpen={modalsActivity["editproduct"]}
             editProduct={editProduct}
+          />
+          <DeleteProductModal
+            name="deleteproduct"
+            onClose={handleModalClose}
+            isOpen={modalsActivity["deleteproduct"]}
+            onSubmit={deleteProduct}
           />
           <CategoryModal
             name="category"
