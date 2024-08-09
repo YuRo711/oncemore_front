@@ -38,6 +38,7 @@ import Confidential from "../Pages/Documents/Confidential";
 import PersonalData from "../Pages/Documents/PersonalData";
 import EditProductModal from "../Modals/Product Modals/EditProductModal";
 import DeleteProductModal from "../Modals/Product Modals/DeleteProductModal";
+import ProductPhotoModal from "../Modals/Product Modals/ProductPhotoModal";
 
 //#endregion
 
@@ -122,7 +123,6 @@ export default function App(props) {
         productData.photo = baseUrl + "/" + image;
         return api.addProduct(productData);
       })
-      .then((data) => console.log(data))
       .catch((err) => console.log(err));
   }
 
@@ -134,6 +134,20 @@ export default function App(props) {
   async function deleteProduct(id)
   {
     api.deleteProduct(id);
+  }
+
+  async function addProductPhoto(id, photo)
+  {
+    const formData = new FormData();
+    formData.append("file", photo);
+    
+    return api.uploadImage(formData)
+      .then((res) => res.data.path)
+      .then((image) => {
+        image = baseUrl + "/" + image;
+        return api.addProductPhoto(id, {photo: image})
+      })
+      .catch((err) => console.log(err));
   }
 
   //#endregion
@@ -339,6 +353,7 @@ export default function App(props) {
     banner: false,
     share: false,
     deleteproduct: false,
+    productphoto: false,
   });
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isOnMobile, setOnMobile] = useState(window.innerWidth < 600);
@@ -485,6 +500,7 @@ export default function App(props) {
                 openBannerModal={() => handleModalOpen("banner")}
                 openDeleteBannerModal={() => handleModalOpen("bannerdelete")}
                 openEditProductModal={() => handleModalOpen("editproduct")}
+                openProductPhotoModal={() => handleModalOpen("productphoto")}
               />
             </AdminRoute>
           }/>
@@ -558,6 +574,12 @@ export default function App(props) {
             onClose={handleModalClose}
             isOpen={modalsActivity["deleteproduct"]}
             onSubmit={deleteProduct}
+          />
+          <ProductPhotoModal
+            name="productphoto"
+            onClose={handleModalClose}
+            isOpen={modalsActivity["productphoto"]}
+            onSubmit={addProductPhoto}
           />
           <CategoryModal
             name="category"

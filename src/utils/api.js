@@ -91,6 +91,10 @@ class Api {
     return this._request(`/products/${id}`, "PATCH", data);
   }
 
+  async addProductPhoto(id, data) {
+    return this._request(`/products/${id}`, "POST", data);
+  }
+
   async deleteProduct(id) {
     return this._request(`/products/${id}`, "DELETE");
   }
