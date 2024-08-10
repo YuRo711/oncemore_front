@@ -1,15 +1,25 @@
 .banners {
   margin-top: 30px;
   background-color: #f8f2f2;
+  z-index: -1;
 }
 
 .banners__main {
-  background-image: url('../../../temp/banner\ 2.jpg');
   width: 100vw;
   box-sizing: border-box;
   padding: 50px;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.banners__main-bg {
+  position: absolute;
+  left: -30px;
+  top: -30px;
+  z-index: -1;
 }
 
 .banners__logo {
@@ -18,6 +28,7 @@
   font-weight: 400;
   font-size: 160px;
   text-align: center;
+  z-index: 0;
 }
 
 .banners__title {
@@ -77,4 +88,29 @@
   justify-content: space-between;
   padding-right: 200px;
   margin-top: 50px;
+}
+
+
+@media screen and (max-width: 600px) {
+  .banners__main {
+    padding: 20px;
+  }
+
+  .banners__logo {
+    font-weight: 400;
+    font-size: 70px;
+  }
+
+  .banners__title {
+    font-size: 30px;
+  }
+
+  .banners__banner {
+    padding: 20px;
+  }
+
+  .banners__info {
+    flex-direction: column;
+    padding: 0;
+  }
 }

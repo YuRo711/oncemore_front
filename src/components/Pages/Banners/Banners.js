@@ -5,6 +5,8 @@ export default function Banners(props) {
   const mainBanner = banners[0];
   const subBanners = banners.slice(1);
 
+  if (banners.length == 0) return;
+
   return (
     <main className="banners">
       <div className="banners__main">
@@ -27,6 +29,10 @@ export default function Banners(props) {
             )
           }
         </div>
+        <img className="banners__main-bg"
+          src={mainBanner.image}
+          crossOrigin=""
+        />
       </div>
       {
         subBanners.map((banner, i) => 
@@ -42,6 +48,7 @@ export default function Banners(props) {
                 <img className="banners__image"
                   src={banner.image}
                   alt="banner image"
+                  crossOrigin=""
                 />
                 : ""
               }

@@ -8,12 +8,12 @@ import Video from "../../Video/Video";
 export default function Profile(props) {
   const searchParams = useSearchParams();
   const id = searchParams[0].get("id");
-  const isMe = useContext(UserContext).user.id == id;
+  const isMe = useContext(UserContext).user._id == id;
   const [userData, setUserData] = useState(null);
   const [videos, setVideos] = useState([]);
   useEffect(() => {
     props.getUser(id)
-      .then((res) => setUserData(res));
+      .then((res) => setUserData(res.data));
     setVideos(props.videos
       .filter((data) => data.author == id));
   }, []);
@@ -29,22 +29,22 @@ export default function Profile(props) {
             userData={userData}
           >
             {
-              isMe ? "" : 
-              <button className="avatar__user-button"/>
+              // isMe ? "" : 
+              // <button className="avatar__user-button"/>
             }
           </UserAvatar>
           <h2 className="profile__name">{userData.name}</h2>
 
           {
-              isMe ? 
-              <button className="profile__edit-button"
-                    onClick={props.openUserModal}
-              />
-              : ""
-            }
+            isMe ? 
+            <button className="profile__edit-button"
+                  onClick={props.openUserModal}
+            />
+            : ""
+          }
         </div>
         {
-          isMe ? 
+          false ? 
           <button className="profile__review-button"
             onClick={props.openVideoModal}
           >
@@ -60,6 +60,7 @@ export default function Profile(props) {
               data={video}
               key={`video-${i}`}
               getProduct={props.getProduct}
+              isSmall={props.isOnMobile}
             />
           )
         }

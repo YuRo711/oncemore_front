@@ -1,6 +1,9 @@
+import { useState } from "react";
 import Modal from "../Modal/Modal";
 
 function FormModal(props) {
+  const [isLoading, setLoading] = useState(false);
+
   return (
     <Modal name={props.name} onClose={props.onClose} isOpen={props.isOpen}>
       <h2 className="modal__title">{props.title}</h2>
@@ -9,16 +12,24 @@ function FormModal(props) {
         ref={props.formRef}
         onSubmit={(e) => {
           e.preventDefault();
-          props.onSubmit();
+          setLoading(true);
+          props.onSubmit()
+            .then(() => {
+              props.onClose(props.name);
+              setLoading(false); 
+            });
         }}
       >
         {props.children}
 
         <button
           className="modal__submit-button"
-          disabled={!props.isButtonActive}
+          disabled={!props.isButtonActive || isLoading}
         >
-          {props.buttonText}
+          {
+            isLoading ? "Загрузка..." :
+            props.buttonText
+          }
         </button>
 
         {

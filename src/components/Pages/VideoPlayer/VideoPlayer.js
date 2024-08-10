@@ -1,5 +1,6 @@
 import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import "./VideoPlayer.css";
+import "./VideoPlayer_adaptive.css";
 import UserAvatar from "../../UserAvatar/UserAvatar";
 import { useContext, useEffect, useState } from "react";
 import {parseViews} from "../../../utils/parsers";
@@ -13,22 +14,12 @@ import Comments from "../../Comments/Comments";
 export default function VideoPlayer(props) {
   //#region Methods
 
-  function nextVideo()
+  function sendComment(commentText)
   {
-    if (index >= props.videos.length - 1) {
-      return;
-    }
+    props.sendComment(commentText, data._id)
+      .then(() => props.getComments(data._id))
+      .then((commentData) => setComments(commentData));
 
-    setIndex(index + 1);
-  }
-
-  function prevVideo()
-  {
-    if (index == 0) {
-      return;
-    }
-
-    setIndex(index - 1);
   }
 
   //#endregion
@@ -40,14 +31,12 @@ export default function VideoPlayer(props) {
 
   const searchParams = useSearchParams();
   const id = searchParams[0].get("id");
-  const [data, setData] = useState(props.videos
-    .find((video) => video.id == id));
-  const [index, setIndex] = useState(props.videos.indexOf(data));
 
-  let { link, productId, author, views, tags, reviewText } = data;
-  const parsedViews = parseViews(views);
-  const videos = props.videos.filter((vid) => vid.productId == productId);
-  const Profile = props. videos.filter((vid) => vid.author == author)
+  const [data, setData] = useState({});
+
+  const [parsedViews, setParsedViews] = useState("");
+  const [videos, setVideos] = useState([]);
+  const [profile, setProfile] = useState({});
 
   const [userData, setUserData] = useState(null);
   const [productData, setProductData] = useState(null);
@@ -56,23 +45,31 @@ export default function VideoPlayer(props) {
   const [commentsOpen, setCommentsOpen] = useState(null);
 
   useEffect(() => {
-    setData(props.videos[index]);
-    ({ link, productId, author, views, tags, reviewText } = props.videos[index]);
-    const _id = props.videos[index].id;
+      if (!props.videos || props.videos.length == 0) return;
 
-    props.getUser(author)
-      .then((user) => setUserData(user));
-
-    props.getProduct(productId)
-      .then((product) => setProductData(product));
-
-    props.getComments(_id)
-      .then((commentData) => setComments(commentData));
-  }, [index]);
+      setData(props.videos
+        .find((video) => video._id == id));
+    },
+  [props.videos]);
 
   useEffect(() => {
-    props.addView(data.id);
-  }, []);
+    if (!data.product) return;
+
+    setProductData(props.getProduct(data.product));
+    props.getUser(data.author)
+      .then((res) => setUserData(res.data));
+    setVideos(props.videos.filter((vid) => vid.product == data.product));
+    setProfile(props.videos.filter((vid) => vid.author == data.author));
+  }, [data]);
+
+  useEffect(() => {
+    if (!data._id) return; 
+
+    setParsedViews(parseViews(data.views + 1));
+    props.addView(data._id, data.views, data.author);
+    props.getComments(data._id)
+      .then((commentData) => setComments(commentData.data));
+  }, [data._id]);
 
   const isAdmin = useContext(UserContext).user.privilege >= 1;
 
@@ -85,14 +82,15 @@ export default function VideoPlayer(props) {
   return (
     <main className="player">
       <div className="player__main">
-        <video className="player__video"
-          src={link}
-          autoPlay
+        <iframe className="player__video"
+          src={data.video}
         />
         <div className="player__product">
-          <img className="player__product-image"
-            src={productData.images[0]}
-          />
+          <div className="player__image-container">
+            <img className="player__product-image"
+              src={productData.photos[0]}
+            />
+          </div>
           <div className="player__product-info">
             <h4 className="player__price">{productData.price}₽</h4>
             <h3 className="player__title">{productData.name}</h3>
@@ -106,26 +104,19 @@ export default function VideoPlayer(props) {
             <UserAvatar
               userData={userData}
             >
-              <button className="avatar__user-button"/>
+              {/* <button className="avatar__user-button"/> */}
             </UserAvatar>
             <div className="player__author">
-              @{userData.handle}
-            </div>
-            <div className="player__tags">
-              {
-                tags.map((tag, i) => 
-                  <p className="player__tag" key={`tag-${i}`}>#{tag}</p>
-              )
-              }
+              {userData.handle}
             </div>
           </div>
           <div className="player__views">
             <img className="player__views-icon"
               src={playIcon}
             />
-            {parsedViews}
+            {parsedViews ? parsedViews : 0}
           </div>
-          <div className="player__arrows">
+          {/* <div className="player__arrows">
             <button 
               className="player__video-button player__video-button_up"
               onClick={prevVideo}
@@ -134,7 +125,7 @@ export default function VideoPlayer(props) {
               className="player__video-button player__video-button_down"
               onClick={nextVideo}
             />
-          </div>
+          </div> */}
           <button 
             className="player__video-button player__video-button_comment"
             onClick={() => setCommentsOpen(!commentsOpen)}
@@ -155,8 +146,7 @@ export default function VideoPlayer(props) {
             getUser={props.getUser}
             setCommentsOpen={setCommentsOpen}
             deleteComment={props.deleteComment}
-            sendComment={props.sendComment}
-            videoId={data.id}
+            sendComment={sendComment}
             likeComment={props.likeComment}
           />
           : ""
@@ -188,7 +178,7 @@ export default function VideoPlayer(props) {
                 Другие обзоры
               </h3>
               <NavLink className="catalogue__more"
-                to={`/items/gallery?filter=${""}&type=videos`}
+                to={`/items/gallery?filtering=item&filter=${data.product}&type=videos`}
               >
                 Посмотреть всё
               </NavLink>
@@ -214,7 +204,7 @@ export default function VideoPlayer(props) {
               Похожие товары
             </h3>
             <NavLink className="catalogue__more"
-              to={`/items/gallery?filter=${""}&type=items`}
+              to={`/items/gallery?filtering=category&filter=${productData.category}&type=items`}
             >
               Посмотреть всё
             </NavLink>
@@ -232,7 +222,7 @@ export default function VideoPlayer(props) {
             </div>
         </div>
         {
-          !reviewText ? "" :
+          !data.text ? "" :
           <div className="player__review">
             <h3 className="player__subtitle">
               Что {userData.name} говорит о {productData.name}
@@ -249,14 +239,14 @@ export default function VideoPlayer(props) {
               Обзоры пользователя {userData.name}
             </h3>
             <NavLink className="catalogue__more"
-              to={`/items/gallery?filter=${""}&type=videos`}
+              to={`/items/gallery?filtering=user&filter=${data.author}&type=videos`}
             >
               Посмотреть всё
             </NavLink>
           </div>
             <div className="player__gallery">
               {
-                Profile.map((video, i) => 
+                profile.map((video, i) => 
                   <Video
                     isSmall={true}
                     data={video}

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 export default function Liked(props) {
   const user = useContext(UserContext).user;
   const items = props.items.filter(
-    (item) => item.likes.includes(user.id));
+    (item) => item.likes.includes(user._id));
   
     const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ export default function Liked(props) {
       <button class="cart__back"
         onClick={() => navigate(-1)}
       >
-        <img class="cart__back-icon"
+        <img className="cart__back-icon"
           src={backIcon}
         />
         Назад
@@ -49,6 +49,7 @@ export default function Liked(props) {
               data={item}
               key={`cart-item-${i}`}
               isCart={false}
+              addItem={props.addItem}
             />
           )
         }

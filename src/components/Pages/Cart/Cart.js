@@ -1,9 +1,10 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Cart.css";
 import { CartContext } from "../../../contexts/CartContext";
 import backIcon from "../../../images/caret-left.svg";
 import HorizontalItem from "../../HorizontalItem/HorizontalItem";
 import { useNavigate } from "react-router";
+import { UserContext } from "../../../contexts/UserContext";
 
 export default function Cart(props) {
   function conjugateItem(n) {
@@ -14,28 +15,35 @@ export default function Cart(props) {
     return "предметов";
   }
 
+  function addToTotal(price) {
+    setItemTotal(itemTotal + price);
+  }
 
-  const items = useContext(CartContext).cart;
-  const itemTotal = items
-    .map((item) => item.price)
-    .reduce(
-      (accumulator, currentValue) => accumulator + currentValue, 
-      0
-  );
-  const delivery = 100;
-  const tax = 0;
-  const discount = -51;
-  const total = itemTotal + delivery + tax + discount;
+  const cartContext = useContext(CartContext);
+  const items = cartContext.cart;
+  const amounts = cartContext.cartAmounts;
+  const points = useContext(UserContext).user.points;
+  const [itemTotal, setItemTotal] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const newDiscount = points ? Math.min(itemTotal / 2, points) : 0;
+    setDiscount(newDiscount);
+    setTotal(itemTotal - newDiscount);
+    localStorage.setItem("totalPrice", itemTotal - newDiscount);
+    localStorage.setItem("spentPoints", newDiscount);
+  }, [itemTotal, points]);
 
   const navigate = useNavigate();
 
 
   return <main className="cart">
     <div className="cart__header">
-      <button class="cart__back"
+      <button className="cart__back"
         onClick={() => navigate(-1)}
       >
-        <img class="cart__back-icon"
+        <img className="cart__back-icon"
           src={backIcon}
         />
         Назад
@@ -59,9 +67,11 @@ export default function Cart(props) {
           items.map((item, i) => 
             <HorizontalItem
               data={item}
+              amount={amounts[i]}
               key={`cart-item-${i}`}
               isCart={true}
               likeItem={props.likeItem}
+              addToTotal={addToTotal}
             />
           )
         }
@@ -71,14 +81,6 @@ export default function Cart(props) {
           <div className="cart__cost">
             Стоимость товаров
             <span className="cart__price">{itemTotal}₽</span>
-          </div>
-          <div className="cart__cost">
-            Доставка
-            <span className="cart__price">{delivery}₽</span>
-          </div>
-          <div className="cart__cost">
-            Налог
-            <span className="cart__price">{tax}₽</span>
           </div>
           <div className="cart__cost cart__cost_discount">
             Скидка
@@ -93,6 +95,7 @@ export default function Cart(props) {
         </div>
         <button className="cart__checkout-button"
           type="button"
+          onClick={() => navigate("/checkout")}
         >
           Оформить заказ
         </button>

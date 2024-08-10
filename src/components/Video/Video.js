@@ -5,25 +5,24 @@ import {parseViews} from "../../utils/parsers";
 import { useEffect, useState } from "react";
 
 export default function Video(props) {
-  const { link, productId, views, id } = props.data;
+  const { video, views, product, _id } = props.data;
+  if (video.includes("watch?v=")) {
+    video = video.replace("watch?v=", "embed/");
+  }
+
   const parsedViews = parseViews(views);
-  const [productData, setProductData] = useState(null);
-  useEffect(() => {
-    props.getProduct((productId))
-      .then((product) => setProductData(product));
-  }, [])
+  const [productData, setProductData] = useState(props.getProduct(product));
 
   if (!productData) return;
 
   return (
     <NavLink className={`video ${props.isSmall ? "video_small" : ""}`}
-      to={`/review?id=${id}`}
+      to={`/review?id=${_id}`}
     >
       <div className="video__container">
-        <video className="video__vid"
-          src={link}
-          onMouseOver={event => event.target.play()}
-          onMouseOut={event => event.target.pause()}
+        <iframe className="video__vid"
+          src={video}
+          muted
         />
         <div className="video__views">
           <img className="video__view-icon"

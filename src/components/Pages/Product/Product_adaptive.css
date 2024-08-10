@@ -68,8 +68,12 @@
 
 @media screen and (max-width: 600px) {
   .product {
-    padding: 100px 50px;
+    padding: 60px 20px 20px;
+  }
+
+  .product__page {
     flex-direction: column;
+    display: flex;
     gap: 30px;
   }
 

@@ -2,10 +2,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 250px;
-  height: 400px;
-  border: solid 1px #c28ea7;
-  border-radius: 8px;
+  width: 200px;
+  height: 320px;
+  border: 1px solid rgb(230, 232, 241);
+  transition: box-shadow 0.2s;
   overflow: hidden;
   text-decoration: none;
   color: #000;
@@ -13,12 +13,12 @@
 }
 
 .video_small {
-  width: 200px;
-  height: 280px;
+  width: 150px;
+  height: 240px;
 }
 
 .video:hover {
-  box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.15);
 }
 
 .video__container {
@@ -27,13 +27,14 @@
   overflow: hidden;
   position: relative;
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .video__vid {
   border: none;
-  width: 250px;
+  height: 100%;
 }
 
 .video__views {
@@ -65,18 +66,23 @@
   background-color: #F8F8F8;
   height: 25%;
   box-sizing: border-box;
-  padding: 30px 20px 20px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
 }
 
 .video_small .video__info {
-  padding: 15px;
+  padding: 10px;
 }
 
 .video__title {
   font-weight: 500;
   font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .video__price {

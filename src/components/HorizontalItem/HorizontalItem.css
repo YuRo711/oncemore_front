@@ -28,6 +28,7 @@
   font-weight: 400;
   font-size: 18px;
   margin-bottom: 10px;
+  margin-right: 20px;
 }
 
 .cart-item__property {
@@ -84,4 +85,34 @@
 
 .cart-item__num-button_plus {
   background-image: url('../../images/Plus.svg');
+}
+
+.cart-item__input {
+  border: none;
+  width: 10px;
+  font-size: 16px;
+}
+
+.cart-item__input:disabled {
+  color: #000;
+}
+
+
+@media screen and (max-width: 600px) {
+  .cart-item {
+    padding: 10px;
+  }
+
+  .cart-item__main {
+    flex-direction: column;
+  }
+
+  .cart-item__title {
+    font-size: 16px;
+  }
+
+  .cart-item__image {
+    max-width: 200px;
+    margin: 0 auto;
+  }
 }

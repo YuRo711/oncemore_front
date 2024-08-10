@@ -1,6 +1,11 @@
 import { NavLink } from "react-router-dom";
 import logoutWhite from "../../images/logout white.svg";
 import "./MobileMenu.css";
+import cart from "../../images/icon _shopping cart.svg";
+import { useContext, useState } from "react";
+import UserAvatar from "../UserAvatar/UserAvatar";
+import { UserContext } from "../../contexts/UserContext";
+import DropdownMenu from "../DropdownMenu/DropdownMenu";
 
 function MobileMenu(props) {
   function openLoginModal() {
@@ -9,6 +14,8 @@ function MobileMenu(props) {
   }
 
   const { isLoggedIn } = props;
+  const [userOpen, setUserOpen] = useState(false);
+  const userData = useContext(UserContext).user;
 
   return (
     <div className={`menu ${props.isMenuOpen ? " menu__opened" : ""}`}>
@@ -24,32 +31,52 @@ function MobileMenu(props) {
           <nav className="menu__nav">
             <NavLink
               className="menu__link"
+              to="/cart"
+              onClick={() => props.setMenuOpen(false)}
+            >
+              <img className="menu__icon"
+                src={cart}
+              />
+              Корзина
+            </NavLink>
+            <NavLink
+              className="menu__link"
               to="/"
               onClick={() => props.setMenuOpen(false)}
             >
               Главная
             </NavLink>
+            <div className="menu__categories">
             {
               props.categories.map((category, i) => (
                 <NavLink className="menu__link"
-                  to={`/items?filter=${category.filter}`}
+                  to={category.link}
                   key={`category-${i}`}
+                  onClick={() => props.setMenuOpen(false)}
                 >
                   {category.name}
                 </NavLink>
               ))
             }
+            </div>
           </nav>
           {isLoggedIn ? (
-            <button
-              type="button"
-              className="menu__button"
-              onClick={() => {
-                props.logOut();
-                props.setMenuOpen(false);
-              }}
+            <button className="menu__button"
+            type="button"
+            onClick={() => setUserOpen(!userOpen)}
             >
-              Выход
+              <UserAvatar
+                userData={userData}
+              />
+              <div className="menu__user-info">
+                <p className="header__link-title">{userData.name}</p>
+              </div>
+              <div className="menu__dropdown">
+                <DropdownMenu
+                  links={props.userLinks}
+                  isOpen={userOpen}
+                />
+              </div>
             </button>
           ) : (
             <button

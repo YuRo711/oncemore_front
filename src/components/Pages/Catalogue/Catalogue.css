@@ -34,6 +34,7 @@
 
 .catalogue__filter-form {
   display: flex;
+  flex-wrap: wrap;
   max-height: 24px;
   gap: 30px;
   margin-bottom: 40px;
@@ -101,18 +102,30 @@
   border: none;
   border-radius: 25px;
   position: absolute;
-  top: 50%;
+  top: 40%;
   cursor: pointer;
 }
 
 .catalogue__carousel-btn_prev {
   background-image: url('../../../images/arrow-circle-left.svg');
-  left: 0;
+  left: 2px;
 }
 
 .catalogue__carousel-btn_next {
   background-image: url('../../../images/arrow-circle-right.svg');
-  right: 0;
+  right: 2px;
 }
 
 @import url('./AliceCarousel.css');
+
+
+
+@media screen and (max-width: 600px) {
+  .catalogue {
+    padding: 60px 20px;
+  }
+
+  .catalogue__filter-form {
+    margin-bottom: 80px;
+  }
+}

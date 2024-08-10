@@ -63,6 +63,8 @@
   text-decoration: none;
   color: #fff;
   margin: 0;
+  display: flex;
+  align-items: center;
 }
 
 .menu__button {
@@ -85,4 +87,21 @@
 
 .menu__button-icon {
   margin-left: 8px;
+}
+
+.menu__icon {
+  height: 20px;
+  width: 20px;
+  margin-right: 8px;
+}
+
+.menu__categories {
+  border-top: #fff 1px solid;
+}
+
+.menu__button {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
 }

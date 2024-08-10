@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import FormModal from "../FormModal/FormModal";
 import { FormValidator } from "../../../utils/FormValidator";
+import { useSearchParams } from "react-router-dom";
 
 function VideoModal(props) {
   function enableValidation() {
@@ -15,11 +16,13 @@ function VideoModal(props) {
   }
 
   function submit() {
-    const productId = props.product ? 
-      props.product.id : 
-      product.split("?id=")[1];
-    props.loadVideo(video, productId, reviewText);
+    return props.loadVideo(video, productId, reviewText)
+      .then(props.onClose);
   }
+
+
+  const searchParams = useSearchParams();
+  const productId = searchParams[0].get("id");
 
   const [isButtonActive, setButtonActivity] = useState(false);
   const [validator, setValidator] = useState(null);
@@ -58,7 +61,7 @@ function VideoModal(props) {
           required
         />
       </label>
-      {
+      {/* {
         props.product ? "" :
         <label className="modal__label">
           <p className="modal__label-text">Ссылка на продукт*</p>
@@ -75,12 +78,11 @@ function VideoModal(props) {
             required
           />
         </label>
-      }
+      } */}
       <label className="modal__label">
         <p className="modal__label-text">Текст отзыва</p>
         <textarea
           className="modal__textarea"
-          type="url"
           id="video-review"
           placeholder="Ваш отзыв на продукт"
           onChange={(e) => {

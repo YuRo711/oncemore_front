@@ -185,6 +185,10 @@
   outline: none;
 }
 
+.modal__share-link {
+  margin-top: 20px;
+}
+
 
 @media screen and (min-width: 600px) and (max-width: 1300px) {
   .modal__container {

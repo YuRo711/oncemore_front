@@ -56,3 +56,10 @@
 .profile__review-button:active {
   background-color: #d87aa9;
 }
+
+
+@media screen and (max-width: 600px) {
+  .profile {
+    padding: 50px 20px;
+  }
+}

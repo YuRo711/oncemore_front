@@ -23,6 +23,10 @@ export default function Catalogue(props) {
     setFilteredItems(
       props.items.filter((item) => (
         (selectedColors.length === 0 || selectedColors.includes(item.color))
+        && (item.price >= minPrice && item.price <= maxPrice)
+        && (item.isNew || !isNew)
+        && (item.discount > 0 || !discount)
+        && (category == "Новинки" ? item.isNew : item.category == category)
       ))
     );
   }
@@ -50,17 +54,19 @@ export default function Catalogue(props) {
 
   const colors = getUniqueItems(props.items.map((data) => data.color));
   const maxItemPrice = Math.max(...(props.items.map((data) => data.price)));
+
+  const searchParams = useSearchParams();
+  const category = searchParams[0].get("filter");
   
-  const [recommended, setRecommended] = useState(false);
   const [isNew, setIsNew] = useState(false);
   const [discount, setDiscount] = useState(false);
   const [selectedColors, setColors] = useState([]);
-  const [minPrice, setMinPrice] = useState(false);
-  const [maxPrice, setMaxPrice] = useState(false);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(maxItemPrice);
 
   const [filteredItems, setFilteredItems] = useState(props.items);
-  useEffect(() => filterItems(),
-    [selectedColors]
+  useEffect(filterItems,
+    [selectedColors, maxPrice, minPrice, isNew, discount, category]
   );
 
   const items = filteredItems.map((data, i) => 
@@ -73,7 +79,7 @@ export default function Catalogue(props) {
       isLoggedIn={props.isLoggedIn}
     />
   );
-  const videos= props.videos.map((video, i) => 
+  const videos = props.videos.map((video, i) => 
     <Video
       data={video}
       key={`video-${i}`}
@@ -83,31 +89,20 @@ export default function Catalogue(props) {
   const itemCarousel = useRef();
   const videoCarousel = useRef();
 
-  const searchParams = useSearchParams();
-  const filter = searchParams[0].get("filter");
-
   //#endregion
 
   return (
     <main className="catalogue">
-      <h2 className="catalogue__title">Глаза</h2>
+      <h2 className="catalogue__title">{category}</h2>
       <section className="catalogue__products">
         <div className="catalogue__filters">
           <form className="catalogue__filter-form">
-            <label className="catalogue__label">
-              Рекомендуемые
-              <input className="catalogue__checkbox"
-                type="checkbox"
-                id="filter-recommended"
-                onChange={(value) => setRecommended(value)}
-              />
-            </label>
             <label className="catalogue__label">
               Новинки
               <input className="catalogue__checkbox"
                 type="checkbox"
                 id="filter-new"
-                onChange={(value) => setIsNew(value)}
+                onChange={(e) => setIsNew(e.target.checked)}
               />
             </label>
             <label className="catalogue__label">
@@ -115,7 +110,7 @@ export default function Catalogue(props) {
               <input className="catalogue__checkbox"
                 type="checkbox"
                 id="filter-discount"
-                onChange={(value) => setDiscount(value)}
+                onChange={(e) => setDiscount(e.target.checked)}
               />
             </label>
             <MultiSelect
@@ -129,7 +124,8 @@ export default function Catalogue(props) {
                 type="number"
                 id="filter-min-price"
                 min={0}
-                onChange={(value) => setMinPrice(value)}
+                onChange={(e) => setMinPrice(e.target.value)}
+                defaultValue={minPrice}
                 placeholder="0"
               />
               до 
@@ -137,7 +133,8 @@ export default function Catalogue(props) {
                 type="number"
                 id="filter-max-price"
                 min={0}
-                onChange={(value) => setMaxPrice(value)}
+                onChange={(e) => setMaxPrice(e.target.value)}
+                defaultValue={maxPrice}
                 placeholder={maxItemPrice}
               />
             </label>
@@ -146,7 +143,7 @@ export default function Catalogue(props) {
         <div className="catalogue__category">
           <h3 className="catalogue__subtitle">#лучшее</h3>
           <NavLink className="catalogue__more"
-            to={`/items/gallery?filter=${filter}&type=items`}
+            to={`/items/gallery?filtering=category&filter=${category}&type=items`}
           >
             Посмотреть всё
           </NavLink>
@@ -185,11 +182,12 @@ export default function Catalogue(props) {
           />
         </div>
       </section>
+      { props.videos.length > 0 ?
       <section className="catalogue__reviews">
         <div className="catalogue__category">
           <h3 className="catalogue__subtitle">#тренды</h3>
           <NavLink className="catalogue__more"
-            to={`/items/gallery?filter=${filter}&type=videos`}
+            to={`/items/gallery?filtering=category&filter=${category}&type=videos`}
           >
             Посмотреть всё
           </NavLink>
@@ -228,6 +226,8 @@ export default function Catalogue(props) {
           /> 
         </div>
       </section>
+      : ""
+      }
     </main>
   );
 }

@@ -16,7 +16,9 @@ function UserModal(props) {
   }
 
   function submit() {
-    props.onSubmit();
+    return props.onSubmit(avatar)
+      .then(() => props.onClose())
+      .catch((err) => console.log(err));
   }
 
   function checkFileSize(file) {
@@ -26,7 +28,6 @@ function UserModal(props) {
       setButtonActivity(false);
       alert("Размер файла превышает 1Гб");
     }
-
   }
 
 
@@ -52,7 +53,7 @@ function UserModal(props) {
       isButtonActive={isButtonActive}
       onSubmit={submit}
     >
-      <label className="modal__label">
+      {/* <label className="modal__label">
         <p className="modal__label-text">Новое имя</p>
         <input
           className="modal__input"
@@ -67,7 +68,7 @@ function UserModal(props) {
           }}
           value={name}
         />
-      </label>
+      </label> */}
 
       <label className="modal__label">
         <p className="modal__label-text">Новый аватар</p>
@@ -77,7 +78,8 @@ function UserModal(props) {
           id="user-avatar"
           accept="image/png, image/jpeg"
           onChange={(e) => {
-            setAvatar(e.target.value);
+            setAvatar(e.target.files[0]);
+            checkFileSize(e.target.value);
             toggleButtonState();
           }}
         />

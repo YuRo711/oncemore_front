@@ -12,7 +12,7 @@ import icon from "../../images/grid-2.svg"
 
 export default function Header(props) {
   const currentPath = useLocation().pathname;
-  const cartItemsNum = useContext(CartContext).cart.length;
+  const {cartItemsNum} = props;
   const userData = useContext(UserContext).user;
   const points = userData.points;
 
@@ -83,7 +83,9 @@ export default function Header(props) {
               </div>
               <NavLink className="header__link" to="/points">
                 <p className="header__link-title">Баллы</p>
-                <p className="header__subtitle">{points}₽</p>
+                <p className="header__subtitle">
+                  {points ? points : 0}₽
+                </p>
               </NavLink>
             </div>
           ) : (
@@ -120,7 +122,7 @@ export default function Header(props) {
         {
           props.categories.map((category, i) => (
             <NavLink className="header__category"
-              to={`/items?filter=${category.filter}`}
+              to={category.link}
               key={`category-${i}`}
             >
               {category.name}

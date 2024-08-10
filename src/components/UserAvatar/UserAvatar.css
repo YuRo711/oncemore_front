@@ -17,6 +17,11 @@
   text-transform: uppercase;
 }
 
+.avatar__image {
+  max-width: 150%;
+  max-height: 150%;
+}
+
 .avatar__user-button {
   position: absolute;
   bottom: -5px;

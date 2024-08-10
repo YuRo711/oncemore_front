@@ -1,15 +1,41 @@
 import { NavLink } from "react-router-dom";
 import "./HorizontalItem.css";
+import { useEffect, useState } from "react";
 
 export default function HorizontalItem(props) {
-  const { images, name, price, color, id } = props.data;
+  function increaseAmount(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    if (amount >= stock)
+      return;
+
+    setAmount(amount + 1);
+    props.addToTotal(price);
+  }
+  function decreaseAmount(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    props.addToTotal(-price);
+    if (amount == 1) {
+      props.deleteItem();
+      return;
+    }
+    setAmount(amount - 1);
+  }
+
+
+  const { photos, name, price, color, stock, _id } = props.data;
   const { isCart } = props;
+  const [amount, setAmount] = useState(props.amount);
+  useEffect(() => props.addToTotal(price), [])
 
   return (
-    <NavLink className="cart-item" to={`/item?id=${id}`}>
+    <NavLink className="cart-item" to={`/item?id=${_id}`}>
       <div className="cart-item__main">
         <img className="cart-item__image"
-          src={images[0]}
+          src={photos[0]}
           alt={name}
         />
         <div className="cart-item__info">
@@ -21,11 +47,22 @@ export default function HorizontalItem(props) {
       <div className="cart-item__buttons">
         <button className="cart-item__text-button"
           type="button"
+          onClick={props.deleteItem}
         >
           Удалить
         </button>
         <button className="cart-item__text-button"
           type="button"
+          onClick={
+            isCart ? (e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              props.likeItem(_id)
+            } :
+            (e) => {
+              props.addItem(e, _id)
+            }
+          }
         >
           {isCart ? "Сохранить" : "В корзину"}
         </button>
@@ -34,11 +71,16 @@ export default function HorizontalItem(props) {
             <button 
               className="cart-item__num-button cart-item__num-button_minus"
               type="button"
+              onClick={(e) => decreaseAmount(e)}
             />
-            1
+            <input className="cart-item__input"
+              value={amount}
+              disabled
+            />
             <button 
               className="cart-item__num-button cart-item__num-button_plus"
               type="button"
+              onClick={(e) => increaseAmount(e)}
             />
           </div>
           : ""

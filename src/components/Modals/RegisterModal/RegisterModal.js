@@ -15,7 +15,7 @@ function RegisterModal(props) {
   }
 
   function submit() {
-    props.registerUser(name, email, password);
+    return props.signUp(email, password, name, handle, phone);
   }
 
   const [isButtonActive, setButtonActivity] = useState(false);
@@ -28,6 +28,8 @@ function RegisterModal(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [handle, setHandle] = useState("");
+  const [phone, setPhone] = useState("+7");
 
   return (
     <FormModal
@@ -59,6 +61,20 @@ function RegisterModal(props) {
       </label>
 
       <label className="modal__label">
+        <p className="modal__label-text checkout__label-text">Телефон</p>
+        <input className="modal__input"
+          type="tel"
+          required
+          value={phone}
+          pattern="\+7[0-9]{10}"
+          onChange={(e) => {
+            setPhone(e.target.value);
+            toggleButtonState();
+          }}
+        />
+      </label>
+
+      <label className="modal__label">
         <p className="modal__label-text">Пароль</p>
         <input
           className="modal__input"
@@ -86,6 +102,22 @@ function RegisterModal(props) {
             toggleButtonState();
           }}
           value={name}
+          required
+        />
+      </label>
+
+      <label className="modal__label">
+        <p className="modal__label-text">Хэндл</p>
+        <input
+          className="modal__input"
+          type="text"
+          id="signup-handle"
+          placeholder="Введите хэндл (уникальное имя, начинается с @)"
+          onChange={(e) => {
+            setHandle(e.target.value);
+            toggleButtonState();
+          }}
+          defaultValue="@"
           required
         />
       </label>

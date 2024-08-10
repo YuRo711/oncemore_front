@@ -1,5 +1,5 @@
 .product {
-  padding: 140px 70px;
+  padding: 70px;
 }
 
 .product__page {
@@ -103,6 +103,13 @@
 .product__price {
   font-weight: 500;
   font-size: 30px;
+  margin-left: 20px;
+}
+
+.product__old-price {
+  text-decoration: line-through;
+  font-size: 16px;
+  color: #888;
 }
 
 .product__text {
@@ -162,6 +169,13 @@
   background-color: #d87aa9;
 }
 
+.product__cart-button:disabled {
+  background-color: #F0F0F0;
+  color: #888;
+  box-shadow: none;
+  cursor: default;
+}
+
 .product__like-button {
   height: 44px;
   width: 44px;
@@ -218,6 +232,11 @@
 
 .product__details-text_visible {
   display: block;
+}
+
+.product__color-image {
+  height: 40px;
+  width: 40px;
 }
 
 

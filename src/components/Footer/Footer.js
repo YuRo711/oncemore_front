@@ -11,12 +11,15 @@ export default function Footer(props) {
       <h2 className="footer__logo">OnceMore</h2>
       <div className="footer__info">
         <div className="footer__legal">
-          <h2 className="footer__title">
-            Юридическая информация
-          </h2>
-          <p className="footer__text">
-          [вставьте юридическую информацию]
-          </p>
+          <NavLink className="footer__link" to="/confidentiality">
+            Политика конфиденциальности
+          </NavLink>
+          <NavLink className="footer__link" to="/personal-data">
+            Политика обработки персональных данных
+          </NavLink>
+          <NavLink className="footer__link" to="/contract">
+            Договор оферта
+          </NavLink>
         </div>
         <div className="footer__contacts">
           <h2 className="footer__title">
