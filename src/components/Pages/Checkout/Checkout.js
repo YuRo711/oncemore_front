@@ -18,6 +18,9 @@ export default function Checkout(props) {
 
   function submit(e) {
     e.preventDefault();
+
+    props.spendPoints(spentPoints);
+    localStorage.setItem("spentPoints", 0);
     
     props.onSubmit({name, email, phone, address, items, quantity});
   }
@@ -26,6 +29,7 @@ export default function Checkout(props) {
   const [isButtonActive, setButtonActivity] = useState(false);
   const [validator, setValidator] = useState(null);
   const totalPrice = localStorage.getItem("totalPrice");
+  const spentPoints = localStorage.getItem("spentPoints");
   const items = localStorage.getItem("cart");
   const quantity = localStorage.getItem("cartAmounts");
   const user = useContext(UserContext).user;

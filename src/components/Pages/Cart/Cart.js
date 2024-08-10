@@ -32,6 +32,7 @@ export default function Cart(props) {
     setDiscount(newDiscount);
     setTotal(itemTotal - newDiscount);
     localStorage.setItem("totalPrice", itemTotal - newDiscount);
+    localStorage.setItem("spentPoints", newDiscount);
   }, [itemTotal, points]);
 
   const navigate = useNavigate();

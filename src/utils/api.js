@@ -75,6 +75,11 @@ class Api {
     return this._request(`/reviews/${videoId}`, "PATCH", data);
   }
 
+  async deleteReview(id)
+  {
+    return this._request(`/reviews/${id}`, "DELETE");
+  }
+
   //#endregion
 
   //#region Product
@@ -144,7 +149,7 @@ class Api {
   }
 
   async changeUserPoints(id, data) {
-    return this._request(`/users/points/${id}`, "PATCH"); 
+    return this._request(`/users/points/${id}`, "PATCH", data); 
   }
 
 

@@ -180,7 +180,7 @@ export default function App(props) {
   }
 
   function deleteReview(reviewData) {
-    
+    return api.deleteReview(reviewData._id);
   }
 
   function addView(videoId, views, userId) {
@@ -190,7 +190,8 @@ export default function App(props) {
       const addedPoints = (views + 1) == 1000 ? 100 : 10;
       api.getUser(userId)
         .then((res) => res.data.points)
-        .then((points) => api.changeUserPoints(points + addedPoints))
+        .then((points) => api.changeUserPoints(
+          userId, {points: points + addedPoints}))
         .catch((err) => console.log(err));
     }
   }
@@ -251,7 +252,7 @@ export default function App(props) {
       });
   }
 
-  function signUp(email, password, name, handle, phone) {
+  async function signUp(email, password, name, handle, phone) {
     return api.createUser({email, password, name, handle, phone})
       .then(() => signIn(email, password))
       .catch((err) => alert(err));
@@ -273,8 +274,8 @@ export default function App(props) {
     return api.getUser(id);
   }
   
-  function blockUser(userData) {
-    
+  async function blockUser(userData) {
+    return api.editUser(userData._id, {blocked: true});
   }
 
   async function editUser(image) {
@@ -288,6 +289,13 @@ export default function App(props) {
         return api.editUser({avatar});
       })
       .then((data) => console.log(data));
+  }
+
+  async function spendPoints(points) {
+    if (!user) return;
+
+    const currentPoints = user.points;
+    return api.changeUserPoints(user._id, {points: currentPoints - points});
   }
 
   //#endregion
@@ -526,6 +534,7 @@ export default function App(props) {
           <Route path="checkout" element={
             <Checkout
               onSubmit={createOrder}
+              spendPoints={spendPoints}
             />
           }/>
           <Route path="admin" element={
