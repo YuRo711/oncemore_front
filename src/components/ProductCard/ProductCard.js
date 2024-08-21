@@ -65,6 +65,7 @@ export default function ProductCard(props) {
         <img className="item__image"
           src={photos[0]}
           alt={name}
+          crossOrigin=""
         />
       </div>
       <div className="item__info">

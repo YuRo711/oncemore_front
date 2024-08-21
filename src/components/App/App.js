@@ -433,7 +433,7 @@ export default function App(props) {
   //#endregion
 
   //#region Rendering
-  if (products.length == 0) {
+  if (products == null) {
     return <div className="page">
       Loading...
     </div>
