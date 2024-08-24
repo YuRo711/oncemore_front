@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import "./Footer.css";
+import logo from "../../images/onsemore_2.png";
 
 export default function Footer(props) {
   const currentPath = useLocation().pathname;
@@ -8,17 +9,20 @@ export default function Footer(props) {
 
   return (
     <footer className="footer">
-      <h2 className="footer__logo">OnceMore</h2>
+      <img className="footer__logo"
+        img={logo}
+        alt="OnceMore"
+      />
       <div className="footer__info">
         <div className="footer__legal">
+          <NavLink className="footer__link" to="/contract">
+            ДОГОВОР ОФЕРТА
+          </NavLink>
           <NavLink className="footer__link" to="/confidentiality">
             ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ
           </NavLink>
           <NavLink className="footer__link" to="/personal-data">
             ПОЛИТИКА ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ
-          </NavLink>
-          <NavLink className="footer__link" to="/contract">
-            ДОГОВОР ОФЕРТА
           </NavLink>
         </div>
         <div className="footer__contacts">

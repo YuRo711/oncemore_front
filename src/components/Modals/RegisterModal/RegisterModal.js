@@ -107,7 +107,7 @@ function RegisterModal(props) {
       </label>
 
       <label className="modal__label">
-        <p className="modal__label-text">Хэндл</p>
+        <p className="modal__label-text">Хэндл (уникальное имя пользователя)</p>
         <input
           className="modal__input"
           type="text"

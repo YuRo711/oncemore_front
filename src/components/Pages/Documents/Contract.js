@@ -1,6 +1,9 @@
 export default function Contract(props) {
   return (
     <main className="document">
+      <h1 className="document__title">
+        Договор оферта
+      </h1>
       <h3 className="document__title">
         1. Общие положения
       </h3>

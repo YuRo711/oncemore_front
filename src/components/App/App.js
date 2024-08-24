@@ -433,12 +433,6 @@ export default function App(props) {
   //#endregion
 
   //#region Rendering
-  if (products.length == 0) {
-    return <div className="page">
-      Loading...
-    </div>
-  }
-
   return (
     <div className="page">
       <CartContext.Provider value={{ cart, addItem, cartAmounts}}>

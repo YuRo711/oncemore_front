@@ -9,6 +9,7 @@ import { CartContext } from "../../contexts/CartContext";
 import { UserContext } from "../../contexts/UserContext";
 import UserAvatar from "../UserAvatar/UserAvatar";
 import icon from "../../images/grid-2.svg"
+import logo from "../../images/onsemore_2.png";
 
 export default function Header(props) {
   const currentPath = useLocation().pathname;
@@ -37,7 +38,10 @@ export default function Header(props) {
     <header className="header">
       <div className="header__top">
         <NavLink className="header__link" to="/">
-          <h1 className="header__logo">OnceMore</h1>
+          <img className="footer__logo"
+            img={logo}
+            alt="OnceMore"
+          />
         </NavLink>
         <div className="header__dropdown">
           <button className={`dropdown__button ${
