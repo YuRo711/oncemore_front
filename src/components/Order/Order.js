@@ -57,7 +57,7 @@ export default function Order(props) {
         items.map((item, i) => (
           <div className="order__item" key={`item-${i}`}>
             <img className="order__image"
-              src={item.photos[0]}
+              src={item.photos ? item.photos[0]: ""}
             />
             <div className="order__item-info">
               <p className="order__text">

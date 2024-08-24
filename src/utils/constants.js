@@ -41,7 +41,10 @@ const contacts = [
   },
 ]
 
-const baseUrl = "http://127.0.0.1:3001";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.oncemorecosmetics.fvds.ru"
+    : "http://localhost:3001";
 
 export {
   contacts,

@@ -112,6 +112,7 @@ export default function Product(props) {
                     key={`image-${i}`}
                     src={img}
                     onClick={() => selectImage(i)}
+                    crossOrigin=""
                   />)
               )
               }
@@ -119,6 +120,7 @@ export default function Product(props) {
             <div className="product__current-image">
               <img className="product__main-image"
                 src={currentImage}
+                crossOrigin=""
                 alt={data.name}
               />
               <button className=

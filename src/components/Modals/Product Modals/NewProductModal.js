@@ -15,7 +15,7 @@ function NewProductModal(props) {
   }
 
   function submit() {
-    return props.addProduct({name, category, brand, color, price, photo,
+    return props.addProduct(photo, {name, category, brand, color, price,
       country, size, barcode, article, description, appliance, composition,
       colorImage, type,
   });
