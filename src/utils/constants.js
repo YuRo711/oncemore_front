@@ -29,7 +29,7 @@ const contacts = [
   },
   {
     icon: tg,
-    link: "#"
+    link: "https://t.me/OMCOS"
   },
   {
     icon: whatsapp,
