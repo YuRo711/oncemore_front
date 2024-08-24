@@ -25,7 +25,7 @@ const userLinks = [
 const contacts = [
   {
     icon: vk,
-    link: "#"
+    link: "https://vk.com/omcos"
   },
   {
     icon: tg,
@@ -33,11 +33,11 @@ const contacts = [
   },
   {
     icon: whatsapp,
-    link: "#"
+    link: "https://api.whatsapp.com/send?phone=79055032444"
   },
   {
     icon: yt,
-    link: "#"
+    link: "http://www.youtube.com/@ONCEMORE_BEAUTY"
   },
 ]
 
