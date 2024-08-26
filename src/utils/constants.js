@@ -43,7 +43,7 @@ const contacts = [
 
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://api.oncemorecosmetics.fvds.ru"
+    ? "https://api.oncemorecosmetics.ru"
     : "http://localhost:3001";
 
 export {
